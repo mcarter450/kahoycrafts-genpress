@@ -13,15 +13,6 @@
     line-height: 60px;
 }
 
-.main-navigation .main-nav ul li a, 
-.main-navigation .menu-toggle, 
-.main-navigation .menu-bar-items {
-    &:hover {
-        text-decoration: underline;
-        text-decoration-style: dotted;
-    }
-}
-
 @media only screen and (max-width: 481px) {
 
     .separate-containers .site-main {

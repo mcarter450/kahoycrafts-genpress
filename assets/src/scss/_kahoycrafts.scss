@@ -3,7 +3,7 @@
 /* Colors */
 $color-blue: #D1DFE4;
 $color-dark-blue: #12232E;
-$color-light-blue: #1E3B4E;
+$color-light-blue: #2170a4;
 $color-shadow-light-blue: #EEFBFB;
 $color-page-background: $color-shadow-light-blue;
 $color-tabs-background: darken($color-shadow-light-blue, 5%);
@@ -189,12 +189,18 @@ body.home {
 
 /* Blog */
 .blog .site.container,
+.archive .site.container,
 .single-post .site.container,
 .single-jetpack-testimonial .site.container {
     max-width: 768px;
 }
 
-.blog .inside-article .wp-post-image {
+.archive.woocommerce-shop .site.container {
+    max-width: 1200px;
+}
+
+.blog .inside-article .wp-post-image,
+.archive .inside-article .wp-post-image  {
     width: 100%;
 }
 
@@ -206,10 +212,6 @@ body.home {
 
 /* Theme overrides */
 .theme-generatepress {
-
-    a:hover, a:focus, a:active {
-        color: var(--accent);
-    }
 
     .wp-block-buttons {
         .wp-block-button {
@@ -289,9 +291,11 @@ body.home {
     }
 
     &.woocommerce .woocommerce-breadcrumb {
-        color: $color-lightest-blue;
         > a {
-            color: $color-lightest-blue;
+            color: $color-secondary;
+            &:hover {
+                color: $color-primary;
+            }
         }
     }
 
