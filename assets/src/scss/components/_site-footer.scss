@@ -1,0 +1,99 @@
+.site-footer .footer-widgets {
+
+    .widget-area {
+
+        margin-left: $mobile-spacing;
+        margin-right: $mobile-spacing;
+
+        @media only screen and (min-width: 768px) {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: calc(2 * $spacing-horizontal);
+            margin-left: $spacing-horizontal;
+            margin-right: $spacing-horizontal;
+        }
+
+        @media only screen and (min-width: 1024px) {
+            column-gap: calc(3 * $spacing-horizontal);
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        > .widget {
+            padding: 0;
+            margin-top: $spacing-vertical;
+            ul li {
+                margin-bottom: 0.25em;
+            }
+        }
+        .widget-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+    }
+    
+}
+
+.site-footer > footer > .site-info > .inner-site-info {
+
+    .site-logo {
+        max-width: 200px;
+    }
+
+    @media only screen and (min-width: 822px) {
+        display: flex;
+        align-items: center;
+    }
+
+    margin: $mobile-spacing;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    @media only screen and (min-width: 768px) {
+        margin: $global-spacing;
+    }
+
+    border-top: 3px solid $color-primary;
+
+    .protected-by .cloudflare-logo {
+        max-width: 150px; 
+        margin-left: 15px;
+    }
+
+    .privacy, 
+    .copyright, 
+    .powered-by, 
+    .protected-by {
+        margin-top: calc(0.7 * $spacing-vertical);
+
+        @media only screen and (min-width: 822px) {
+            margin-top: initial;
+            margin-left: auto;
+        }
+    }
+
+}
+
+.site-footer > footer > .social-footer {
+
+    display: flex;
+    justify-content: center;
+
+    margin-top: $spacing-vertical;
+    margin-bottom: $spacing-vertical;
+
+    ul {
+        margin: 0;
+        padding-left: 0;
+
+        > li {
+            list-style: none;
+            display: inline-block;
+            > a {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+    }
+
+}

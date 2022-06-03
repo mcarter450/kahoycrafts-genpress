@@ -1,0 +1,62 @@
+.wpforms-container .wpforms-error-container,.wpforms-container noscript.wpforms-error-noscript {
+    color: #990000
+}
+
+.wpforms-container .wpforms-title {
+    font-size: 26px;
+    margin: 0 0 10px 0
+}
+
+.wpforms-container .wpforms-submit-container {
+    padding: 10px 0 0 0;
+    position: relative
+}
+
+.wpforms-container .wpforms-submit-spinner {
+    margin-left: 0.5em
+}
+
+.wpforms-container {
+    margin-bottom: 26px
+}
+
+.wpforms-container input.wpforms-field-medium,.wpforms-container select.wpforms-field-medium,.wpforms-container .wpforms-field-row.wpforms-field-medium {
+    max-width: 60%
+}
+
+.wpforms-container .wpforms-field {
+    padding: 10px 0;
+    position: relative
+}
+
+.wpforms-container .wpforms-field-label {
+    display: block;
+    font-weight: 700;
+    float: none
+}
+
+.wpforms-container .wpforms-required-label {
+    color: #ff0000;
+    font-weight: normal
+}
+
+.wpforms-container input[type=date],.wpforms-container input[type=datetime],.wpforms-container input[type=datetime-local],.wpforms-container input[type=email],.wpforms-container input[type=month],.wpforms-container input[type=number],.wpforms-container input[type=password],.wpforms-container input[type=range],.wpforms-container input[type=search],.wpforms-container input[type=tel],.wpforms-container input[type=text],.wpforms-container input[type=time],.wpforms-container input[type=url],.wpforms-container input[type=week],.wpforms-container select,.wpforms-container textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    float: none
+}
+
+@media only screen and (max-width: 600px) {
+
+	.wpforms-container .wpforms-field:not(.wpforms-field-phone):not(.wpforms-field-select-style-modern) {
+        overflow-x:hidden
+    }
+
+    .wpforms-container .wpforms-form .wpforms-field>* {
+        max-width: 100%
+    }
+
+}
