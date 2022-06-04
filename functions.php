@@ -313,7 +313,7 @@ function wpf_dev_process( $fields, $entry, $form_data ) {
 	}
 	catch (Exception $e) {
 
-		wpforms()->process->errors[$form_data[ 'id' ]]['2'] = $e->getMessage();
+		wpforms()->process->errors[$form_data[ 'id' ]]['2'] = __( 'Email address is malformed or already exists.' );
 	}
 
 	
