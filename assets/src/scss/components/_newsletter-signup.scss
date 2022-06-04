@@ -28,17 +28,9 @@ div.wpforms-container.newsletter-signup {
         }
 
         &:hover {
-            background-color: $color-secondary;
-            //color: var(--button--color-text-hover);
-            //border-color: $color-secondary;
-            &:after {
-                //color: var(--button--color-text-hover);
-            }
+            background-color: $button-color-background-hover;
+            border-color: $button-color-background-hover;
         }
-        // &:focus {
-        //     outline-offset: -6px;
-        //     outline: 2px dotted currentColor;
-        // }
     }
 
 }

@@ -3,6 +3,7 @@
 $childtheme_directory = str_replace('generatepress', 'kahoycrafts-genpress', get_template_directory());
 
 require($childtheme_directory .'/classes/kahoycrafts_product_categories_widget.php');
+require($childtheme_directory .'/assets/aws.phar'); // AWS SDK
 
 function kahoycrafts_load_widget() {
 
@@ -312,7 +313,7 @@ function wpf_dev_process( $fields, $entry, $form_data ) {
 	}
 	catch (Exception $e) {
 
-		wpforms()->process->errors[$form_data[ 'id' ]]['2'] = __( 'Email address is malformed or already exists.' );
+		wpforms()->process->errors[$form_data[ 'id' ]]['2'] = $e->getMessage();
 	}
 
 	
