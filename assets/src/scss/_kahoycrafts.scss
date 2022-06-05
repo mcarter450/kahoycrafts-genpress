@@ -380,6 +380,12 @@ body.home {
         address {
             font-style: normal;
         }
+
+        .woocommerce-orders-table {
+            &__cell-order-actions .woocommerce-button {
+                margin-right: 5px;
+            }
+        }
     }
 
     /* 
