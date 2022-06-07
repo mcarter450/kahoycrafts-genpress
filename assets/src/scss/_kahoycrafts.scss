@@ -255,20 +255,7 @@ body.home {
         
     }
 
-    // .singular .entry-header {
-    //     //border-bottom: 2px solid var(--global--color-border);
-    //     padding-bottom: calc(2 * $spacing-vertical);
-    //     margin-bottom: calc(3 * $spacing-vertical);
-    // }
-
-    // .page-header {
-    //     //border-bottom: 2px solid var(--global--color-border);
-    //     padding-bottom: calc(2 * $spacing-vertical);
-    // }
-
-    // .woocommerce-products-header {
-    //     //border-bottom: 2px solid var(--global--color-border);
-    // }
+    
 
     &.woocommerce .onsale {
         height: 3.25em;
@@ -282,7 +269,12 @@ body.home {
             font-style: normal;
             padding: 10px;
         }
+        th {
+            width: 35%;
+        }
     }
+
+    .search-results .site.container,
 
     &.woocommerce div.product p.price, 
     &.woocommerce div.product span.price {
