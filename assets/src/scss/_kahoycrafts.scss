@@ -191,7 +191,8 @@ body.home {
 .blog .site.container,
 .archive .site.container,
 .single-post .site.container,
-.single-jetpack-testimonial .site.container {
+.single-jetpack-testimonial .site.container,
+.page-template-contact-page .site.container {
     max-width: 768px;
 }
 
@@ -306,6 +307,18 @@ body.home {
         //color: var(--contrast);
         background-color: #ffffff;
         border-color: darken($color-page-background, 10%);
+    }
+
+}
+
+/* Contact Page */
+.page-template-contact-page .wpforms-container.contact-form {
+
+    .wpforms-form .wpforms-field-medium {
+        max-width: 100%;
+    }
+    .wpforms-form .wpforms-field-row.wpforms-field-medium {
+        max-width: 100%;
     }
 
 }
@@ -467,39 +480,3 @@ body.home {
     }
 
 }
-
-/* Checkout Page */
-// .woocommerce-checkout {
-
-//     .form-row.woocommerce-SavedPaymentMethods-saveNew {
-//         padding: 10px;
-//     }
-
-//     .woocommerce-terms-and-conditions-wrapper .woocommerce-privacy-policy-text p {
-//         font-size: inherit;
-//     }
-    
-//     input[type=checkbox] {
-//         vertical-align: middle;
-//         margin-right: 5px;
-//     }
-
-//     form .form-row label {
-//         vertical-align: initial;
-//     }
-
-// }
-
-// .woocommerce-notices-wrapper a.button.wc-forward {
-//     display: inline-block;
-//     float: right;
-//     padding: 0 !important;
-//     line-height: 1 !important;
-//     background: transparent !important;
-//     color: #47c9e5 !important;
-
-//     &:hover {
-//         background: transparent !important;
-//         text-decoration: underline;
-//     }
-// }
