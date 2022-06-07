@@ -32,44 +32,37 @@ async function download_webpages(cb) {
     cb();
 }
 
-function purge_theme_styles() {
+function purge_fontawesome_styles() {
     return gulp.src([
-        '../../plugins/woocommerce/assets/css/twenty-twenty-one.css',
-        '../../plugins/jetpack/modules/theme-tools/compat/twentytwentyone.css',
-        '../twentytwentyone/style.css'
+        'assets/src/scss/purge-styles/fontawesome.scss'
       ])
+      .pipe(sass().on('error', sass.logError))
       .pipe(purgecss({
           content: ['assets/src/downloads/**/*.html'],
-          safelist: {
-            standard: ['onsale', 'variations', 'woocommerce-variation-price', 'widget'],
-            deep: [
-                /^woocommerce-product-gallery/, 
-                /^primary-navigation/, 
-                /^wp-custom-logo/, 
-                /^site-header/, 
-                /^site-logo/, 
-                /^site-branding/
-            ]
-          },
           rejected: false
       }))
-      .pipe(concat('twentytwentyone.css'))
       .pipe(gulp.dest('assets/src/purge-css/'));
 }
 
-function purge_block_styles() {
+function purge_general_styles() {
     return gulp.src([
         '../../../wp-includes/css/dist/block-library/style.css',
+        '../../plugins/woocommerce/assets/css/woocommerce.css',
         '../../plugins/woocommerce/assets/css/woocommerce-layout.css',
         '../../plugins/woocommerce/assets/css/woocommerce-smallscreen.css',
         '../../plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-vendors-style.css',
-        '../../plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-style.css',
-        'assets/src/fontawesome/css/fontawesome.css'
+        '../../plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-style.css'
       ])
       .pipe(purgecss({
           content: ['assets/src/downloads/**/*.html'],
           safelist: {
-            standard: ['onsale']
+            standard: ['onsale'],
+            deep: [
+                /flex-control-thumbs$/,
+                /variations$/,
+                /woocommerce-product-gallery__trigger$/
+            ],
+            // greedy: []
           },
           rejected: false
       }))
@@ -131,7 +124,7 @@ function watch() {
 
 exports.download = download_webpages;
 
-exports.purge = gulp.series(purge_theme_styles, purge_block_styles);
+exports.purge = gulp.series(purge_fontawesome_styles, purge_general_styles);
 
 exports.build = gulp.parallel(css, js);
 

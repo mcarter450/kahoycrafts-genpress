@@ -76,14 +76,6 @@
  * Reset the WP Admin page styles for Gutenberg-like pages.
  */
 
-.wp-block-audio {
-  margin: 0 0 1em 0;
-}
-.wp-block-audio figcaption {
-  margin-top: 0.5em;
-  margin-bottom: 1em;
-}
-
 .wp-block-button__link {
   color: #fff;
   background-color: #32373c;
@@ -131,13 +123,6 @@
 
 .wp-block-button.aligncenter {
   text-align: center;
-}
-
-.wp-block-code code {
-  display: block;
-  font-family: inherit;
-  overflow-wrap: break-word;
-  white-space: pre-wrap;
 }
 
 .wp-block-columns {
@@ -190,26 +175,6 @@
 }
 .wp-block-column.is-vertically-aligned-top, .wp-block-column.is-vertically-aligned-center {
   width: 100%;
-}
-
-
-.wp-block-embed.alignleft,
-.wp-block-embed.alignright {
-  max-width: 360px;
-  width: 100%;
-}
-
-.wp-block-embed {
-  margin: 0 0 1em 0;
-  overflow-wrap: break-word;
-}
-.wp-block-embed figcaption {
-  margin-top: 0.5em;
-  margin-bottom: 1em;
-}
-
-.wp-block-group {
-  box-sizing: border-box;
 }
 
 h1.has-background,
@@ -327,128 +292,13 @@ p.has-background {
   color: inherit;
 }
 
-.wp-block-pullquote {
-  margin: 0 0 1em 0;
-  padding: 3em 0;
-  text-align: center;
-  overflow-wrap: break-word;
-  box-sizing: border-box;
-}
-.wp-block-pullquote p,
-.wp-block-pullquote blockquote,
-.wp-block-pullquote cite {
-  color: inherit;
-}
-.wp-block-pullquote.has-text-align-left, .wp-block-pullquote.has-text-align-right, .wp-block-pullquote.alignleft, .wp-block-pullquote.alignright {
-  max-width: 420px;
-}
-.wp-block-pullquote.has-text-align-left p, .wp-block-pullquote.has-text-align-right p, .wp-block-pullquote.alignleft p, .wp-block-pullquote.alignright p {
-  font-size: 1.25em;
-}
-.wp-block-pullquote p {
-  font-size: 1.75em;
-  line-height: 1.6;
-}
-.wp-block-pullquote cite,
-.wp-block-pullquote footer {
-  position: relative;
-}
-.wp-block-pullquote .has-text-color a {
-  color: inherit;
-}
-
-.wp-block-pullquote.has-text-align-left blockquote {
-  text-align: left;
-}
-
-.wp-block-pullquote.has-text-align-right blockquote {
-  text-align: right;
-}
-
-.wp-block-pullquote cite {
-  color: inherit;
-}
-
 .wp-block-quote {
   box-sizing: border-box;
   overflow-wrap: break-word;
 }
-.wp-block-quote.is-style-large:not(.is-style-plain), .wp-block-quote.is-large:not(.is-style-plain) {
-  margin-bottom: 1em;
-  padding: 0 1em;
-}
-.wp-block-quote.is-style-large:not(.is-style-plain) p, .wp-block-quote.is-large:not(.is-style-plain) p {
-  font-size: 1.5em;
-  font-style: italic;
-  line-height: 1.6;
-}
-.wp-block-quote.is-style-large:not(.is-style-plain) cite,
-.wp-block-quote.is-style-large:not(.is-style-plain) footer, .wp-block-quote.is-large:not(.is-style-plain) cite,
-.wp-block-quote.is-large:not(.is-style-plain) footer {
-  font-size: 1.125em;
-  text-align: right;
-}
-
-.wp-block-search__label {
-  width: 100%;
-}
-
-.wp-block-separator {
-  border-top: 1px solid currentColor;
-  border-bottom: 1px solid currentColor;
-}
-.wp-block-separator.is-style-dots {
-  background: none !important;
-  border: none;
-  text-align: center;
-  line-height: 1;
-  height: auto;
-}
-.wp-block-separator.is-style-dots::before {
-  content: "···";
-  color: currentColor;
-  font-size: 1.5em;
-  letter-spacing: 2em;
-  /*rtl:ignore*/
-  padding-left: 2em;
-  font-family: serif;
-}
 
 .wp-block-spacer {
   clear: both;
-}
-
-.wp-block-table {
-  margin: 0 0 1em 0;
-  overflow-x: auto;
-}
-.wp-block-table table {
-  border-collapse: collapse;
-  width: 100%;
-}
-.wp-block-table.alignleft, .wp-block-table.aligncenter, .wp-block-table.alignright {
-  display: table;
-  width: auto;
-}
-.wp-block-table.alignleft td,
-.wp-block-table.alignleft th, .wp-block-table.aligncenter td,
-.wp-block-table.aligncenter th, .wp-block-table.alignright td,
-.wp-block-table.alignright th {
-  word-break: break-word;
-}
-
-.wp-block-video {
-  margin: 0 0 1em 0;
-}
-.wp-block-video video {
-  width: 100%;
-}
-.wp-block-video.aligncenter {
-  text-align: center;
-}
-.wp-block-video figcaption {
-  margin-top: 0.5em;
-  margin-bottom: 1em;
 }
 
 :root {
@@ -472,11 +322,6 @@ p.has-background {
 .has-text-align-left {
   /*rtl:ignore*/
   text-align: left;
-}
-
-.has-text-align-right {
-  /*rtl:ignore*/
-  text-align: right;
 }
 
 .aligncenter {
