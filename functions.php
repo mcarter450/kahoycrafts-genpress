@@ -413,6 +413,15 @@ function video_shortcode_override( $markup, $attr, $content, $id ) {
 
 }
 
+// Remove lazy loading for image above the fold
+add_filter( 'woocommerce_product_get_image', function($image, $obj, $size, $attr, $placeholder) {
+	if ( $obj->get_menu_order() == -1 ) {
+		$image = str_replace('loading="lazy"', '', $image);
+	}
+
+	return $image;
+}, 10, 5);
+
 // Override video tag
 add_filter( 'wp_video_shortcode_override', 'video_shortcode_override', 10, 4);
 
