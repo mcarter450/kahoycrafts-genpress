@@ -38,6 +38,7 @@ function kahoy_crafts_styles() {
 	wp_deregister_script( 'mediaelement-core' );
 	wp_deregister_script( 'mediaelement-migrate' );
 	wp_deregister_script( 'mediaelement-vimeo' );
+	wp_deregister_script( 'woocommerce-analytics' );
 
 	if ( is_front_page() or 
 		 is_page('contact') or 
