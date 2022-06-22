@@ -5,15 +5,21 @@ $childtheme_directory = str_replace('generatepress', 'kahoycrafts-genpress', get
 require($childtheme_directory .'/classes/kahoycrafts_product_categories_widget.php');
 require($childtheme_directory .'/assets/aws.phar'); // AWS SDK
 
-function kahoycrafts_load_widget() {
+//    ------    ------------ ------------ --------    --------   ----    ---- ------------ 
+//   ********   ************ ************ ********   **********  *****   **** ************ 
+//  ----------  ---          ------------   ----    ----    ---- ------  ---- ----         
+// ****    **** ***              ****       ****    ***      *** ************ ************ 
+// ------------ ---              ----       ----    ---      --- ------------ ------------ 
+// ************ ***              ****       ****    ****    **** ****  ******        ***** 
+// ----    ---- ------------     ----     --------   ----------  ----   ----- ------------ 
+// ****    **** ************     ****     ********    ********   ****    **** ************ 
 
+add_action( 'widgets_init', function() {
 	register_widget( 'kahoycrafts_product_categories_widget' );
+} );
 
-}
-
-add_action( 'widgets_init', 'kahoycrafts_load_widget' );
-add_action( 'wp_enqueue_scripts', 'kahoy_crafts_styles', 11, 0);
-add_action( 'admin_enqueue_scripts', 'kahoy_crafts_admin_styles', 11, 1);
+add_action( 'wp_enqueue_scripts', 'kahoy_crafts_styles', 11, 0 );
+add_action( 'admin_enqueue_scripts', 'kahoy_crafts_admin_styles', 11, 1 );
 
 function kahoy_crafts_admin_styles( $hook ) {
 
@@ -72,64 +78,39 @@ function kahoy_crafts_styles() {
 
 }
 
-add_filter( 'style_loader_src', function( $src, $handle ) {
-
-	if ( is_front_page() or 
-			 is_page('contact') or 
-			 is_page('owners-bio') or 
-			 is_page('free-shipping-kit') or 
-			 is_page('products-feed-generator') or
-			 is_page('gallery') or 
-			 is_blog() or is_woocommerce() ) {
-
-		switch ($handle) {
-			case 'woocommerce-layout': 
-			case 'woocommerce-smallscreen':
-				$src = preg_replace('/^(.*)\?(.*)$/', get_stylesheet_directory_uri() . '/assets/src/purge-css/'. $handle .'.css?$2', $src);
-				break;
-			case 'woocommerce-general':
-				$src = preg_replace('/^(.*)\?(.*)$/', get_stylesheet_directory_uri() . '/assets/src/purge-css/woocommerce.css?$2', $src);
-				break;
-		}
-	    
-	}
-
-    return $src;
-
-}, 10, 2 );
-
-function is_blog () {
+function is_blog() {
     return ( is_archive() || is_author() || is_category() || is_home() || is_single() || is_tag()) && 'post' == get_post_type();
 }
 
-function remove_jquery_migrate( $scripts ) {
+// function remove_jquery_migrate( $scripts ) {
 	
-	if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
+// 	if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
 			
-		$script = $scripts->registered['jquery'];
+// 		$script = $scripts->registered['jquery'];
 		
-		if ( $script->deps ) { 
-			$script->deps = array_diff( $script->deps, array( 'jquery-migrate' ) );
-		}
-	}
-}
+// 		if ( $script->deps ) { 
+// 			$script->deps = array_diff( $script->deps, array( 'jquery-migrate' ) );
+// 		}
+// 	}
+// }
 
 add_action( 'init', function() {
 
 	register_nav_menu( 'footer', __( 'Footer Menu' ) );
 	remove_action( 'generate_footer', 'generate_construct_footer', 10 );
 
-});
+} );
 
 /**
  * Build our footer.
  */
 add_action( 'generate_before_footer_content', function() {
 	get_template_part( 'template-parts/footer/footer-widgets' );
-});
+} );
+
 add_action( 'generate_footer', function() {
 	get_template_part( 'template-parts/footer/footer-content' );
-});
+} );
 
 /**
  * Enqueue scripts and styles.
@@ -172,116 +153,15 @@ function kahoy_crafts_scripts() {
 add_action( 'wp_enqueue_scripts', 'kahoy_crafts_scripts' );
 
 /**
- * @param array $defaults The default array of items
- * @return array 	Modified array
+ * Post nav for jetpack testimonials
  */
-function woo_change_breadcrumb_home_test($defaults) {
-
-	$defaults['home'] = 'Shop';
-	return $defaults;
-
-}
-
-add_filter('woocommerce_breadcrumb_defaults', 'woo_change_breadcrumb_home_test');
-
-/**
- * Defer or async scripts
- */
-add_filter( 'script_loader_tag', function ( $tag, $handle ) {
-	
-	if ( $handle == 'wpforms-mailcheck' || 
-		 $handle == 'wpforms-punycode' ) {
-		
-		return str_replace( ' src', ' async src', $tag );
-	}
-
-	if ( $handle == 'wpforms' || 
-		 $handle == 'wpforms-validation' || 
-		 $handle == 'owl-carousel' || 
-		 $handle == 'kahoycrafts'  || 
-		 $handle == 'cookie-consent' || 
-		 $handle == 'cookie-consent-banner' ) {
-		
-		return str_replace( ' src', ' defer src', $tag );
-	}
-
-	// WooCommerce
-	if ( is_front_page() && ( 
-			$handle == 'wc-cart-fragments' || 
-			$handle == 'wc-add-to-cart' || 
-			$handle == 'woocommerce' || 
-			$handle == 'js-cookie'
-		) ) {
-
-		return str_replace( ' src', ' async src', $tag );
-	}
-
-	return $tag;
-
-	//return str_replace( ' src', ' async defer src', $tag ); // OR do both!
-
-}, 10, 2 );
-
-add_filter( 'woocommerce_breadcrumb_home_url', 'woo_custom_breadrumb_home_url' );
-
- /*Change the breadcrumb home link URL from / to /shop.
- @return string New URL for Home link item. / */
-function woo_custom_breadrumb_home_url() {
-
-    return '/shop/';
-
-}
-
-add_filter('wp_sitemaps_posts_query_args', 'kahoycrafts_disable_sitemap_specific_page', 10, 2);
-
-/**
- * Exclude woocommerce pages from sitemap.xml
- *
- * @param array $args
- * @param string $post_type
- * @return array Array of args
- */
-function kahoycrafts_disable_sitemap_specific_page($args, $post_type) {
-
-	if ('page' !== $post_type) return $args;
-	
-	$args['post__not_in'] = isset($args['post__not_in']) ? $args['post__not_in'] : [];
-
-	$args['post__not_in'][] = 70;
-	$args['post__not_in'][] = 71;
-	$args['post__not_in'][] = 72; // exclude page with ID = 72
-	
-	return $args;
-
-}
-
-/**
- * Conversion tracking for WC order
- */
-function add_gtag_purchase_event( $order_id ) {
-
-	if (! $order_id ) {
-		return; // no order id
-	}
-
-	if ( $order = wc_get_order( $order_id ) ) {
-
-		$script = "
-<script>
-gtag('event', 'conversion', {
-	'send_to': 'AW-10818559065/WOdmCKLJo6UDENm42KYo',
-	'value': {$order->get_total()},
-	'currency': '{$order->get_currency()}',
-	'transaction_id': '{$order_id}'
-});
-</script>
-		";
-
-		echo $script;
-
-	}
-
-}
+add_action( 'generate_after_entry_content', function() {
+    if ( is_singular( 'jetpack-testimonial' ) ) : ?>
+        <footer class="entry-meta">
+            <?php generate_content_nav( 'nav-below' ); ?>
+        </footer><!-- .entry-meta -->
+    <?php endif;
+} );
 
 /**
  * Action that fires during form entry processing after initial field validation.
@@ -341,7 +221,7 @@ function wpf_dev_process( $fields, $entry, $form_data ) {
 
 add_action( 'wpforms_process', 'wpf_dev_process', 10, 3 );
 
-function newsletter_checkout_field($checkout) {
+function newsletter_checkout_field( $checkout ) {
 
 	echo '<div class="newsletter-checkout-field">';
 
@@ -371,12 +251,12 @@ function newsletter_checkout_field($checkout) {
 
 }
 
-add_action('woocommerce_after_order_notes', 'newsletter_checkout_field');
+add_action( 'woocommerce_after_order_notes', 'newsletter_checkout_field' );
 
 /**
  * Store newsletter optin choice
  */
-function newsletter_checkout_field_update_order_meta($order_id) {
+function newsletter_checkout_field_update_order_meta( $order_id ) {
 
 	$value = isset($_POST['newsletter_optin']) ? 'yes' : 'no';
 	
@@ -384,7 +264,164 @@ function newsletter_checkout_field_update_order_meta($order_id) {
 
 }
 
-add_action('woocommerce_checkout_update_order_meta', 'newsletter_checkout_field_update_order_meta');
+add_action( 'woocommerce_checkout_update_order_meta', 'newsletter_checkout_field_update_order_meta' );
+
+/**
+ * Conversion tracking for WC order
+ */
+// function add_gtag_purchase_event( $order_id ) {
+
+// 	if (! $order_id ) {
+// 		return; // no order id
+// 	}
+
+// 	if ( $order = wc_get_order( $order_id ) ) {
+
+// 		$script = "
+// <script>
+// gtag('event', 'conversion', {
+// 	'send_to': 'AW-10818559065/WOdmCKLJo6UDENm42KYo',
+// 	'value': {$order->get_total()},
+// 	'currency': '{$order->get_currency()}',
+// 	'transaction_id': '{$order_id}'
+// });
+// </script>
+// 		";
+
+// 		echo $script;
+
+// 	}
+
+// }
+
+//add_action( 'woocommerce_thankyou', 'add_gtag_purchase_event', 10, 4 );
+
+// ------------ --------  ----         ------------ ------------ -----------  ------------ 
+// ************ ********  ****         ************ ************ ***********  ************ 
+// ----           ----    ----         ------------ ----         ----    ---  ----         
+// ************   ****    ****             ****     ************ *********    ************ 
+// ------------   ----    ----             ----     ------------ ---------    ------------ 
+// ****           ****    ************     ****     ****         ****  ****          ***** 
+// ----         --------  ------------     ----     ------------ ----   ----  ------------ 
+// ****         ********  ************     ****     ************ ****    **** ************ 
+
+add_filter( 'style_loader_src', function( $src, $handle ) {
+
+	if ( is_front_page() or 
+			 is_page('contact') or 
+			 is_page('owners-bio') or 
+			 is_page('free-shipping-kit') or 
+			 is_page('products-feed-generator') or
+			 is_page('gallery') or 
+			 is_blog() or is_woocommerce() ) {
+
+		switch ($handle) {
+			case 'woocommerce-layout': 
+			case 'woocommerce-smallscreen':
+				$src = preg_replace('/^(.*)\?(.*)$/', get_stylesheet_directory_uri() . '/assets/src/purge-css/'. $handle .'.css?$2', $src);
+				break;
+			case 'woocommerce-general':
+				$src = preg_replace('/^(.*)\?(.*)$/', get_stylesheet_directory_uri() . '/assets/src/purge-css/woocommerce.css?$2', $src);
+				break;
+		}
+	    
+	}
+
+    return $src;
+
+}, 10, 2 );
+
+/**
+ * Defer or async scripts
+ */
+add_filter( 'script_loader_tag', function ( $tag, $handle ) {
+	
+	if ( $handle == 'wpforms-mailcheck' || 
+		 $handle == 'wpforms-punycode' ) {
+		
+		return str_replace( ' src', ' async src', $tag );
+	}
+
+	if ( $handle == 'wpforms' || 
+		 $handle == 'wpforms-validation' || 
+		 $handle == 'owl-carousel' || 
+		 $handle == 'kahoycrafts'  || 
+		 $handle == 'cookie-consent' || 
+		 $handle == 'cookie-consent-banner' ) {
+		
+		return str_replace( ' src', ' defer src', $tag );
+	}
+
+	// WooCommerce
+	if ( is_front_page() && ( 
+			$handle == 'wc-cart-fragments' || 
+			$handle == 'wc-add-to-cart' || 
+			$handle == 'woocommerce' || 
+			$handle == 'js-cookie'
+		) ) {
+
+		return str_replace( ' src', ' async src', $tag );
+	}
+
+	return $tag;
+
+}, 10, 2 );
+
+/**
+ * @param array $defaults The default array of items
+ * @return array 	Modified array
+ */
+add_filter( 'woocommerce_breadcrumb_defaults', function( $defaults ) {
+
+	$defaults['home'] = 'Shop';
+	return $defaults;
+
+} );
+
+/**
+ * Change the breadcrumb home link URL from / to /shop.
+ * 
+ * @return string 	Home url
+ */
+add_filter( 'woocommerce_breadcrumb_home_url', function() {
+
+	return '/shop/';
+
+} );
+
+/**
+ * Exclude woocommerce pages from sitemap.xml
+ *
+ * @param array $args
+ * @param string $post_type
+ * @return array Array of args
+ */
+function kahoycrafts_disable_sitemap_specific_page( $args, $post_type ) {
+
+	if ('page' !== $post_type) return $args;
+	
+	$args['post__not_in'] = isset($args['post__not_in']) ? $args['post__not_in'] : [];
+
+	$args['post__not_in'][] = 70;
+	$args['post__not_in'][] = 71;
+	$args['post__not_in'][] = 72; // exclude page with ID = 72
+	
+	return $args;
+
+}
+
+add_filter( 'wp_sitemaps_posts_query_args', 'kahoycrafts_disable_sitemap_specific_page', 10, 2 );
+
+/**
+ * Remove lazy loading for image above the fold
+ */
+add_filter( 'woocommerce_product_get_image', function( $image, $obj, $size, $attr, $placeholder ) {
+	if ( $obj->get_menu_order() == -1 ) {
+		$image = str_replace('loading="lazy"', '', $image);
+	}
+
+	return $image;
+}, 10, 5);
 
 function video_shortcode_override( $markup, $attr, $content, $id ) {
 	
@@ -413,19 +450,8 @@ function video_shortcode_override( $markup, $attr, $content, $id ) {
 
 }
 
-// Remove lazy loading for image above the fold
-add_filter( 'woocommerce_product_get_image', function($image, $obj, $size, $attr, $placeholder) {
-	if ( $obj->get_menu_order() == -1 ) {
-		$image = str_replace('loading="lazy"', '', $image);
-	}
-
-	return $image;
-}, 10, 5);
-
 // Override video tag
-add_filter( 'wp_video_shortcode_override', 'video_shortcode_override', 10, 4);
-
-//add_action( 'woocommerce_thankyou', 'add_gtag_purchase_event', 10, 4 );
+add_filter( 'wp_video_shortcode_override', 'video_shortcode_override', 10, 4 );
 
 /**
  * Disable unused jetpack CSS
