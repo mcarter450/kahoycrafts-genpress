@@ -53,7 +53,6 @@ function kahoy_crafts_styles() {
 		 is_page('gallery') or is_blog() ) {
 
 		wp_dequeue_script( 'wc-cart-fragments' );
-		wp_dequeue_style( 'wc-blocks-checkout-style' );
 	}
 
 	if ( is_front_page() or 
