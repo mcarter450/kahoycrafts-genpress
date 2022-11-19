@@ -1,5 +1,5 @@
 <?php
-//* Code goes here
+//* Code goes here - test commit
 $childtheme_directory = str_replace('generatepress', 'kahoycrafts-genpress', get_template_directory());
 
 require($childtheme_directory .'/classes/kahoycrafts_product_categories_widget.php');
