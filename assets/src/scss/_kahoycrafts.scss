@@ -11,6 +11,9 @@ $color-shadow-blue: #203647;
 $color-lighter-blue: #007CC7;
 $color-lightest-blue: #4DA8DA;
 
+/* Browns */
+$color-light-brown: #bc7c54;
+
 $color-primary: $color-dark-blue;
 
 /* Body text color, site title, footer text color. */
@@ -123,7 +126,7 @@ body.home {
         }
         h2 {
             font-weight: 600;
-            font-size: 24px;
+            font-size: 32px;
         }
     }
 
@@ -234,9 +237,11 @@ body.home {
 
     .wp-block-buttons.shop-buttons {
         margin-top: calc(0.66 * $spacing-vertical * 2);
+        margin-bottom: calc(0.66 * $spacing-vertical * 2);
 
         @media only screen and (min-width: 482px) {
             margin-top: calc($spacing-vertical * 2);
+            margin-bottom: calc($spacing-vertical * 2);
         }
     }
 
