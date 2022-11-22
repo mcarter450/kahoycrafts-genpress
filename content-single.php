@@ -13,14 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> <?php generate_do_microdata( 'article' ); ?>>
 	<div class="inside-article">
 		<?php
-		/**
-		 * generate_before_content hook.
-		 *
-		 * @since 0.1
-		 *
-		 * @hooked generate_featured_page_header_inside_single - 10
-		 */
-		do_action( 'generate_before_content' );
 
 		if ( generate_show_entry_header() ) :
 			?>
@@ -66,6 +58,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 		if ( 'microdata' === generate_get_schema_type() ) {
 			$itemprop = ' itemprop="text"';
 		}
+
+		/**
+		 * generate_before_content hook.
+		 *
+		 * @since 0.1
+		 *
+		 * @hooked generate_featured_page_header_inside_single - 10
+		 */
+		do_action( 'generate_before_content' );
 		?>
 
 		<div class="entry-content"<?php echo $itemprop; // phpcs:ignore -- No escaping needed. ?>>
