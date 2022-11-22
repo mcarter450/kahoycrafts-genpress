@@ -191,7 +191,7 @@ body.home {
     max-width: 768px;
 }
 
-.one-container .inside-article >.featured-image  {
+.one-container .inside-article > .featured-image  {
     margin-top: 1em;
     text-align: center;
     border-top: 1px solid #ddd;
@@ -203,9 +203,12 @@ body.home {
     max-width: 1200px;
 }
 
-.blog .inside-article .wp-post-image,
-.archive .inside-article .wp-post-image  {
-    //width: 100%;
+.one-container .inside-article > .post-image {
+    margin-top: 1em;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 1em 0;
 }
 
 .one-container .inside-article > .page-header-image-single > img {
