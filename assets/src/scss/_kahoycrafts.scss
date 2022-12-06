@@ -130,6 +130,27 @@ body.home {
         }
     }
 
+    .jetpack-testimonial-shortcode.owl-carousel {
+        .owl-item {
+            .testimonial-featured-image {
+                position: absolute;
+                top: 0;
+            }
+            .testimonial-entry.has-testimonial-thumbnail {
+                .testimonial-entry-content,
+                .testimonial-entry-title {
+                    margin-left: calc(155px + 0.75em);
+                }
+            }
+            .testimonial-entry-content {
+                margin-top: 0;
+            }
+            img {
+                width: auto;
+            }
+        }
+    }
+
 }
 
 .entry-content > * {
