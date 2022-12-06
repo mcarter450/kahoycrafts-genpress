@@ -77,21 +77,11 @@
  */
 
 .wp-block-button__link {
-  color: #fff;
-  background-color: #32373c;
-  border-radius: 9999px;
-  box-shadow: none;
   cursor: pointer;
   display: inline-block;
-  font-size: 1.125em;
-  padding: calc(0.667em + 2px) calc(1.333em + 2px);
   text-align: center;
-  text-decoration: none;
   word-break: break-word;
   box-sizing: border-box;
-}
-.wp-block-button__link:hover, .wp-block-button__link:focus, .wp-block-button__link:active, .wp-block-button__link:visited {
-  color: #fff;
 }
 .wp-block-button__link.aligncenter {
   text-align: center;
@@ -101,12 +91,19 @@
   text-align: right;
 }
 
+.wp-block-button[style*=text-decoration] .wp-block-button__link {
+  text-decoration: inherit;
+}
+
 .wp-block-buttons {
   /* stylelint-disable indentation */
 }
 .wp-block-buttons > .wp-block-button {
   display: inline-block;
   margin: 0;
+}
+.wp-block-buttons.is-content-justification-center {
+  justify-content: center;
 }
 .wp-block-buttons.aligncenter {
   text-align: center;
@@ -119,6 +116,10 @@
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+}
+.wp-block-buttons[style*=text-decoration] .wp-block-button,
+.wp-block-buttons[style*=text-decoration] .wp-block-button__link {
+  text-decoration: inherit;
 }
 
 .wp-block-button.aligncenter {
@@ -177,6 +178,121 @@
   width: 100%;
 }
 
+/* Styles for backwards compatibility with the legacy `post-comments` block */
+
+.wp-block-gallery:not(.has-nested-images) {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.wp-block-gallery:not(.has-nested-images) figcaption {
+  flex-grow: 1;
+}
+.wp-block-gallery:not(.has-nested-images).alignleft, .wp-block-gallery:not(.has-nested-images).alignright {
+  max-width: 420px;
+  width: 100%;
+}
+
+figure.wp-block-gallery.has-nested-images {
+  align-items: normal;
+}
+
+.wp-block-gallery.has-nested-images figure.wp-block-image:not(#individual-image) {
+  width: calc(50% - (var(--wp--style--unstable-gallery-gap, 16px) / 2));
+  margin: 0;
+}
+.wp-block-gallery.has-nested-images figure.wp-block-image {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.wp-block-gallery.has-nested-images figure.wp-block-image > div,
+.wp-block-gallery.has-nested-images figure.wp-block-image > a {
+  margin: 0;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.wp-block-gallery.has-nested-images figure.wp-block-image img {
+  display: block;
+  height: auto;
+  max-width: 100% !important;
+  width: auto;
+}
+.wp-block-gallery.has-nested-images figure.wp-block-image figcaption {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.3) 70%, transparent);
+  bottom: 0;
+  color: #fff;
+  font-size: 13px;
+  left: 0;
+  margin-bottom: 0;
+  max-height: 60%;
+  overflow: auto;
+  padding: 0 8px 8px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+.wp-block-gallery.has-nested-images figure.wp-block-image figcaption img {
+  display: inline;
+}
+.wp-block-gallery.has-nested-images figure.wp-block-image figcaption a {
+  color: inherit;
+}
+.wp-block-gallery.has-nested-images figure.wp-block-image.is-style-rounded > div,
+.wp-block-gallery.has-nested-images figure.wp-block-image.is-style-rounded > a {
+  flex: 1 1 auto;
+}
+.wp-block-gallery.has-nested-images figure.wp-block-image.is-style-rounded figcaption {
+  flex: initial;
+  background: none;
+  color: inherit;
+  margin: 0;
+  padding: 10px 10px 9px;
+  position: relative;
+}
+.wp-block-gallery.has-nested-images figcaption {
+  flex-grow: 1;
+  flex-basis: 100%;
+  text-align: center;
+}
+.wp-block-gallery.has-nested-images:not(.is-cropped) figure.wp-block-image:not(#individual-image) {
+  margin-top: 0;
+  margin-bottom: auto;
+}
+.wp-block-gallery.has-nested-images.is-cropped figure.wp-block-image:not(#individual-image) {
+  align-self: inherit;
+}
+.wp-block-gallery.has-nested-images.is-cropped figure.wp-block-image:not(#individual-image) > div:not(.components-drop-zone),
+.wp-block-gallery.has-nested-images.is-cropped figure.wp-block-image:not(#individual-image) > a {
+  display: flex;
+}
+.wp-block-gallery.has-nested-images.is-cropped figure.wp-block-image:not(#individual-image) a,
+.wp-block-gallery.has-nested-images.is-cropped figure.wp-block-image:not(#individual-image) img {
+  width: 100%;
+  flex: 1 0 0%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (min-width: 600px) {
+  .wp-block-gallery.has-nested-images.columns-4 figure.wp-block-image:not(#individual-image) {
+    width: calc(25% - (var(--wp--style--unstable-gallery-gap, 16px) * 0.75));
+  }
+}
+.wp-block-gallery.has-nested-images.alignleft, .wp-block-gallery.has-nested-images.alignright {
+  max-width: 420px;
+  width: 100%;
+}
+.wp-block-gallery.has-nested-images.aligncenter {
+  justify-content: center;
+}
+
 h1.has-background,
 h2.has-background,
 h3.has-background,
@@ -184,17 +300,11 @@ h5.has-background {
   padding: 1.25em 2.375em;
 }
 
-.wp-block-image {
-  margin: 0 0 1em 0;
-}
 .wp-block-image img {
   height: auto;
   max-width: 100%;
   vertical-align: bottom;
-}
-.wp-block-image:not(.is-style-rounded) > a,
-.wp-block-image:not(.is-style-rounded) img {
-  border-radius: inherit;
+  box-sizing: border-box;
 }
 .wp-block-image.aligncenter {
   text-align: center;
@@ -246,16 +356,46 @@ h5.has-background {
 .wp-block-image .is-style-rounded img {
   border-radius: 9999px;
 }
+.wp-block-image :where(.has-border-color) {
+  border-style: solid;
+}
+.wp-block-image :where([style*="border-top-color"]) {
+  border-top-style: solid;
+}
+.wp-block-image :where([style*="border-right-color"]) {
+  border-right-style: solid;
+}
+.wp-block-image :where([style*="border-bottom-color"]) {
+  border-bottom-style: solid;
+}
+.wp-block-image :where([style*="border-left-color"]) {
+  border-left-style: solid;
+}
+.wp-block-image :where([style*="border-width"]) {
+  border-style: solid;
+}
+.wp-block-image :where([style*="border-top-width"]) {
+  border-top-style: solid;
+}
+.wp-block-image :where([style*="border-right-width"]) {
+  border-right-style: solid;
+}
+.wp-block-image :where([style*="border-bottom-width"]) {
+  border-bottom-style: solid;
+}
+.wp-block-image :where([style*="border-left-width"]) {
+  border-left-style: solid;
+}
 
 .wp-block-image figure {
   margin: 0;
 }
 
-
+ol,
 ul {
   box-sizing: border-box;
 }
-
+ol.has-background,
 ul.has-background {
   padding: 1.25em 2.375em;
 }
@@ -267,6 +407,31 @@ ul.has-background {
 * If the style were set on mobile first, on desktop styles,
 * we would have no way of setting the style again to the inline style.
 */
+.wp-block-navigation {
+  position: relative;
+  --navigation-layout-justification-setting: flex-start;
+  --navigation-layout-direction: row;
+  --navigation-layout-wrap: wrap;
+  --navigation-layout-justify: flex-start;
+  --navigation-layout-align: center;
+}
+.wp-block-navigation ul {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-left: 0;
+}
+.wp-block-navigation ul,
+.wp-block-navigation ul li {
+  list-style: none;
+  padding: 0;
+}
+.wp-block-navigation:where(:not([class*="has-text-decoration"])) a {
+  text-decoration: none;
+}
+.wp-block-navigation:where(:not([class*="has-text-decoration"])) a:focus, .wp-block-navigation:where(:not([class*="has-text-decoration"])) a:active {
+  text-decoration: none;
+}
 
 /**
  * Margins
@@ -283,12 +448,50 @@ ul.has-background {
 /**
  * Mobile menu.
  */
+@keyframes overlay-menu__fade-in-animation {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 p.has-background {
   padding: 1.25em 2.375em;
 }
 
 :where(p.has-text-color:not(.has-link-color)) a {
+  color: inherit;
+}
+
+.wp-block-pullquote {
+  margin: 0 0 1em 0;
+  padding: 3em 0;
+  text-align: center;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+}
+.wp-block-pullquote p,
+.wp-block-pullquote blockquote,
+.wp-block-pullquote cite {
+  color: inherit;
+}
+.wp-block-pullquote.alignleft, .wp-block-pullquote.alignright {
+  max-width: 420px;
+}
+.wp-block-pullquote cite,
+.wp-block-pullquote footer {
+  position: relative;
+}
+
+.wp-block-pullquote.has-text-align-left blockquote {
+  text-align: left;
+}
+
+.wp-block-pullquote cite {
   color: inherit;
 }
 
@@ -299,6 +502,13 @@ p.has-background {
 
 .wp-block-spacer {
   clear: both;
+}
+
+/**
+ * Element styles.
+ */
+.wp-element-button {
+  cursor: pointer;
 }
 
 :root {
@@ -331,7 +541,6 @@ p.has-background {
 .screen-reader-text {
   border: 0;
   clip: rect(1px, 1px, 1px, 1px);
-  -webkit-clip-path: inset(50%);
   clip-path: inset(50%);
   height: 1px;
   margin: -1px;
@@ -345,8 +554,7 @@ p.has-background {
 .screen-reader-text:focus {
   background-color: #ddd;
   clip: auto !important;
-  -webkit-clip-path: none;
-          clip-path: none;
+  clip-path: none;
   color: #444;
   display: block;
   font-size: 1em;
@@ -375,8 +583,40 @@ html :where(.has-border-color) {
   border-style: solid;
 }
 
+html :where([style*="border-top-color"]) {
+  border-top-style: solid;
+}
+
+html :where([style*="border-right-color"]) {
+  border-right-style: solid;
+}
+
+html :where([style*="border-bottom-color"]) {
+  border-bottom-style: solid;
+}
+
+html :where([style*="border-left-color"]) {
+  border-left-style: solid;
+}
+
 html :where([style*="border-width"]) {
   border-style: solid;
+}
+
+html :where([style*="border-top-width"]) {
+  border-top-style: solid;
+}
+
+html :where([style*="border-right-width"]) {
+  border-right-style: solid;
+}
+
+html :where([style*="border-bottom-width"]) {
+  border-bottom-style: solid;
+}
+
+html :where([style*="border-left-width"]) {
+  border-left-style: solid;
 }
 
 /**
@@ -385,4 +625,11 @@ html :where([style*="border-width"]) {
 html :where(img[class*="wp-image-"]) {
   height: auto;
   max-width: 100%;
+}
+
+/**
+ * Reset user agent styles for figure element margins.
+ */
+figure {
+  margin: 0 0 1em 0;
 }
