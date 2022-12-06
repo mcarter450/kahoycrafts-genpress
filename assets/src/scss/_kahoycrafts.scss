@@ -55,8 +55,11 @@ $spacing-vertical: $global-spacing;
     .wp-block-column.creative-process {
         padding: $mobile-spacing !important;
 
-        @media (min-width: 768px) {
-            padding: $global-spacing !important;
+        @media (min-width: 821px) {
+            > p {
+                padding-left: 15%;
+                padding-right: 15%;
+            }
         }
     }
 }
