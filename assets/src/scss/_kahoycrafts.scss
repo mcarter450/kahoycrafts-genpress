@@ -133,6 +133,11 @@ body.home {
         }
     }
 
+    /* Hide slider navigation elements when offscreen */
+    .wp-block-columns.alignfull.home-slider {
+        overflow: hidden;
+    }
+
     .jetpack-testimonial-shortcode.owl-carousel {
         .owl-item {
             .testimonial-featured-image {
