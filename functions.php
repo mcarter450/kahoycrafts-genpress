@@ -38,6 +38,9 @@ function kahoy_crafts_styles() {
 
 	wp_dequeue_style( 'generate-child' );
 
+	// Disable useless styles
+	wp_dequeue_style( 'classic-theme-styles' );
+
 	// Use native Html5 players
 	wp_deregister_style( 'wp-mediaelement' );
 	wp_deregister_script( 'wp-mediaelement' );
