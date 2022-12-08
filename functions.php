@@ -48,16 +48,13 @@ function kahoy_crafts_styles() {
 	wp_deregister_script( 'mediaelement-migrate' );
 	wp_deregister_script( 'mediaelement-vimeo' );
 
-	if ( is_front_page() or 
-		 is_page('contact') or 
-		 is_page('owners-bio') or 
-		 is_page('free-shipping-kit') or 
-		 is_page('products-feed-generator') or
-		 is_page('gallery') or is_blog() ) {
-
-		// Dequeue cart related styles on non-checkout pages
-		wp_dequeue_style( 'wc-blocks-checkout-style' );
-		wp_deregister_style( 'wc-blocks-checkout-style' );
+	// if we're not on a Woocommerce page, dequeue all of these scripts
+	if (! is_woocommerce() && ! is_cart() && ! is_checkout() && ! is_account_page() ) { 
+		wp_dequeue_script( 'wc-add-to-cart' );
+		wp_dequeue_script( 'jquery-blockui' );
+		wp_dequeue_script( 'jquery-placeholder' );
+		wp_dequeue_script( 'woocommerce' );
+		wp_dequeue_script( 'jquery-cookie' );
 		wp_dequeue_script( 'wc-cart-fragments' );
 	}
 
@@ -87,18 +84,6 @@ function kahoy_crafts_styles() {
 function is_blog() {
     return ( is_archive() || is_author() || is_category() || is_home() || is_single() || is_tag()) && 'post' == get_post_type();
 }
-
-// function remove_jquery_migrate( $scripts ) {
-	
-// 	if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
-			
-// 		$script = $scripts->registered['jquery'];
-		
-// 		if ( $script->deps ) { 
-// 			$script->deps = array_diff( $script->deps, array( 'jquery-migrate' ) );
-// 		}
-// 	}
-// }
 
 add_action( 'init', function() {
 
