@@ -56,6 +56,7 @@ function kahoy_crafts_styles() {
 		 is_page('gallery') or is_blog() ) {
 
 		// Dequeue cart related styles on non-checkout pages
+		wp_dequeue_style( 'wc-blocks-checkout-style' );
 		wp_deregister_style( 'wc-blocks-checkout-style' );
 		wp_dequeue_script( 'wc-cart-fragments' );
 	}
