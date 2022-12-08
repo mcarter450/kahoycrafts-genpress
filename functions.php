@@ -154,6 +154,19 @@ add_action( 'generate_after_entry_content', function() {
     <?php endif;
 } );
 
+// Remove JQuery migrate
+function remove_jquery_migrate( $scripts ) {
+	if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
+		$script = $scripts->registered['jquery'];
+		// Check whether the script has any dependencies
+		if ( $script->deps ) { 
+			$script->deps = array_diff( $script->deps, ['jquery-migrate'] );
+		}
+	}
+}
+
+add_action( 'wp_default_scripts', 'remove_jquery_migrate' );
+
 /**
  * Action that fires during form entry processing after initial field validation.
  *
