@@ -384,7 +384,12 @@ add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 	}
 
 	if ( $handle == 'wpforms' || 
+		 $handle == 'wpforms-dropzone' || 
+		 $handle == 'wpforms-recaptcha' || 
 		 $handle == 'wpforms-validation' || 
+		 $handle == 'wpforms-file-upload' || 
+		 $handle == 'wpforms-generic-utils' || 
+		 $handle == 'wpforms-builder-conditionals' ||
 		 $handle == 'owl-carousel' || 
 		 $handle == 'kahoycrafts'  || 
 		 $handle == 'cookie-consent' || 
