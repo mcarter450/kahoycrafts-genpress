@@ -335,6 +335,30 @@ add_filter( 'style_loader_src', function( $src, $handle ) {
 
 }, 10, 2 );
 
+// Delay non-critical stylesheets 
+add_filter( 'style_loader_tag', function( $tag, $handle ) {
+
+	if ( is_front_page() or 
+			 is_page('contact') or 
+			 is_page('owners-bio') or 
+			 is_page('free-shipping-kit') or 
+			 is_page('products-feed-generator') or
+			 is_page('gallery') or 
+			 is_blog() or is_woocommerce() ) {
+
+		switch ($handle) {
+			case 'generate-google-fonts':
+			case 'wc-blocks-checkout-style':
+				$tag = str_replace('rel=\'stylesheet\'', 'rel="preload" as="style", onload="this.onload=null;this.rel=\'stylesheet\'"', $tag);
+				break;
+		}
+
+	}
+
+	return $tag;
+
+}, 10, 2);
+
 /**
  * Defer or async scripts
  */
