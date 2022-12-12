@@ -344,6 +344,10 @@ add_filter( 'style_loader_src', function( $src, $handle ) {
 // Delay non-critical stylesheets 
 add_filter( 'style_loader_tag', function( $tag, $handle ) {
 
+	if ( is_admin() ) {
+		return $tag;
+	}
+
 	if ( is_front_page() or 
 			 is_page('contact') or 
 			 is_page('owners-bio') or 
@@ -382,12 +386,14 @@ add_filter( 'style_loader_tag', function( $tag, $handle ) {
  * Defer or async scripts
  */
 add_filter( 'script_loader_tag', function ( $tag, $handle ) {
+
+	if ( is_admin() ) {
+		return $tag;
+	}
 	
 	if ( $handle == 'wpforms-mailcheck' || 
 		 $handle == 'wpforms-punycode' || 
-		 $handle == 'wpforms-recaptcha' || 
-		 $handle == 'regenerator-runtime' || 
-		 $handle == 'wp-polyfill' ) {
+		 $handle == 'wpforms-recaptcha' ) {
 		
 		return str_replace( ' src', ' async src', $tag );
 	}
