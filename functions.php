@@ -33,8 +33,14 @@ function kahoy_crafts_admin_styles( $hook ) {
 function kahoy_crafts_styles() {
 
 	// Disable subscription styles
-	wp_dequeue_style( 'wc-blocks-integration' );
 	wp_dequeue_style( 'wcs-checkout' );
+	wp_dequeue_style( 'wc-blocks-integration' );
+	
+	wp_dequeue_script( 'wcs-single-product' );
+	wp_dequeue_script( 'wcs-cart' );
+
+	// Disable cart fragments - not used in generatepress theme
+	wp_dequeue_script( 'wc-cart-fragments' );
 
 	wp_dequeue_style( 'generate-child' );
 
@@ -378,34 +384,11 @@ add_filter( 'style_loader_tag', function( $tag, $handle ) {
 add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 	
 	if ( $handle == 'wpforms-mailcheck' || 
-		 $handle == 'wpforms-punycode' ) {
-		
-		return str_replace( ' src', ' async src', $tag );
-	}
-
-	if ( $handle == 'wpforms' || 
-		 $handle == 'wpforms-dropzone' || 
+		 $handle == 'wpforms-punycode' || 
 		 $handle == 'wpforms-recaptcha' || 
-		 $handle == 'wpforms-validation' || 
-		 $handle == 'wpforms-file-upload' || 
-		 $handle == 'wpforms-generic-utils' || 
-		 $handle == 'wpforms-builder-conditionals' ||
-		 $handle == 'owl-carousel' || 
-		 $handle == 'kahoycrafts'  || 
-		 $handle == 'cookie-consent' || 
-		 $handle == 'cookie-consent-banner' ) {
+		 $handle == 'regenerator-runtime' || 
+		 $handle == 'wp-polyfill' ) {
 		
-		return str_replace( ' src', ' defer src', $tag );
-	}
-
-	// WooCommerce
-	if ( is_front_page() && ( 
-			$handle == 'wc-cart-fragments' || 
-			$handle == 'wc-add-to-cart' || 
-			$handle == 'woocommerce' || 
-			$handle == 'js-cookie'
-		) ) {
-
 		return str_replace( ' src', ' async src', $tag );
 	}
 
