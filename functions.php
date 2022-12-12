@@ -344,12 +344,25 @@ add_filter( 'style_loader_tag', function( $tag, $handle ) {
 			 is_page('free-shipping-kit') or 
 			 is_page('products-feed-generator') or
 			 is_page('gallery') or 
-			 is_blog() or is_woocommerce() ) {
+			 is_blog() ) {
+
+		switch ($handle) {
+			case 'woocommerce-layout':
+			case 'woocommerce-smallscreen':
+			case 'woocommerce-general':
+			case 'generate-google-fonts':
+			case 'wc-blocks-checkout-style':
+				$tag = str_replace('rel=\'stylesheet\'', 'rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"', $tag);
+				break;
+		}
+	}
+
+	if ( is_woocommerce() ) {
 
 		switch ($handle) {
 			case 'generate-google-fonts':
 			case 'wc-blocks-checkout-style':
-				$tag = str_replace('rel=\'stylesheet\'', 'rel="preload" as="style", onload="this.onload=null;this.rel=\'stylesheet\'"', $tag);
+				$tag = str_replace('rel=\'stylesheet\'', 'rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"', $tag);
 				break;
 		}
 
