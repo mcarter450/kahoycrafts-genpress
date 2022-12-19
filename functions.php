@@ -62,8 +62,6 @@ function kahoy_crafts_styles() {
 		wp_dequeue_script( 'woocommerce' );
 		wp_dequeue_script( 'jquery-cookie' );
 		wp_dequeue_script( 'wc-cart-fragments' );
-		wp_dequeue_script( 'WCPAY_TOS' );
-		wp_dequeue_script( 'WCPAY_MULTI_CURRENCY_ANALYTICS' );
 	}
 
 	if ( is_front_page() or 
