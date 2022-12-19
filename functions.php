@@ -28,6 +28,15 @@ function kahoy_crafts_admin_styles( $hook ) {
 	wp_deregister_script( 'jetpack-jitm' );
 	wp_deregister_script( 'jetpack-plugins-page-js' );
 
+	// Fix error with woo-pay tos.js
+	if ($_SERVER['PHP_SELF'] == '/wp-admin/customize.php') {
+		wp_dequeue_style('wcpay-admin-css');
+		wp_dequeue_style('WCPAY_TOS');
+		wp_dequeue_style('wc-blocks-checkout-style');
+		wp_deregister_script( 'WCPAY_TOS' );
+		wp_deregister_script( 'WCPAY_MULTI_CURRENCY_ANALYTICS' );
+	}
+
 }
 
 function kahoy_crafts_styles() {
