@@ -478,6 +478,17 @@ body.home {
     &.woocommerce .woocommerce-breadcrumb {
         display: none;
     }
+
+    &.woocommerce ul.products li.product-category {
+        .woocommerce-loop-category__title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            .count {
+                //display: none;
+                background: none;
+            }
+        }
+    }
 }
 
 .woocommerce-shop,
