@@ -4,6 +4,8 @@
     background-repeat: no-repeat;
     height: 275px;
 
+    margin-top: $nav-header-height;
+
     .site-logo {
         opacity: .8;
         max-width: 175px;
@@ -24,6 +26,8 @@
     }
 
     @media only screen and (max-width: 768px) {
+
+        margin-top: 0;
 
         height: auto;
         background-image: linear-gradient(90deg, $color-shadow-light-blue, $color-blue);

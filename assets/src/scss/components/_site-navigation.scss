@@ -1,3 +1,18 @@
+@media only screen and (min-width: 769px) {
+    .site-header .inside-header .main-navigation.sub-menu-right {
+        position: absolute;
+        top: 0;
+        margin-left: -40px !important;
+        margin-top: -$nav-link-height;
+        width: 100%;
+        .inside-navigation {
+            margin-left: 0;
+            margin-right: 0;
+            justify-content: center;
+        }
+    }
+}
+
 .main-navigation a {
     font-size: 1rem;
 }
@@ -5,15 +20,10 @@
 .main-navigation .main-nav ul li a {
     padding-left: 1rem;
     padding-right: 1rem;
-    line-height: 45px;
-
-    &:hover {
-        color: $color-shadow-light-blue !important;
-    }
+    line-height: $nav-link-height;
 }
 
 .main-navigation .main-nav ul li[class*="current-menu-"] > a {
-    background-image: linear-gradient(304deg, $color-shadow-light-blue, transparent);
     color: var(--contrast);
     font-weight: 600;
 
@@ -29,6 +39,7 @@
 @media only screen and (max-width: 768px) {
 
     .main-navigation .main-nav ul li a {
+        line-height: 55px;
         &:hover {
             color: var(--contrast) !important;
         }

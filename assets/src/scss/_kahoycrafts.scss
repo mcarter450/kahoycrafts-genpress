@@ -45,6 +45,9 @@ $mobile-spacing: calc($global-spacing / 2);
 $spacing-horizontal: $global-spacing;
 $spacing-vertical: $global-spacing;
 
+$nav-header-height: 75px;
+$nav-link-height: 75px;
+
 @import "components/site-header";
 @import "components/site-footer";
 @import "components/site-navigation";
