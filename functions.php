@@ -64,13 +64,15 @@ function kahoy_crafts_styles() {
 	wp_deregister_script( 'mediaelement-vimeo' );
 
 	// if we're not on a Woocommerce page, dequeue all of these scripts
-	if (! is_woocommerce() && ! is_cart() && ! is_checkout() && ! is_account_page() ) { 
-		wp_dequeue_script( 'wc-add-to-cart' );
-		wp_dequeue_script( 'jquery-blockui' );
-		wp_dequeue_script( 'jquery-placeholder' );
-		wp_dequeue_script( 'woocommerce' );
-		wp_dequeue_script( 'jquery-cookie' );
-		wp_dequeue_script( 'wc-cart-fragments' );
+	if ( function_exists( 'is_woocommerce' ) ) {
+		if (! is_woocommerce() && ! is_cart() && ! is_checkout() && ! is_account_page() ) { 
+			wp_dequeue_script( 'wc-add-to-cart' );
+			wp_dequeue_script( 'jquery-blockui' );
+			wp_dequeue_script( 'jquery-placeholder' );
+			wp_dequeue_script( 'woocommerce' );
+			wp_dequeue_script( 'jquery-cookie' );
+			wp_dequeue_script( 'wc-cart-fragments' );
+		}
 	}
 
 	if ( is_front_page() or 
@@ -79,7 +81,7 @@ function kahoy_crafts_styles() {
 		 is_page('free-shipping-kit') or 
 		 is_page('products-feed-generator') or
 		 is_page('gallery') or 
-		 is_blog() or is_woocommerce() ) {
+		 is_blog() or ( function_exists( 'is_woocommerce' ) and is_woocommerce() ) ) {
 
 		// Load partial wp and wc gutenberg block styles for performance
 		wp_deregister_style( 'wp-block-library' );
@@ -332,7 +334,7 @@ add_filter( 'style_loader_src', function( $src, $handle ) {
 			 is_page('free-shipping-kit') or 
 			 is_page('products-feed-generator') or
 			 is_page('gallery') or 
-			 is_blog() or is_woocommerce() ) {
+			 is_blog() or ( function_exists( 'is_woocommerce' ) and is_woocommerce() ) ) {
 
 		switch ($handle) {
 			case 'woocommerce-layout': 
@@ -376,7 +378,7 @@ add_filter( 'style_loader_tag', function( $tag, $handle ) {
 		}
 	}
 
-	if ( is_woocommerce() ) {
+	if ( function_exists( 'is_woocommerce' ) and is_woocommerce() ) {
 
 		switch ($handle) {
 			case 'generate-google-fonts':
