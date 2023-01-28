@@ -19,8 +19,6 @@ $color-primary: $color-dark-blue;
 /* Body text color, site title, footer text color. */
 $color-secondary: $color-light-blue;
 
-
-
 // Matches <html> element
 :root {
 
@@ -38,6 +36,8 @@ $button-color-text-active: $white;
 $button-color-background: $color-dark-blue;
 $button-color-background-hover: #1e3b4e; 
 $button-color-background-active: #1e3b4e;
+
+$container-width: 1200px;
 
 $global-spacing: 30px;
 $mobile-spacing: calc($global-spacing / 2);
