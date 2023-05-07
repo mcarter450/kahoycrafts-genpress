@@ -27,6 +27,7 @@ function kahoy_crafts_admin_styles( $hook ) {
 
 	wp_dequeue_style( 'jetpack-jitm' );
 	wp_dequeue_style( 'jetpack-plugins-page-js' );
+	wp_dequeue_style( 'jetpack-videopress-video-block-view' ); // Jetpack bloat
 	wp_deregister_script( 'jetpack-jitm' );
 	wp_deregister_script( 'jetpack-plugins-page-js' );
 
@@ -54,6 +55,7 @@ function kahoy_crafts_styles() {
 	wp_dequeue_script( 'wc-cart-fragments' );
 
 	wp_dequeue_style( 'generate-child' );
+	wp_dequeue_style( 'jetpack-videopress-video-block-view' ); // Jetpack bloat
 
 	// Disable useless styles
 	wp_dequeue_style( 'classic-theme-styles' );
