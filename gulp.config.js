@@ -17,6 +17,10 @@ module.exports = {
 	        path: '/product/decorative-bookends-multicolor-backlit-cityscape-1-pair/'
 	    },
 	    {
+	        name: 'product_detail_handle',
+	        path: '/product/deluxe-birch-drawer-pull-wooden-wardrobe-handle/'
+	    },
+	    {
 	        name: 'bio',
 	        path: '/owners-bio/'
 	    },

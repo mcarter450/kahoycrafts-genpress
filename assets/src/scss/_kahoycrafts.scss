@@ -134,6 +134,15 @@ body.home {
             font-weight: 600;
             font-size: 32px;
         }
+
+        @media only screen and (max-width: 481px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
     }
 
     /* Fix issue with horizontal scrolling */
