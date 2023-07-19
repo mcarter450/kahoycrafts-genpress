@@ -6,6 +6,7 @@ require($childtheme_directory .'/classes/kahoycrafts_product_categories_widget.p
 
 // Include is 26 MB and causing out of memory error
 //require($childtheme_directory .'/assets/aws.phar'); // AWS SDK
+require($childtheme_directory .'/custom-post-types/testimonial.php');
 
 //    ------    ------------ ------------ --------    --------   ----    ---- ------------ 
 //   ********   ************ ************ ********   **********  *****   **** ************ 
@@ -56,6 +57,7 @@ function kahoy_crafts_styles() {
 
 	wp_dequeue_style( 'generate-child' );
 	wp_dequeue_style( 'jetpack-videopress-video-block-view' ); // Jetpack bloat
+	wp_dequeue_style( 'bne-testimonials-css' );
 
 	// Disable useless styles
 	wp_dequeue_style( 'classic-theme-styles' );
