@@ -26,11 +26,11 @@ add_action( 'admin_enqueue_scripts', 'kahoy_crafts_admin_styles', 11, 1 );
 
 function kahoy_crafts_admin_styles( $hook ) {
 
-	wp_dequeue_style( 'jetpack-jitm' );
-	wp_dequeue_style( 'jetpack-plugins-page-js' );
-	wp_dequeue_style( 'jetpack-videopress-video-block-view' ); // Jetpack bloat
-	wp_deregister_script( 'jetpack-jitm' );
-	wp_deregister_script( 'jetpack-plugins-page-js' );
+	// wp_dequeue_style( 'jetpack-jitm' );
+	// wp_dequeue_style( 'jetpack-plugins-page-js' );
+	// wp_dequeue_style( 'jetpack-videopress-video-block-view' ); // Jetpack bloat
+	// wp_deregister_script( 'jetpack-jitm' );
+	// wp_deregister_script( 'jetpack-plugins-page-js' );
 
 	// Fix error with woo-pay tos.js
 	if ($_SERVER['PHP_SELF'] == '/wp-admin/customize.php') {
@@ -56,8 +56,7 @@ function kahoy_crafts_styles() {
 	wp_dequeue_script( 'wc-cart-fragments' );
 
 	wp_dequeue_style( 'generate-child' );
-	wp_dequeue_style( 'jetpack-videopress-video-block-view' ); // Jetpack bloat
-	wp_dequeue_style( 'bne-testimonials-css' );
+	//wp_dequeue_style( 'jetpack-videopress-video-block-view' ); // Jetpack bloat\
 
 	// Disable useless styles
 	wp_dequeue_style( 'classic-theme-styles' );
@@ -140,12 +139,12 @@ function kahoy_crafts_scripts() {
 		wp_get_theme()->get( 'Version' ),
 		true
 	);
-	wp_enqueue_script(
-		'modernizr',
-		get_stylesheet_directory_uri() . '/assets/js/modernizr.min.js',
-		wp_get_theme()->get( 'Version' ),
-		true
-	);
+	// wp_enqueue_script(
+	// 	'modernizr',
+	// 	get_stylesheet_directory_uri() . '/assets/js/modernizr.min.js',
+	// 	wp_get_theme()->get( 'Version' ),
+	// 	true
+	// );
 	wp_enqueue_script(
 		'kahoycrafts',
 		get_stylesheet_directory_uri() . '/assets/js/kahoycrafts.min.js',
