@@ -141,6 +141,12 @@ function kahoy_crafts_scripts() {
 		true
 	);
 	wp_enqueue_script(
+		'modernizr',
+		get_stylesheet_directory_uri() . '/assets/js/modernizr.min.js',
+		wp_get_theme()->get( 'Version' ),
+		true
+	);
+	wp_enqueue_script(
 		'kahoycrafts',
 		get_stylesheet_directory_uri() . '/assets/js/kahoycrafts.min.js',
 		['jquery'],
