@@ -1,12 +1,7 @@
 <?php
 //* Code goes here
-$childtheme_directory = str_replace('generatepress', 'kahoycrafts-genpress', get_template_directory());
-
-require($childtheme_directory .'/classes/kahoycrafts_product_categories_widget.php');
-
-// Include is 26 MB and causing out of memory error
-//require($childtheme_directory .'/assets/aws.phar'); // AWS SDK
-require($childtheme_directory .'/custom-post-types/testimonial.php');
+require(__DIR__ .'/custom-post-types/testimonial.php');
+require(__DIR__ .'/classes/kahoycrafts_product_categories_widget.php');
 
 //    ------    ------------ ------------ --------    --------   ----    ---- ------------ 
 //   ********   ************ ************ ********   **********  *****   **** ************ 
@@ -22,26 +17,6 @@ add_action( 'widgets_init', function() {
 } );
 
 add_action( 'wp_enqueue_scripts', 'kahoy_crafts_styles', 11, 0 );
-add_action( 'admin_enqueue_scripts', 'kahoy_crafts_admin_styles', 11, 1 );
-
-function kahoy_crafts_admin_styles( $hook ) {
-
-	// wp_dequeue_style( 'jetpack-jitm' );
-	// wp_dequeue_style( 'jetpack-plugins-page-js' );
-	// wp_dequeue_style( 'jetpack-videopress-video-block-view' ); // Jetpack bloat
-	// wp_deregister_script( 'jetpack-jitm' );
-	// wp_deregister_script( 'jetpack-plugins-page-js' );
-
-	// Fix error with woo-pay tos.js
-	if ($_SERVER['PHP_SELF'] == '/wp-admin/customize.php') {
-		wp_dequeue_style( 'wcpay-admin-css' );
-		wp_dequeue_style( 'WCPAY_TOS' );
-		wp_dequeue_style( 'wc-blocks-checkout-style' );
-		wp_deregister_script( 'WCPAY_TOS' );
-		wp_deregister_script( 'WCPAY_MULTI_CURRENCY_ANALYTICS' );
-	}
-
-}
 
 function kahoy_crafts_styles() {
 
@@ -56,7 +31,6 @@ function kahoy_crafts_styles() {
 	wp_dequeue_script( 'wc-cart-fragments' );
 
 	wp_dequeue_style( 'generate-child' );
-	//wp_dequeue_style( 'jetpack-videopress-video-block-view' ); // Jetpack bloat\
 
 	// Disable useless styles
 	wp_dequeue_style( 'classic-theme-styles' );
@@ -103,6 +77,21 @@ function kahoy_crafts_styles() {
 
 }
 
+add_action( 'admin_enqueue_scripts', 'kahoy_crafts_admin_styles', 11, 1 );
+
+function kahoy_crafts_admin_styles( $hook ) {
+
+	// Fix error with woo-pay tos.js
+	if ($_SERVER['PHP_SELF'] == '/wp-admin/customize.php') {
+		wp_dequeue_style( 'wcpay-admin-css' );
+		wp_dequeue_style( 'WCPAY_TOS' );
+		wp_dequeue_style( 'wc-blocks-checkout-style' );
+		wp_deregister_script( 'WCPAY_TOS' );
+		wp_deregister_script( 'WCPAY_MULTI_CURRENCY_ANALYTICS' );
+	}
+
+}
+
 function is_blog() {
     return ( is_archive() || is_author() || is_category() || is_home() || is_single() || is_tag()) && 'post' == get_post_type();
 }
@@ -125,6 +114,8 @@ add_action( 'generate_footer', function() {
 	get_template_part( 'template-parts/footer/footer-content' );
 } );
 
+add_action( 'wp_enqueue_scripts', 'kahoy_crafts_scripts' );
+
 /**
  * Enqueue scripts and styles.
  * 
@@ -139,12 +130,6 @@ function kahoy_crafts_scripts() {
 		wp_get_theme()->get( 'Version' ),
 		true
 	);
-	// wp_enqueue_script(
-	// 	'modernizr',
-	// 	get_stylesheet_directory_uri() . '/assets/js/modernizr.min.js',
-	// 	wp_get_theme()->get( 'Version' ),
-	// 	true
-	// );
 	wp_enqueue_script(
 		'kahoycrafts',
 		get_stylesheet_directory_uri() . '/assets/js/kahoycrafts.min.js',
@@ -169,8 +154,6 @@ function kahoy_crafts_scripts() {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'kahoy_crafts_scripts' );
-
 /**
  * Post nav for jetpack testimonials
  */
@@ -181,6 +164,8 @@ add_action( 'generate_after_entry_content', function() {
         </footer><!-- .entry-meta -->
     <?php endif;
 } );
+
+add_action( 'wp_default_scripts', 'remove_jquery_migrate' );
 
 // Remove JQuery migrate
 function remove_jquery_migrate( $scripts ) {
@@ -193,65 +178,7 @@ function remove_jquery_migrate( $scripts ) {
 	}
 }
 
-add_action( 'wp_default_scripts', 'remove_jquery_migrate' );
-
-/**
- * Action that fires during form entry processing after initial field validation.
- *
- * @link   https://wpforms.com/developers/wpforms_process/
- *
- * @param  array  $fields    Sanitized entry field. values/properties.
- * @param  array  $entry     Original $_POST global.
- * @param  array  $form_data Form data and settings.
- *
- */
-// function wpf_dev_process( $fields, $entry, $form_data ) {
-
-// 	// Optional, you can limit to specific forms. Below, we restrict output to
-// 	// form #5.
-// 	if ( $form_data['settings']['form_class'] == 'newsletter-signup' ) {
-// 		$name = sanitize_text_field( $fields[1]['value'] );
-// 		$email = sanitize_email( $fields[2]['value'] );
-// 	}
-// 	else {
-// 		return $fields;
-// 	}
-
-// 	$sdk = new Aws\Sdk([
-// 		'region' => 'us-west-2',
-// 		'version' => 'latest'
-// 	]);
-
-// 	$client = $sdk->createSesV2();
-
-// 	try {
-
-// 		$client->createContact([
-// 			'AttributesData' => '{"Name": "'. $name .'"}',
-// 			'ContactListName' => 'KahoyCraftsMailingList', // REQUIRED
-// 			'EmailAddress' => $email, // REQUIRED
-// 			'TopicPreferences' => [
-// 				[
-// 					'SubscriptionStatus' => 'OPT_IN', // REQUIRED
-// 					'TopicName' => 'News', // REQUIRED
-// 				],
-// 				// ...
-// 			],
-// 			'UnsubscribeAll' => false,
-// 		]);
-
-// 		return $fields;
-
-// 	}
-// 	catch (Exception $e) {
-
-// 		wpforms()->process->errors[$form_data[ 'id' ]]['2'] = __( 'Email address is malformed or already exists.' );
-// 	}
-
-	
-// }
-
-//add_action( 'wpforms_process', 'wpf_dev_process', 10, 3 );
+add_action( 'woocommerce_after_order_notes', 'newsletter_checkout_field' );
 
 function newsletter_checkout_field( $checkout ) {
 
@@ -283,7 +210,7 @@ function newsletter_checkout_field( $checkout ) {
 
 }
 
-add_action( 'woocommerce_after_order_notes', 'newsletter_checkout_field' );
+add_action( 'woocommerce_checkout_update_order_meta', 'newsletter_checkout_field_update_order_meta' );
 
 /**
  * Store newsletter optin choice
@@ -295,38 +222,6 @@ function newsletter_checkout_field_update_order_meta( $order_id ) {
 	update_post_meta( $order_id, 'newsletter_optin', $value );
 
 }
-
-add_action( 'woocommerce_checkout_update_order_meta', 'newsletter_checkout_field_update_order_meta' );
-
-/**
- * Conversion tracking for WC order
- */
-// function add_gtag_purchase_event( $order_id ) {
-
-// 	if (! $order_id ) {
-// 		return; // no order id
-// 	}
-
-// 	if ( $order = wc_get_order( $order_id ) ) {
-
-// 		$script = "
-// <script>
-// gtag('event', 'conversion', {
-// 	'send_to': 'AW-10818559065/WOdmCKLJo6UDENm42KYo',
-// 	'value': {$order->get_total()},
-// 	'currency': '{$order->get_currency()}',
-// 	'transaction_id': '{$order_id}'
-// });
-// </script>
-// 		";
-
-// 		echo $script;
-
-// 	}
-
-// }
-
-//add_action( 'woocommerce_thankyou', 'add_gtag_purchase_event', 10, 4 );
 
 // ------------ --------  ----         ------------ ------------ -----------  ------------ 
 // ************ ********  ****         ************ ************ ***********  ************ 
@@ -446,6 +341,8 @@ add_filter( 'woocommerce_breadcrumb_home_url', function() {
 
 } );
 
+add_filter( 'wp_sitemaps_posts_query_args', 'kahoycrafts_disable_sitemap_specific_page', 10, 2 );
+
 /**
  * Exclude woocommerce pages from sitemap.xml
  *
@@ -467,8 +364,6 @@ function kahoycrafts_disable_sitemap_specific_page( $args, $post_type ) {
 
 }
 
-add_filter( 'wp_sitemaps_posts_query_args', 'kahoycrafts_disable_sitemap_specific_page', 10, 2 );
-
 /**
  * Remove lazy loading for image above the fold
  */
@@ -479,6 +374,9 @@ add_filter( 'woocommerce_product_get_image', function( $image, $obj, $size, $att
 
 	return $image;
 }, 10, 5);
+
+// Override video tag
+add_filter( 'wp_video_shortcode_override', 'video_shortcode_override', 10, 4 );
 
 function video_shortcode_override( $markup, $attr, $content, $id ) {
 	
@@ -506,15 +404,3 @@ function video_shortcode_override( $markup, $attr, $content, $id ) {
 	return $markup;
 
 }
-
-// Override video tag
-add_filter( 'wp_video_shortcode_override', 'video_shortcode_override', 10, 4 );
-
-/**
- * Disable unused jetpack CSS
- */
-//add_filter( 'jetpack_sharing_counts', '__return_false', 99 );
-add_filter( 'jetpack_implode_frontend_css', '__return_false', 99 );
-
-//disable just in time messages 
-add_filter( 'jetpack_just_in_time_msgs', '__return_false', 99 );
