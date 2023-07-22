@@ -142,6 +142,20 @@ body.home {
             h2 {
                 font-size: 1.8rem;
             }
+
+            .wp-block-image {
+                display: flex;
+
+                .owners-bio > img {
+                    max-width: 128px;
+                    margin-right: 1rem;
+                }
+
+                figcaption {
+                    margin-top: auto;
+                    margin-bottom: auto;
+                }
+            }
         }
     }
 
