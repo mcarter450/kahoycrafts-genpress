@@ -66,6 +66,45 @@ function kahoy_crafts_styles() {
 		wp_deregister_style( 'wp-block-library' );
 		wp_deregister_style( 'wc-blocks-style' );
 
+		// Remove yet more woo blocks style bloat
+		wp_deregister_style( 'wc-blocks-style-mini-cart-contents' );
+		wp_deregister_style( 'wc-blocks-style-add-to-cart-form' );
+		wp_deregister_style( 'wc-blocks-style-active-filters' );
+		wp_deregister_style( 'wc-blocks-packages-style' );
+		wp_deregister_style( 'wc-blocks-style-all-products' );
+		wp_deregister_style( 'wc-blocks-style-all-reviews' );
+		wp_deregister_style( 'wc-blocks-style-attribute-filter' );
+		wp_deregister_style( 'wc-blocks-style-breadcrumbs' );
+		wp_deregister_style( 'wc-blocks-style-catalog-sorting' );
+		wp_deregister_style( 'wc-blocks-style-customer-account' );
+		wp_deregister_style( 'wc-blocks-style-featured-category' );
+		wp_deregister_style( 'wc-blocks-style-featured-product' );
+		wp_deregister_style( 'wc-blocks-style-mini-cart' );
+		wp_deregister_style( 'wc-blocks-style-price-filter' );
+		wp_deregister_style( 'wc-blocks-style-product-add-to-cart' );
+		wp_deregister_style( 'wc-blocks-style-product-button' );
+		wp_deregister_style( 'wc-blocks-style-product-categories' );
+		wp_deregister_style( 'wc-blocks-style-product-image' );
+		wp_deregister_style( 'wc-blocks-style-product-image-gallery' );
+		wp_deregister_style( 'wc-blocks-style-product-query' );
+		wp_deregister_style( 'wc-blocks-style-product-results-count' );
+		wp_deregister_style( 'wc-blocks-style-product-reviews' );
+		wp_deregister_style( 'wc-blocks-style-product-sale-badge' );
+		wp_deregister_style( 'wc-blocks-style-product-search' );
+		wp_deregister_style( 'wc-blocks-style-product-sku' );
+		wp_deregister_style( 'wc-blocks-style-product-stock-indicator' );
+		wp_deregister_style( 'wc-blocks-style-product-summary' );
+		wp_deregister_style( 'wc-blocks-style-product-title' );
+		wp_deregister_style( 'wc-blocks-style-rating-filter' );
+		wp_deregister_style( 'wc-blocks-style-reviews-by-category' );
+		wp_deregister_style( 'wc-blocks-style-reviews-by-product' );
+		wp_deregister_style( 'wc-blocks-style-product-details' );
+		wp_deregister_style( 'wc-blocks-style-single-product' );
+		wp_deregister_style( 'wc-blocks-style-stock-filter' );
+		wp_deregister_style( 'wc-blocks-style-cart' );
+		wp_deregister_style( 'wc-blocks-style-checkout' );
+
+
 		wp_register_style( 'purge-block-style', get_stylesheet_directory_uri() . '/assets/css/purge-block-style.min.css', [], wp_get_theme()->get( 'Version' ) );
 
 		wp_enqueue_style( 'kahoy-crafts-style', get_stylesheet_directory_uri() . '/assets/css/purge-style.min.css', ['purge-block-style'], wp_get_theme()->get( 'Version' ) );
