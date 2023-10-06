@@ -349,9 +349,15 @@ add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 		return $tag;
 	}
 	
-	if ( $handle == 'wpforms-mailcheck' || 
+	if ( $handle == 'wpforms' || 
+		 $handle == 'wpforms-generic-utils' || 
+		 $handle == 'wpforms-validation' || 
+		 $handle == 'wpforms-mailcheck' || 
 		 $handle == 'wpforms-punycode' || 
-		 $handle == 'wpforms-recaptcha' ) {
+		 $handle == 'wpforms-recaptcha' ||
+		 $handle == 'generate-menu' || 
+		 $handle == 'cookie-consent' ||
+		 $handle == 'cookie-consent-banner' ) {
 		
 		return str_replace( ' src', ' async src', $tag );
 	}
