@@ -349,8 +349,7 @@ add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 		return $tag;
 	}
 	
-	if ( $handle == 'wpforms' || 
-		 $handle == 'wpforms-validation' || 
+	if ( $handle == 'wpforms-validation' || 
 		 $handle == 'wpforms-mailcheck' || 
 		 $handle == 'wpforms-punycode' || 
 		 $handle == 'wpforms-recaptcha' ||
