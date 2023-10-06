@@ -350,7 +350,6 @@ add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 	}
 	
 	if ( $handle == 'wpforms' || 
-		 $handle == 'wpforms-generic-utils' || 
 		 $handle == 'wpforms-validation' || 
 		 $handle == 'wpforms-mailcheck' || 
 		 $handle == 'wpforms-punycode' || 
