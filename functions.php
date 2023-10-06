@@ -65,8 +65,10 @@ function kahoy_crafts_styles() {
 		// Load partial wp and wc gutenberg block styles for performance
 		wp_deregister_style( 'wp-block-library' );
 		wp_deregister_style( 'wc-blocks-style' );
+		wp_deregister_style( 'wc-all-blocks-style' );
 
 		// Remove yet more woo blocks style bloat
+		
 		wp_deregister_style( 'wc-blocks-style-mini-cart-contents' );
 		wp_deregister_style( 'wc-blocks-style-add-to-cart-form' );
 		wp_deregister_style( 'wc-blocks-style-active-filters' );
@@ -103,8 +105,8 @@ function kahoy_crafts_styles() {
 		wp_deregister_style( 'wc-blocks-style-stock-filter' );
 		wp_deregister_style( 'wc-blocks-style-cart' );
 		wp_deregister_style( 'wc-blocks-style-checkout' );
-
-
+		wp_deregister_style( 'wc-blocks-vendors-style' );
+		
 		wp_register_style( 'purge-block-style', get_stylesheet_directory_uri() . '/assets/css/purge-block-style.min.css', [], wp_get_theme()->get( 'Version' ) );
 
 		wp_enqueue_style( 'kahoy-crafts-style', get_stylesheet_directory_uri() . '/assets/css/purge-style.min.css', ['purge-block-style'], wp_get_theme()->get( 'Version' ) );
