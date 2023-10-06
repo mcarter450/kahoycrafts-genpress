@@ -39,8 +39,11 @@
 			<div class="privacy">
 				<a href="/privacy-policy/">Privacy Policy</a>
 			</div><!-- .privacy -->
+			<div class="terms">
+				<a href="/terms-and-conditions/">Terms and Conditions</a>
+			</div><!-- .privacy -->
 			<div class="copyright">
-				© <?php echo date('Y'); ?> Kahoy Crafts. All rights reserved.
+				© <?php echo date('Y'); ?> Kahoy Crafts
 			</div><!-- .copyright -->
 			<div class="protected-by">
 				<?php $image_attributes = wp_get_attachment_image_src(417, 'medium'); ?>
