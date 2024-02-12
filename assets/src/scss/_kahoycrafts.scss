@@ -134,6 +134,9 @@ body.home {
             font-weight: 600;
             font-size: 32px;
         }
+        h3.testimonials {
+            margin-bottom: calc(1.5 * $spacing-vertical);
+        }
 
         @media only screen and (max-width: 481px) {
             h1 {
