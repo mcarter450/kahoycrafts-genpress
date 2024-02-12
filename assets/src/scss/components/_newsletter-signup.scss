@@ -1,6 +1,6 @@
 // Newsletter signup form
 div.wpforms-container.newsletter-signup {
-    background-image: linear-gradient(304deg, $color-blue, transparent);
+    background-color: #c6d2d0;
     padding: 15px;
 
     .wpforms-confirmation-container, 
@@ -9,14 +9,18 @@ div.wpforms-container.newsletter-signup {
         border: 1px solid $color-lightest-blue;
     }
 
+    .wpforms-form input.wpforms-field-medium {
+        max-width: 95%;
+    }
+
     .wpforms-form .wpforms-title {
         display: none;
     }
 
     .wpforms-form button[type=submit] {
-        background-color: $color-primary;
+        background-color: var(--accent);;
         color: $white;
-        border-color: $color-primary;
+        border-color: var(--accent);;
         border-radius: 5px;
 
         &:after {
@@ -28,8 +32,8 @@ div.wpforms-container.newsletter-signup {
         }
 
         &:hover {
-            background-color: $button-color-background-hover;
-            border-color: $button-color-background-hover;
+            background-color: var(--contrast);
+            border-color: var(--contrast);
         }
     }
 

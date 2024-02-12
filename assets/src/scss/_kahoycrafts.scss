@@ -159,16 +159,27 @@ body.home {
         }
     }
 
-    /* Fix issue with horizontal scrolling */
     @media only screen and (min-width: 1024px) {
+        /* Fix issue with horizontal scrolling */
         &.no-sidebar .entry-content .alignfull {
             margin-right: calc((-100vw + 15px) / 2 + 100% / 2);
+        }
+
+        .wide-margin {
+            margin-left: 3rem;
+            margin-right: 3rem;
         }
     }
 
     /* Hide slider navigation elements when offscreen */
     .wp-block-columns.alignfull.home-slider {
         overflow: hidden;
+    }
+
+    .creative-process.owl-carousel {
+        .owl-dots {
+            display: none;
+        }
     }
 
     .jetpack-testimonial-shortcode.owl-carousel {
