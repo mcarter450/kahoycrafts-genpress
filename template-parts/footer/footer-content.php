@@ -1,3 +1,15 @@
+<?php if (! is_page('contact') ): ?>
+<div id="newsletter-popup">
+	<div class="toolbar">
+		<button class="close">x</button>
+	</div>
+	<div class="content">
+		<h1>Take 15% Off</h1>
+		<h4>Sign up for email and save on your first order.</h4>
+		<?php echo do_shortcode('[contact-form-7 id="fa11142" title="Newsletter Signup"]'); ?>
+	</div>
+</div>
+<?php endif; ?>
 <footer>
 	<?php if ( has_nav_menu( 'footer' ) ) : ?>
 		<div class="social-footer grid-container">

@@ -1,40 +1,109 @@
 // Newsletter signup form
-div.wpforms-container.newsletter-signup {
-    background-color: #c6d2d0;
-    padding: 15px;
+// div.wpforms-container.newsletter-signup {
+//     background-color: #c6d2d0;
+//     padding: 15px;
 
-    .wpforms-confirmation-container, 
-    div[submit-success]>.wpforms-confirmation-container:not(.wpforms-redirection-message) {
-        background: #FFF;
-        border: 1px solid $color-lightest-blue;
+//     .wpforms-confirmation-container, 
+//     div[submit-success]>.wpforms-confirmation-container:not(.wpforms-redirection-message) {
+//         background: #FFF;
+//         border: 1px solid $color-lightest-blue;
+//     }
+
+//     .wpforms-form input.wpforms-field-medium {
+//         max-width: 95%;
+//     }
+
+//     .wpforms-form .wpforms-title {
+//         display: none;
+//     }
+
+//     .wpforms-form button[type=submit] {
+//         background-color: var(--accent);;
+//         color: $white;
+//         border-color: var(--accent);;
+//         border-radius: 5px;
+
+//         &:after {
+//             content: '\f0f3';
+//             font-family: 'Font Awesome 6 Free';
+//             font-weight: 400;
+//             color: #fff;
+//             margin-left: 0.3em;
+//         }
+
+//         &:hover {
+//             background-color: var(--contrast);
+//             border-color: var(--contrast);
+//         }
+//     }
+
+// }
+
+#newsletter-popup {
+    position: fixed;
+    background-color: #2a8dce;
+    width: 0px;
+    height: 0px;
+    bottom: 0;
+    right: 0;
+    z-index: 101;
+    transition: width 1.2s, height 1.2s;
+
+    &.expand {
+        width: 440px;
+        height: 620px;
     }
 
-    .wpforms-form input.wpforms-field-medium {
-        max-width: 95%;
+    .toolbar {
+        width: 440px;
+        text-align: right;
     }
 
-    .wpforms-form .wpforms-title {
-        display: none;
+    .content {
+        padding: 1rem 2rem;
     }
 
-    .wpforms-form button[type=submit] {
-        background-color: var(--accent);;
+    h1, h4 {
+        width: 376px;
         color: $white;
-        border-color: var(--accent);;
-        border-radius: 5px;
-
-        &:after {
-            content: '\f0f3';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 400;
-            color: #fff;
-            margin-left: 0.3em;
-        }
-
-        &:hover {
-            background-color: var(--contrast);
-            border-color: var(--contrast);
-        }
+        text-align: center;
     }
 
+    h4 {
+        font-size: 1.2rem;
+    }
+
+    .wpcf7-not-valid-tip {
+        color: #c0fe55;
+    }
+
+    .wpcf7-submit {
+        width: 100%;
+    }
+
+    .wpcf7-spinner {
+        margin-left: 6px;
+    }
+
+    .wpcf7 form .wpcf7-response-output {
+        margin-top: 0;
+    }
+
+    @media only screen and (max-width: 481px) {
+
+        transition: height 1.2s;
+
+        &.expand {
+            width: 100%;
+        }
+
+        .toolbar {
+            width: auto;
+        }
+
+        h1, h4 {
+            width: auto;
+        }
+    }
 }
+

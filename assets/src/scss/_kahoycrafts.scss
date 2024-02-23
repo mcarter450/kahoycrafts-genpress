@@ -52,7 +52,7 @@ $nav-link-height: 75px;
 @import "components/site-footer";
 @import "components/site-navigation";
 @import "components/share-icons";
-// @import "components/newsletter-signup";
+@import "components/newsletter-signup";
 
 .no-sidebar .entry-content .alignfull {
     .wp-block-column.creative-process {
@@ -103,6 +103,11 @@ $nav-link-height: 75px;
         }
     }
 
+}
+
+.wpcf7-spinner {
+    margin: 12px 0 0 12px;
+    position: absolute;
 }
 
 .wc-block-grid__product {

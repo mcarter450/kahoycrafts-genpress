@@ -54,6 +54,11 @@ function kahoy_crafts_styles() {
 		}
 	}
 
+	if (! is_page('contact') ) {
+		wp_deregister_script( 'google-recaptcha' );
+		wp_deregister_script( 'wpcf7-recaptcha' );
+	}
+
 	if ( is_front_page() or 
 		 is_page('contact') or 
 		 is_page('owners-bio') or 
@@ -263,6 +268,85 @@ function newsletter_checkout_field_update_order_meta( $order_id ) {
 	update_post_meta( $order_id, 'newsletter_optin', $value );
 
 }
+
+// Create the new wordpress action hook before sending the email from CF7
+add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
+
+	$submission = WPCF7_Submission::get_instance();
+
+	if (! $submission ) {
+		$abort = true;
+    	$object->set_response("No data to capture.");
+		return; // No data to capture
+	}
+
+	// Get the post data and other post meta values.
+    $posted_data = $submission->get_posted_data();
+
+    // Skip api request 
+    if ( $form->name() != 'newsletter-signup' 
+    	&& isset($posted_data['newsletter-optin'][0]) && $posted_data['newsletter-optin'][0] != 'Yes' ) {
+		return;
+	}
+
+	// $abort = true;
+	// error_log(print_r($posted_data, 1));
+	// $object->set_response("No data to capture");
+	// return; // No data to capture
+
+	// these variables are examples of other things you may want to pass to your custom handler
+	//$remote_ip = $submission->get_meta( 'remote_ip' );
+	//$url = $submission->get_meta( 'url' );
+	//$timestamp = gmdate("Y-m-d H:i:s", $submission->get_meta( 'timestamp' ));
+	//$title = wpcf7_special_mail_tag( '', '_post_title', '' );
+    
+	// If you have checkboxes or other multi-select fields, make sure you convert the values to a string  
+	// $mycheckbox1 = implode(", ", $posted_data["checkbox-465"]);
+	// $mycheckbox2 = implode(", ", $posted_data["checkbox-466"]);
+
+ 	// Encode the data in a new array in JSON format
+	$data = json_encode([
+		"email" => $posted_data["your-email"],
+		"list_ids" => [
+			//'3b76642d-8d8d-4cf9-b039-976f59ac94a2',
+			'ca8a5659-199e-4ca6-9062-2f0aa4544f23',
+		],
+		"field_values" => [
+			['name' => 'FIRST_NAME', 'string' => $posted_data["your-name"]]
+		]
+	]);
+ 
+	// Finally send the data to your custom endpoint
+    $ch = curl_init("https://api.bigmailer.io/v1/brands/63e25b44-7bfe-45a9-8948-ef354714783d/contacts/upsert");
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    	"X-API-Key: 69ea64c7-261b-45b3-b733-8f6e00213386",
+    	"accept: application/json",
+    	"content-type: application/json"
+    ]);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT ,5); //Optional timeout value
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5); //Optional timeout value
+    $result = curl_exec($ch);
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if ( $http_code != 200 && $form->name() == 'newsletter-signup' ) {
+    	$abort = true;
+    	$response = json_decode($result);
+
+    	if ($response->message) {
+    		$object->set_response($response->message);
+    	} else {
+    		$object->set_response('Sorry, an error occurred.');
+    	}
+    }
+
+    curl_close($ch);
+        
+    return $result;
+}, 10, 3 );
+
 
 // ------------ --------  ----         ------------ ------------ -----------  ------------ 
 // ************ ********  ****         ************ ************ ***********  ************ 
