@@ -54,10 +54,10 @@ function kahoy_crafts_styles() {
 		}
 	}
 
-	if (! is_page('contact') ) {
-		wp_dequeue_script( 'google-recaptcha' );
-		wp_dequeue_script( 'wpcf7-recaptcha' );
-	}
+	// if (! is_page('contact') ) {
+	// 	wp_dequeue_script( 'google-recaptcha' );
+	// 	wp_dequeue_script( 'wpcf7-recaptcha' );
+	// }
 
 	if ( is_front_page() or 
 		 is_page('contact') or 
@@ -183,6 +183,15 @@ function kahoy_crafts_scripts() {
 		wp_get_theme()->get( 'Version' ),
 		true
 	);
+	if (! is_page('contact') ) {
+		wp_enqueue_script(
+			'newsletter-popup',
+			get_stylesheet_directory_uri() . '/assets/js/newsletter-popup.min.js',
+			['jquery'],
+			wp_get_theme()->get( 'Version' ),
+			true
+		);
+	}
 	wp_register_script(
 		'cookie-consent-banner',
 		get_stylesheet_directory_uri() . '/assets/js/cookie-consent-banner.min.js',
