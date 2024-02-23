@@ -55,8 +55,8 @@ function kahoy_crafts_styles() {
 	}
 
 	if (! is_page('contact') ) {
-		wp_deregister_script( 'google-recaptcha' );
-		wp_deregister_script( 'wpcf7-recaptcha' );
+		wp_dequeue_script( 'google-recaptcha' );
+		wp_dequeue_script( 'wpcf7-recaptcha' );
 	}
 
 	if ( is_front_page() or 
