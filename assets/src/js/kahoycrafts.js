@@ -36,13 +36,13 @@
 				$popup.hide()
 			})
 
-			var wpcf7Elm = document.querySelector( '#wpcf7-f1640-o2' );
+			// var wpcf7Elm = document.querySelector( '#wpcf7-f1640-o2' );
  
-			wpcf7Elm.addEventListener( 'wpcf7mailsent', function( event ) {
-			  setTimeout(function() {
-			  	$popup.hide()
-			  }, 3000)
-			}, false );
+			// wpcf7Elm.addEventListener( 'wpcf7mailsent', function( event ) {
+			//   setTimeout(function() {
+			//   	$popup.hide()
+			//   }, 3000)
+			// }, false );
 
 			function maybeShowPopup() {
 				// Check if the user scrolled far enough.
