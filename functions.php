@@ -360,12 +360,17 @@ add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 add_action( 'woocommerce_thankyou', function( $order_id ) {
 	$order = wc_get_order( $order_id );
 
-    $code = $this->build_event( 'conversion', array(
-        'send_to'        => 'AW-10818559065/WOdmCKLJo6UDENm42KYo',
-        'transaction_id' => $order_id,
-        'value'          => $order->get_total() ? $order->get_total() : 0,
-        'currency'       => get_woocommerce_currency()
-    ) );
+	$value = $order->get_total() ? $order->get_total() : 0;
+	$currency = get_woocommerce_currency();
+
+$code = "<script>
+  gtag('event', 'conversion', {
+      'send_to': 'AW-10818559065/WOdmCKLJo6UDENm42KYo',
+      'value': {$value},
+      'currency': {$currency},
+      'transaction_id': {$order_id}
+  });
+</script>";
 
     wc_enqueue_js( $code );
 } );
