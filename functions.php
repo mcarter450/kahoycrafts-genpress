@@ -367,7 +367,7 @@ $code = "gtag('event', 'conversion', {
       'send_to': 'AW-10818559065/WOdmCKLJo6UDENm42KYo',
       'value': {$value},
       'currency': '{$currency}',
-      'transaction_id': {$order_id}
+      'transaction_id': '{$order_id}'
   });";
 
     wc_enqueue_js( $code );
