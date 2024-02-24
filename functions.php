@@ -356,6 +356,20 @@ add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
     return $result;
 }, 10, 3 );
 
+// Google Ads conversion tracking
+add_action( 'woocommerce_thankyou', function( $order_id ) {
+	$order = wc_get_order( $order_id );
+
+    $code = $this->build_event( 'conversion', array(
+        'send_to'        => 'AW-10818559065/WOdmCKLJo6UDENm42KYo',
+        'transaction_id' => $order_id,
+        'value'          => $order->get_total() ? $order->get_total() : 0,
+        'currency'       => get_woocommerce_currency()
+    ) );
+
+    wc_enqueue_js( $code );
+} );
+
 
 // ------------ --------  ----         ------------ ------------ -----------  ------------ 
 // ************ ********  ****         ************ ************ ***********  ************ 
