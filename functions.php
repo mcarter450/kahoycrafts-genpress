@@ -363,14 +363,12 @@ add_action( 'woocommerce_thankyou', function( $order_id ) {
 	$value = $order->get_total() ? $order->get_total() : 0;
 	$currency = get_woocommerce_currency();
 
-$code = "<script>
-  gtag('event', 'conversion', {
+$code = "gtag('event', 'conversion', {
       'send_to': 'AW-10818559065/WOdmCKLJo6UDENm42KYo',
       'value': {$value},
-      'currency': {$currency},
+      'currency': '{$currency}',
       'transaction_id': {$order_id}
-  });
-</script>";
+  });";
 
     wc_enqueue_js( $code );
 } );
