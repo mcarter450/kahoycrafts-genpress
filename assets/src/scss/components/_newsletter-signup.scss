@@ -1,43 +1,8 @@
 // Newsletter signup form
-// div.wpforms-container.newsletter-signup {
-//     background-color: #c6d2d0;
-//     padding: 15px;
-
-//     .wpforms-confirmation-container, 
-//     div[submit-success]>.wpforms-confirmation-container:not(.wpforms-redirection-message) {
-//         background: #FFF;
-//         border: 1px solid $color-lightest-blue;
-//     }
-
-//     .wpforms-form input.wpforms-field-medium {
-//         max-width: 95%;
-//     }
-
-//     .wpforms-form .wpforms-title {
-//         display: none;
-//     }
-
-//     .wpforms-form button[type=submit] {
-//         background-color: var(--accent);;
-//         color: $white;
-//         border-color: var(--accent);;
-//         border-radius: 5px;
-
-//         &:after {
-//             content: '\f0f3';
-//             font-family: 'Font Awesome 6 Free';
-//             font-weight: 400;
-//             color: #fff;
-//             margin-left: 0.3em;
-//         }
-
-//         &:hover {
-//             background-color: var(--contrast);
-//             border-color: var(--contrast);
-//         }
-//     }
-
-// }
+.widget .wpcf7 {
+    border: 1px #c6d2d0 solid;
+    padding: 1rem;
+}
 
 #newsletter-popup {
     position: fixed;
