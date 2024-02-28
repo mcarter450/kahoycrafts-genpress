@@ -131,31 +131,32 @@ body.home {
     }
 
     .entry-content {
-        h1 {
+        h1, h2 {
             font-weight: 600;
-            font-size: 48px;
         }
-        h2 {
-            font-weight: 600;
-            font-size: 32px;
+        h1.drawer-pulls,
+        h2.bookends {
+            display: inline-block;
+        }
+        h1.drawer-pulls {
+            margin-right: 0.1em;
+        }
+        h2.bookends {
+            font-size: 42px;
+            &::before {
+                content: ' • ';
+            }
         }
         h3.testimonials {
             margin-bottom: calc(1.5 * $spacing-vertical);
         }
 
-        @media only screen and (max-width: 481px) {
-            h1 {
-                font-size: 2.4rem;
-            }
-            h2 {
-                font-size: 1.8rem;
-            }
-
+        @media only screen and (max-width: 768px) {
             .wp-block-image {
                 display: flex;
 
                 .owners-bio > img {
-                    max-width: 128px;
+                    max-width: 256px;
                     margin-right: 1rem;
                 }
 
@@ -163,6 +164,53 @@ body.home {
                     margin-top: auto;
                     margin-bottom: auto;
                 }
+            }
+        }
+
+        @media only screen and (min-width: 768px) and (max-width: 1024px) {
+            h1.drawer-pulls, h2.bookends {
+                font-size: 32px;
+            }
+        }
+
+        @media only screen and (max-width: 540px) {
+            h1.drawer-pulls {
+                display: block;
+                text-align: center;
+            }
+
+            h2.bookends {
+                display: block;
+                font-size: 35px;
+                text-align: center;
+                &::before {
+                    content: '';
+                }
+            }
+
+            .wp-block-image {
+                .owners-bio > img {
+                    max-width: 128px;
+                    margin-right: 1rem;
+                }
+            }
+        }
+
+        @media only screen and (max-width: 400px) {
+            h2.bookends {
+                font-size: 30px;
+            }
+        }
+
+        @media only screen and (max-width: 360px) {
+            h2.bookends {
+                font-size: 28px;
+            }
+        }
+
+        @media only screen and (max-width: 280px) {
+            h2.bookends {
+                font-size: 23px;
             }
         }
     }
@@ -174,8 +222,8 @@ body.home {
         }
 
         .wide-margin {
-            margin-left: 3rem;
-            margin-right: 3rem;
+            padding-left: 3rem;
+            padding-right: 3rem;
         }
     }
 
@@ -326,11 +374,6 @@ body.home {
     .wp-block-buttons.shop-buttons {
         margin-top: calc(0.66 * $spacing-vertical * 2);
         margin-bottom: calc(0.66 * $spacing-vertical * 2);
-
-        @media only screen and (min-width: 482px) {
-            margin-top: calc($spacing-vertical * 2);
-            margin-bottom: calc($spacing-vertical * 2);
-        }
     }
 
     @media only screen and (min-width: 1024px) {
