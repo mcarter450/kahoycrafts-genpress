@@ -297,6 +297,33 @@ function newsletter_checkout_field_update_order_meta( $order_id ) {
 
 }
 
+
+add_action('woocommerce_add_to_cart', 'add_to_cart_click', 10, 6);
+
+function add_to_cart_click( $cart_id, $product_id, $request_quantity, $variation_id, $variation, $cart_item_data )
+{
+    $item_id = $variation_id ?: $product_id;
+
+    $product = wc_get_product($item_id);
+    $value = ($product->get_price() * $request_quantity);
+    $currency = get_woocommerce_currency();
+
+    $code = "gtag('event', 'add_to_cart', {
+		'value': {$value},
+		'currency': '{$currency}',
+		'items': [
+			{
+				'item_id': '{$product->get_id()}',
+				'item_name': '{$product->get_title()}',
+				'quantity': {$request_quantity},
+				'price': {$product->get_price()}
+			}
+		]
+	});";
+
+    wc_enqueue_js( $code );
+}
+
 // Create the new wordpress action hook before sending the email from CF7
 add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 

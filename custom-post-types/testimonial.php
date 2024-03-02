@@ -635,7 +635,6 @@ class Jetpack_Testimonial {
 	 */
 	public static function jetpack_testimonial_shortcode( $atts ) {
 		// Default attributes.
-		error_log('register jetpack shortcode');
 		$atts = shortcode_atts(
 			array(
 				'display_content' => true, // Can be false, true, or full.
