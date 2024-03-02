@@ -62,12 +62,12 @@ class Jetpack_Testimonial {
 		// Check on theme switch if theme supports CPT and setting is disabled
 		add_action( 'after_switch_theme', array( $this, 'activation_post_type_support' ) );
 
-		$setting = Jetpack_Options::get_option_and_ensure_autoload( self::OPTION_NAME, '0' );
+		// $setting = Jetpack_Options::get_option_and_ensure_autoload( self::OPTION_NAME, '0' );
 
 		// Bail early if Testimonial option is not set and the theme doesn't declare support
-		if ( empty( $setting ) && ! $this->site_supports_custom_post_type() ) {
-			return;
-		}
+		// if ( empty( $setting ) && ! $this->site_supports_custom_post_type() ) {
+		// 	return;
+		// }
 
 		// if ( ( ! defined( 'IS_WPCOM' ) || ! IS_WPCOM ) && ! Jetpack::is_module_active( 'custom-content-types' ) ) {
 		// 	return;
@@ -117,9 +117,9 @@ class Jetpack_Testimonial {
 		}
 
 		// If CPT was enabled programatically and no CPT items exist when user switches away, disable
-		if ( $setting && $this->site_supports_custom_post_type() ) {
-			add_action( 'switch_theme', array( $this, 'deactivation_post_type_support' ) );
-		}
+		// if ( $setting && $this->site_supports_custom_post_type() ) {
+		// 	add_action( 'switch_theme', array( $this, 'deactivation_post_type_support' ) );
+		// }
 	}
 
 	/**
@@ -635,6 +635,7 @@ class Jetpack_Testimonial {
 	 */
 	public static function jetpack_testimonial_shortcode( $atts ) {
 		// Default attributes.
+		error_log('register jetpack shortcode');
 		$atts = shortcode_atts(
 			array(
 				'display_content' => true, // Can be false, true, or full.
