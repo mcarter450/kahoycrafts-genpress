@@ -1,0 +1,22 @@
+body.page-template-contact-page .wpcf7-form {
+
+    :nth-child(5) {
+        margin-bottom: 1em;
+    }
+
+    .wpcf7-textarea {
+        max-height: 200px;
+    }
+
+    .wpcf7-form-control.wpcf7-checkbox .wpcf7-list-item {
+
+        margin-left: 0.5em;
+
+        .wpcf7-list-item-label {
+            padding-left: 0.5rem;
+            cursor: pointer;
+        }
+
+    }
+
+}
