@@ -300,12 +300,13 @@ function newsletter_checkout_field_update_order_meta( $order_id ) {
 
 add_action('woocommerce_add_to_cart', 'add_to_cart_click', 10, 6);
 
-function add_to_cart_click( $cart_id, $product_id, $request_quantity, $variation_id, $variation, $cart_item_data )
-{
+function add_to_cart_click( $cart_id, $product_id, $request_quantity, $variation_id, $variation, $cart_item_data ) {
+
     $item_id = $variation_id ?: $product_id;
 
     $product = wc_get_product($item_id);
-    $value = ($product->get_price() * $request_quantity);
+    $price = $product->get_price();
+    $value = ($price * $request_quantity);
     $currency = get_woocommerce_currency();
 
     $code = "gtag('event', 'add_to_cart', {
@@ -316,9 +317,70 @@ function add_to_cart_click( $cart_id, $product_id, $request_quantity, $variation
 				'item_id': '{$product->get_id()}',
 				'item_name': '{$product->get_title()}',
 				'quantity': {$request_quantity},
-				'price': {$product->get_price()}
+				'price': {$price}
 			}
 		]
+	});";
+
+    wc_enqueue_js( $code );
+}
+
+// add_action( 'woocommerce_remove_cart_item', 'remove_cart_item', 10, 2 );
+
+// function remove_cart_item( $cart_item_key, $cart ) {
+
+//     $cart_item = $cart->cart_contents[$cart_item_key];
+//     $product = $cart_item['data'];
+//     $value = $cart_item['line_subtotal'];
+//     $quantity = $cart_item['quantity'];
+
+//     $currency = get_woocommerce_currency();
+
+//     $code = "gtag('event', 'remove_from_cart', {
+// 		'value': {$value},
+// 		'currency': '{$currency}',
+// 		'items': [
+// 			{
+// 				'item_id': '{$product->get_id()}',
+// 				'item_name': '{$product->get_title()}',
+// 				'quantity': {#quantity},
+// 				'price': {$product->get_price()}
+// 			}
+// 		]
+// 	});";
+
+//     wc_enqueue_js( $code );
+
+// };
+
+add_action('woocommerce_review_order_after_cart_contents', 'after_cart_contents');
+
+function after_cart_contents( $cart_items ) {
+
+	$currency = get_woocommerce_currency();
+	
+	$cart_totals = WC()->session->get('cart_totals');
+	$value = $cart_totals['cart_contents_total'] ?: 0;
+	$coupons = implode(',', WC()->session->get('applied_coupons'));
+
+	$items = [];
+
+	foreach ( $cart_items as $item ) {
+		$items[] = [
+			'item_id' => (string)$item['data']->get_id(),
+			'item_name' => $item['data']->get_title(),
+			'quantity' => $item['quantity'],
+			'price' => $item['line_subtotal']
+		];
+	}
+
+	$json_items = json_encode($items);
+
+	$code = "gtag('event', 'begin_checkout', {
+		'value': {$value},
+		'currency': '{$currency}',
+		'coupon': '{$coupons}',
+		'items': {$json_items}
 	});";
 
     wc_enqueue_js( $code );
