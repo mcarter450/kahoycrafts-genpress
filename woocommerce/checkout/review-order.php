@@ -33,9 +33,6 @@ defined( 'ABSPATH' ) || exit;
 		foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 			$_product = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
 
-			error_log('enter custom woo template');
-			error_log(print_r($cart_item, 1));
-
 			$cart_items[] = $cart_item;
 
 			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key ) ) {

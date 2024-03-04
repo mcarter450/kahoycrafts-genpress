@@ -358,9 +358,6 @@ add_action('woocommerce_review_order_after_cart_contents', 'after_cart_contents'
 function after_cart_contents( $cart_items ) {
 
 	$currency = get_woocommerce_currency();
-
-	error_log('cart items:');
-	error_log(print_r($cart_items, 1));
 	
 	$cart_totals = WC()->session->get('cart_totals');
 	$value = $cart_totals['cart_contents_total'] ?: 0;
