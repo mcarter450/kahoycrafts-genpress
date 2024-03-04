@@ -48,6 +48,10 @@ $spacing-vertical: $global-spacing;
 $nav-header-height: 75px;
 $nav-link-height: 75px;
 
+//regular, italic, 600, 600italic
+$font-path: "../src/fonts";
+
+@import "fonts";
 @import "components/site-header";
 @import "components/site-footer";
 @import "components/site-navigation";
