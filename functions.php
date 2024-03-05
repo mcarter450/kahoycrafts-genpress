@@ -92,7 +92,6 @@ function kahoy_crafts_styles() {
 		wp_deregister_style( 'wc-all-blocks-style' );
 
 		// Remove yet more woo blocks style bloat
-		
 		wp_deregister_style( 'wc-blocks-style-mini-cart-contents' );
 		wp_deregister_style( 'wc-blocks-style-add-to-cart-form' );
 		wp_deregister_style( 'wc-blocks-style-active-filters' );
@@ -313,7 +312,7 @@ add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 
     // Skip api request 
     if ( $form->name() != 'newsletter-signup' 
-    	&& isset($posted_data['newsletter-optin'][0]) && $posted_data['newsletter-optin'][0] != 'Yes' ) {
+    	/*&& isset($posted_data['newsletter-optin'][0]) && $posted_data['newsletter-optin'][0] != 'Yes'*/ ) {
 		return;
 	}
 
