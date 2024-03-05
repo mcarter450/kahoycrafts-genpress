@@ -39,6 +39,7 @@
     font-weight: 400;
     font-style: normal;
     font-stretch: normal;
+    font-display: swap;
     src: url('#{$font-path}/source-sans-pro/sourcesanspro-regular-webfont.woff2') format('woff2'),
          url('#{$font-path}/source-sans-pro/sourcesanspro-regular-webfont.woff') format('woff');
 }
@@ -48,6 +49,7 @@
     font-weight: 400;
     font-style: italic;
     font-stretch: normal;
+    font-display: swap;
     src: url('#{$font-path}/source-sans-pro/sourcesanspro-it-webfont.woff2') format('woff2'),
          url('#{$font-path}/source-sans-pro/sourcesanspro-it-webfont.woff') format('woff');
 }
@@ -57,6 +59,7 @@
     font-weight: 600;
     font-style: normal;
     font-stretch: normal;
+    font-display: swap;
     src: url('#{$font-path}/source-sans-pro/sourcesanspro-semibold-webfont.woff2') format('woff2'),
          url('#{$font-path}/source-sans-pro/sourcesanspro-semibold-webfont.woff') format('woff');
 }
@@ -66,6 +69,7 @@
     font-weight: 600;
     font-style: italic;
     font-stretch: normal;
+    font-display: swap;
     src: url('#{$font-path}/source-sans-pro/sourcesanspro-semiboldit-webfont.woff2') format('woff2'),
          url('#{$font-path}/source-sans-pro/sourcesanspro-semiboldit-webfont.woff') format('woff');
 }
