@@ -310,9 +310,14 @@ add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 	// Get the post data and other post meta values.
     $posted_data = $submission->get_posted_data();
 
+	#honeypot spam filter
+	if ( !empty($posted_data["website"]) ) {
+		$abort = true;
+		return;
+	}
+
     // Skip api request 
-    if ( $form->name() != 'newsletter-signup' 
-    	/*&& isset($posted_data['newsletter-optin'][0]) && $posted_data['newsletter-optin'][0] != 'Yes'*/ ) {
+    if ( $form->name() != 'newsletter-signup' && empty($posted_data['newsletter-optin'][0]) ) {
 		return;
 	}
 
