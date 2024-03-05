@@ -61,6 +61,11 @@ function kahoy_crafts_styles() {
 	wp_deregister_script( 'mediaelement-migrate' );
 	wp_deregister_script( 'mediaelement-vimeo' );
 
+	// Remove flexible shipping styles
+	wp_deregister_style( 'flexible-shipping-free-shipping-notice-block-integration-blocks-integration-frontend' );
+	wp_deregister_style( 'flexible-shipping-free-shipping-notice-block-integration-blocks-integration-editor' );
+	wp_deregister_style( 'flexible-shipping-free-shipping' );
+
 	// if we're not on a Woocommerce page, dequeue all of these scripts
 	if ( function_exists( 'is_woocommerce' ) ) {
 		if (! is_woocommerce() && ! is_cart() && ! is_checkout() && ! is_account_page() ) { 
@@ -72,11 +77,6 @@ function kahoy_crafts_styles() {
 			wp_dequeue_script( 'wc-cart-fragments' );
 		}
 	}
-
-	// if (! is_page('contact') ) {
-	// 	wp_dequeue_script( 'google-recaptcha' );
-	// 	wp_dequeue_script( 'wpcf7-recaptcha' );
-	// }
 
 	if ( is_front_page() or 
 		 is_page('contact') or 
