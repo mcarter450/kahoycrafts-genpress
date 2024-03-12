@@ -22,12 +22,7 @@ add_action( 'wp_head', function() {
 	if ( is_wc_endpoint_url( 'order-received' ) ) {
 		?>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-10818559065"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
   gtag('config', 'AW-10818559065');
 </script>
 		<?php
@@ -472,12 +467,18 @@ add_action( 'woocommerce_thankyou', function( $order_id ) {
 	$value = $order->get_total() ? $order->get_total() : 0;
 	$currency = get_woocommerce_currency();
 
-$code = "gtag('event', 'conversion', {
+	// $code = "gtag('event', 'purchase', {
+ //      'value': {$value},
+ //      'currency': '{$currency}',
+ //      'transaction_id': '{$order_id}'
+ //  	});";
+
+	$code = "gtag('event', 'conversion', {
       'send_to': 'AW-10818559065/WOdmCKLJo6UDENm42KYo',
       'value': {$value},
       'currency': '{$currency}',
       'transaction_id': '{$order_id}'
-  });";
+  	});";
 
     wc_enqueue_js( $code );
 } );
