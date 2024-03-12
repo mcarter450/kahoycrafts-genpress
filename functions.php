@@ -399,34 +399,6 @@ function add_to_cart_click( $cart_id, $product_id, $request_quantity, $variation
     wc_enqueue_js( $code );
 }
 
-// add_action( 'woocommerce_remove_cart_item', 'remove_cart_item', 10, 2 );
-
-// function remove_cart_item( $cart_item_key, $cart ) {
-
-//     $cart_item = $cart->cart_contents[$cart_item_key];
-//     $product = $cart_item['data'];
-//     $value = $cart_item['line_subtotal'];
-//     $quantity = $cart_item['quantity'];
-
-//     $currency = get_woocommerce_currency();
-
-//     $code = "gtag('event', 'remove_from_cart', {
-// 		'value': {$value},
-// 		'currency': '{$currency}',
-// 		'items': [
-// 			{
-// 				'item_id': '{$product->get_id()}',
-// 				'item_name': '{$product->get_title()}',
-// 				'quantity': {#quantity},
-// 				'price': {$product->get_price()}
-// 			}
-// 		]
-// 	});";
-
-//     wc_enqueue_js( $code );
-
-// };
-
 add_action('woocommerce_review_order_after_cart_contents', 'after_cart_contents');
 
 function after_cart_contents( $cart_items ) {
@@ -435,7 +407,11 @@ function after_cart_contents( $cart_items ) {
 	
 	$cart_totals = WC()->session->get('cart_totals');
 	$value = $cart_totals['cart_contents_total'] ?: 0;
-	$coupons = implode(',', WC()->session->get('applied_coupons'));
+
+	$coupons = WC()->session->get('applied_coupons') ?: '';
+	if ($coupons) {
+		$coupons = implode(',', $coupons);
+	}
 
 	$items = [];
 
@@ -444,7 +420,7 @@ function after_cart_contents( $cart_items ) {
 			'item_id' => (string)$item['data']->get_id(),
 			'item_name' => $item['data']->get_title(),
 			'quantity' => $item['quantity'],
-			'price' => $item['line_subtotal']
+			'price' => (float)$item['line_total']
 		];
 	}
 
@@ -467,12 +443,34 @@ add_action( 'woocommerce_thankyou', function( $order_id ) {
 	$value = $order->get_total() ? $order->get_total() : 0;
 	$currency = get_woocommerce_currency();
 
-	// $code = "gtag('event', 'purchase', {
- //      'value': {$value},
- //      'currency': '{$currency}',
- //      'transaction_id': '{$order_id}'
- //  	});";
+	// Array of WC_Order_Item_Product
+	$cart_items = $order->get_items();
 
+	$items = [];
+
+	foreach ( $cart_items as &$item ) {
+		$data = $item->get_data();
+		$items[] = [
+			'item_id' => (string)($data['variation_id'] ?: $data['product_id']),
+			'item_name' => $data['name'],
+			'quantity' => $data['quantity'],
+			'price' => (float)$data['total']
+		];
+	}
+
+	$json_items = json_encode($items);
+
+	// GA4 event
+	$code = "gtag('event', 'purchase', {
+      'value': {$value},
+      'currency': '{$currency}',
+      'transaction_id': '{$order_id}',
+	  'items': {$json_items}
+  	});";
+
+  	wc_enqueue_js( $code );
+
+  	// Google Ads Event
 	$code = "gtag('event', 'conversion', {
       'send_to': 'AW-10818559065/WOdmCKLJo6UDENm42KYo',
       'value': {$value},
