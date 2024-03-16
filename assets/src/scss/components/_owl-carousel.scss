@@ -112,3 +112,19 @@
 		outline: none;
 	}
 }
+
+.jetpack-testimonial-shortcode.owl-carousel .owl-item .testimonial-entry-title .stars {
+	display: inline-block; 
+	padding-left: 10px;
+	transform: translateY(3px);
+}
+
+.jetpack-testimonial-shortcode.owl-carousel .owl-item .testimonial-entry-title .star-icon {
+	display: inline;
+}
+
+// .etsy-reviews:after {
+// 	display: inline-block; 
+// 	content: url('/wp-content/themes/kahoycrafts-genpress/assets/images/etsy-icon.svg');
+// 	transform: translate(7px, 9px);
+// }

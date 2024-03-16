@@ -701,6 +701,10 @@ class Jetpack_Testimonial {
 		return self::jetpack_testimonial_shortcode_html( $atts );
 	}
 
+	private static function get_rating_stars() {
+		echo '<img class="star-icon" src="/wp-content/themes/kahoycrafts-genpress/assets/images/5-star-icon.svg">';
+	}
+
 	/**
 	 * The Testimonial shortcode loop.
 	 *
@@ -750,7 +754,8 @@ class Jetpack_Testimonial {
 							}
 						}
 						?>
-						<span class="testimonial-entry-title">&#8213; <a href="<?php echo esc_url( get_permalink() ); ?>" title="<?php echo esc_attr( the_title_attribute() ); ?>"><?php the_title(); ?></a></span>
+						<span class="testimonial-entry-title">&#8213; <a href="<?php echo esc_url( get_permalink() ); ?>" title="<?php echo esc_attr( the_title_attribute() ); ?>">
+							<?php the_title(); ?></a><span class="stars"><?php self::get_rating_stars(); ?></span></span>
 						<?php
 						// Featured image
 						if ( false !== $atts['image'] ) :

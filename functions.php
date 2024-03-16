@@ -16,20 +16,6 @@ add_action( 'widgets_init', function() {
 	register_widget( 'kahoycrafts_product_categories_widget' );
 } );
 
-
-add_action( 'wp_head', function() {
-
-	if ( is_wc_endpoint_url( 'order-received' ) ) {
-		?>
-<!-- Google tag (gtag.js) -->
-<script>
-  gtag('config', 'AW-10818559065');
-</script>
-		<?php
-	}
-
-} );
-
 add_action( 'wp_enqueue_scripts', 'kahoy_crafts_styles', 11, 0 );
 
 function kahoy_crafts_styles() {
@@ -469,16 +455,6 @@ add_action( 'woocommerce_thankyou', function( $order_id ) {
   	});";
 
   	wc_enqueue_js( $code );
-
-  	// Google Ads Event
-	$code = "gtag('event', 'conversion', {
-      'send_to': 'AW-10818559065/WOdmCKLJo6UDENm42KYo',
-      'value': {$value},
-      'currency': '{$currency}',
-      'transaction_id': '{$order_id}'
-  	});";
-
-    wc_enqueue_js( $code );
 } );
 
 
