@@ -126,6 +126,8 @@ add_action( 'admin_enqueue_scripts', 'kahoy_crafts_admin_styles', 11, 1 );
 
 function kahoy_crafts_admin_styles( $hook ) {
 
+	wp_enqueue_style( 'kahoy-crafts-style', get_stylesheet_directory_uri() . '/assets/css/admin-style.min.css', [], wp_get_theme()->get( 'Version' ) );
+
 	// Fix error with woo-pay tos.js
 	if ($_SERVER['PHP_SELF'] == '/wp-admin/customize.php') {
 		wp_dequeue_style( 'wcpay-admin-css' );
