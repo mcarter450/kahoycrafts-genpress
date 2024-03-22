@@ -371,17 +371,21 @@ function add_to_cart_click( $cart_id, $product_id, $request_quantity, $variation
     $value = ($price * $request_quantity);
     $currency = get_woocommerce_currency();
 
+    $items = [];
+
+    $items[] = [
+    	'item_id' => (string)$item_id,
+		'item_name' => $product->get_name(),
+		'quantity' => $request_quantity,
+		'price' => (float)$price
+    ];
+
+    $json_items = json_encode($items);
+
     $code = "gtag('event', 'add_to_cart', {
 		'value': {$value},
 		'currency': '{$currency}',
-		'items': [
-			{
-				'item_id': '{$product->get_id()}',
-				'item_name': '{$product->get_title()}',
-				'quantity': {$request_quantity},
-				'price': {$price}
-			}
-		]
+		'items': {$json_items}
 	});";
 
     wc_enqueue_js( $code );
@@ -396,17 +400,15 @@ function after_cart_contents( $cart_items ) {
 	$cart_totals = WC()->session->get('cart_totals');
 	$value = $cart_totals['cart_contents_total'] ?: 0;
 
-	$coupons = WC()->session->get('applied_coupons') ?: '';
-	if ($coupons) {
-		$coupons = implode(',', $coupons);
-	}
+	$coupons = WC()->session->get('applied_coupons');
+	$coupons_list = $coupons ? implode(',', $coupons) : '';
 
 	$items = [];
 
 	foreach ( $cart_items as $item ) {
 		$items[] = [
 			'item_id' => (string)$item['data']->get_id(),
-			'item_name' => $item['data']->get_title(),
+			'item_name' => $item['data']->get_name(),
 			'quantity' => $item['quantity'],
 			'price' => (float)$item['line_total']
 		];
@@ -417,7 +419,7 @@ function after_cart_contents( $cart_items ) {
 	$code = "gtag('event', 'begin_checkout', {
 		'value': {$value},
 		'currency': '{$currency}',
-		'coupon': '{$coupons}',
+		'coupon': '{$coupons_list}',
 		'items': {$json_items}
 	});";
 
@@ -438,8 +440,9 @@ add_action( 'woocommerce_thankyou', function( $order_id ) {
 
 	foreach ( $cart_items as &$item ) {
 		$data = $item->get_data();
+		$item_id = $data['variation_id'] ?: $data['product_id'];
 		$items[] = [
-			'item_id' => (string)($data['variation_id'] ?: $data['product_id']),
+			'item_id' => (string)$item_id,
 			'item_name' => $data['name'],
 			'quantity' => $data['quantity'],
 			'price' => (float)$data['total']
