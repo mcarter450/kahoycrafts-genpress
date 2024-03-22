@@ -193,6 +193,15 @@ function kahoy_crafts_scripts() {
 			true
 		);
 	}
+	if ( is_product() ) {
+		wp_enqueue_script(
+			'view-product',
+			get_stylesheet_directory_uri() . '/assets/js/view-product.min.js',
+			['jquery'],
+			wp_get_theme()->get( 'Version' ),
+			true
+		);
+	}
 	wp_register_script(
 		'cookie-consent-banner',
 		get_stylesheet_directory_uri() . '/assets/js/cookie-consent-banner.min.js',
@@ -425,6 +434,10 @@ function after_cart_contents( $cart_items ) {
 
     wc_enqueue_js( $code );
 }
+
+add_action( 'woocommerce_before_single_product', function( $data ) {
+	error_log(print_r($data, 1));
+}, 10, 1);
 
 add_action( 'woocommerce_thankyou', function( $order_id ) {
 
