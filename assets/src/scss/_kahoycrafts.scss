@@ -141,21 +141,8 @@ body.home {
     }
 
     .entry-content {
-        h1, h2 {
+        h1 {
             font-weight: 600;
-        }
-        h1.drawer-pulls,
-        h2.bookends {
-            display: inline-block;
-        }
-        h1.drawer-pulls {
-            margin-right: 0.1em;
-        }
-        h2.bookends {
-            font-size: 42px;
-            &::before {
-                content: ' – ';
-            }
         }
         h3.testimonials {
             margin-bottom: calc(1.5 * $spacing-vertical);
@@ -164,7 +151,6 @@ body.home {
         .service-badge {
             > .fa-solid {
                 font-size: 35px;
-                // color: #2a8dce;
             }
             > big {
                 display: inline-block;
@@ -191,24 +177,14 @@ body.home {
         }
 
         @media only screen and (min-width: 768px) and (max-width: 1024px) {
-            h1.drawer-pulls, h2.bookends {
+            h1 {
                 font-size: 32px;
             }
         }
 
         @media only screen and (max-width: 540px) {
-            h1.drawer-pulls {
-                display: block;
+            h1 {
                 text-align: center;
-            }
-
-            h2.bookends {
-                display: block;
-                font-size: 35px;
-                text-align: center;
-                &::before {
-                    content: '';
-                }
             }
 
             .wp-block-image {
@@ -219,23 +195,6 @@ body.home {
             }
         }
 
-        @media only screen and (max-width: 400px) {
-            h2.bookends {
-                font-size: 30px;
-            }
-        }
-
-        @media only screen and (max-width: 360px) {
-            h2.bookends {
-                font-size: 28px;
-            }
-        }
-
-        @media only screen and (max-width: 280px) {
-            h2.bookends {
-                font-size: 23px;
-            }
-        }
     }
 
     @media only screen and (min-width: 1024px) {
