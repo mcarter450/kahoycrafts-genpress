@@ -43,7 +43,7 @@
 @media only screen and (max-width: 768px) {
 
     .main-navigation .main-nav ul li a {
-        line-height: 55px;
+        line-height: 65px;
         &:hover {
             color: var(--contrast) !important;
         }
@@ -75,6 +75,10 @@
 }
 
 @media only screen and (max-width: 481px) {
+
+    .main-navigation a {
+        font-size: 1.2rem;
+    }
 
     .has-inline-mobile-toggle .inside-header {
         padding: 0 calc(0.5 * $spacing-horizontal);
