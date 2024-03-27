@@ -161,6 +161,19 @@ body.home {
             margin-bottom: calc(1.5 * $spacing-vertical);
         }
 
+        .service-badge {
+            > .fa-solid {
+                font-size: 35px;
+                // color: #2a8dce;
+            }
+            > big {
+                display: inline-block;
+                font-size: 150%;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+        }
+
         @media only screen and (max-width: 768px) {
             .wp-block-image {
                 display: flex;

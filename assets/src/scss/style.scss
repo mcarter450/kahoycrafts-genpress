@@ -1,4 +1,8 @@
-@import "../purge-css/fontawesome.css";
+@import "../fontawesome/scss/fontawesome";
+//@import "../fontawesome/scss/regular";
+@import "../fontawesome/scss/solid";
+@import "../fontawesome/scss/brands";
+//@import "../purge-css/fontawesome.css";
 @import "../../js/OwlCarousel2-2.3.4/src/scss/owl.carousel";
 @import "../../js/OwlCarousel2-2.3.4/src/scss/owl.theme.default";
 @import "components/owl-carousel";
