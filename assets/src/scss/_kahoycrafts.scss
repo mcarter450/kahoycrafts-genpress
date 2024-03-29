@@ -140,6 +140,11 @@ body.home {
     .entry-content {
         h1 {
             font-weight: 600;
+            @media only screen and (min-width: 820px) {
+                &:before {
+                    content: 'Elevate Your Space with ';
+                }
+            }
         }
         h3.testimonials {
             margin-bottom: calc(1.5 * $spacing-vertical);
