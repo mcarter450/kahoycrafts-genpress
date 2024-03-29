@@ -148,6 +148,45 @@ body.home {
             margin-bottom: calc(1.5 * $spacing-vertical);
         }
 
+        .product-benefits {
+            .wp-block-column .wp-block-image {
+                margin-bottom: 0;
+            }
+            .wp-block-column ul {
+                list-style: none;
+                margin: 2em 2em 0 0;
+                margin-left: 0;
+                li {
+                    margin-bottom: 1em;
+                }
+            }
+
+            padding-top: 0;
+
+            .wp-block-image.size-large {
+                max-width: 100%!important;
+            }
+
+            @media only screen and (max-width: 1180px) {
+                .wp-block-column ul {
+                    font-size: 1rem;
+                }
+            }
+
+            @media only screen and (max-width: 980px) {
+                .wp-block-column ul {
+                    font-size: small;
+                }
+            }
+
+            @media only screen and (max-width: 781px) {
+                .wp-block-column ul {
+                    font-size: 1rem;
+                    margin: 0 2em 3em 2em;
+                }
+            }
+        }
+
         .service-badge {
             > .fa-solid {
                 font-size: 35px;
@@ -369,8 +408,6 @@ body.home {
         }
         
     }
-
-    
 
     &.woocommerce .onsale {
         height: 3.25em;
