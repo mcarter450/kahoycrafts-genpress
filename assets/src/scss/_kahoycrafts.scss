@@ -61,13 +61,10 @@ $font-path: "../src/fonts";
 
 .no-sidebar .entry-content .alignfull {
     .wp-block-column.creative-process {
-        padding: $mobile-spacing !important;
+        padding: 2em 2em 0 2em !important;
 
-        @media (min-width: 821px) {
-            > p {
-                padding-left: 15%;
-                padding-right: 15%;
-            }
+        @media (min-width: 820px) {
+            padding: $mobile-spacing !important;
         }
     }
 }
@@ -203,7 +200,7 @@ body.home {
             .wp-block-image {
                 display: flex;
 
-                .owners-bio > img {
+                .owners-bio img {
                     max-width: 256px;
                     margin-right: 1rem;
                 }
