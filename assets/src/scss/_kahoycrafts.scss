@@ -66,6 +66,12 @@ $font-path: "../src/fonts";
         @media (min-width: 820px) {
             padding: $mobile-spacing !important;
         }
+        @media (min-width: 1200px) {
+             > p {
+                padding-left: 15%;
+                padding-right: 15%;
+            }
+        }
     }
 }
 
