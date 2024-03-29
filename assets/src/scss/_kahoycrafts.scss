@@ -200,8 +200,10 @@ body.home {
             .wp-block-image {
                 display: flex;
 
-                .owners-bio img {
-                    // max-width: 256px;
+                .owners-bio {
+                    img {
+                        max-width: 256px;
+                    }
                     margin-right: 1rem;
                 }
 
@@ -224,8 +226,10 @@ body.home {
             }
 
             .wp-block-image {
-                .owners-bio > img {
-                    max-width: 128px;
+                .owners-bio {
+                    img {
+                        max-width: 128px;
+                    }
                     margin-right: 1rem;
                 }
             }
