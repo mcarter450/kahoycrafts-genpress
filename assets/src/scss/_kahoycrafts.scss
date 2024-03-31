@@ -156,6 +156,25 @@ body.home {
             margin-bottom: calc(1.5 * $spacing-vertical);
         }
 
+        .intro-text {
+            font-size: 26px;
+        }
+
+        @media only screen and (max-width: 480px) {
+            .kahoy-definition {
+                display: none;
+            }
+        }
+
+        @media only screen and (max-width: 390px) {
+            h1 {
+                font-size: 38px;
+            }
+            .intro-text {
+                font-size: 22px;
+            }
+        }
+
         .product-benefits {
             .wp-block-column .wp-block-image {
                 margin-bottom: 0;
