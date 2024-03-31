@@ -143,7 +143,9 @@ body.home {
         display: none;
     }
 
-    .entry-content {
+    .entry-content:not(:first-child) {
+        margin-top: 0;
+
         h1 {
             font-weight: 600;
             @media only screen and (min-width: 820px) {
