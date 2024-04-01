@@ -30,18 +30,24 @@
         margin-top: 0;
 
         height: 95px;
-        background: transparent url('/wp-content/themes/kahoycrafts-genpress/assets/images/kahoycrafts_banner_small.webp') top center;
-        background-size: 100% auto;
-        background-position: 0px 0px;
+        background-image: url('/wp-content/themes/kahoycrafts-genpress/assets/images/kahoycrafts_banner_small.webp');
+        background-size: cover;
+        background-position: 0px -25px;
 
         .site-logo {
-            max-width: 80px;
+            max-width: 70px;
             padding: 2px;
         }
 
         .inside-header {
             align-items: center;
         }
+
+    }
+
+    @media only screen and (max-width: 481px) {
+
+        background-position: 0px 0px;
 
     }
 
