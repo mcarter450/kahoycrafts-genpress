@@ -143,6 +143,10 @@ body.home {
         display: none;
     }
 
+    .mobile-only {
+        display: none !important;
+    }
+
     .entry-content:not(:first-child) {
         margin-top: 0;
 
@@ -162,18 +166,21 @@ body.home {
             font-size: 26px;
         }
 
-        @media only screen and (max-width: 480px) {
+        @media only screen and (max-width: 481px) {
             .kahoy-definition {
                 display: none;
             }
-        }
-
-        @media only screen and (max-width: 390px) {
             h1 {
                 font-size: 38px;
             }
             .intro-text {
                 font-size: 22px;
+            }
+            .desktop-only {
+                display: none !important;
+            }
+            .wp-block-image.mobile-only {
+                display: flex !important;
             }
         }
 
@@ -316,10 +323,14 @@ body.home {
 }
 
 .entry-content > * {
-
     margin-top: calc(.666 * $spacing-vertical);
     margin-bottom: calc(.666 * $spacing-vertical);
+}
 
+@media only screen and (max-width: 481px) {
+    :where(.wp-block-columns.is-layout-flex) {
+        gap: 1em;
+    }
 }
 
 .entry-content {
