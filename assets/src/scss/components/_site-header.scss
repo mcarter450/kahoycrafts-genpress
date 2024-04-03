@@ -11,18 +11,16 @@
         max-width: 175px;
         background-color: $color-shadow-light-blue;
         padding: 10px;
+        margin-left: 85px;
+        margin-top: 40px;
+
+         @media only screen and (max-width: 820px) {
+            max-width: 150px;
+        }
     }
 
     .inside-header {
         align-items: flex-start;
-    }
-
-    @media only screen and (max-width: 820px) {
-
-        .site-logo {
-            max-width: 150px;
-        }
-
     }
 
     @media only screen and (max-width: 768px) {
@@ -32,9 +30,11 @@
         height: 95px;
         background-image: url('/wp-content/themes/kahoycrafts-genpress/assets/images/kahoycrafts_banner_small.webp');
         background-size: cover;
-        background-position: 0px -25px;
+        background-position: 0px -15px;
 
         .site-logo {
+            margin-left: 0;
+            margin-top: 0;
             max-width: 70px;
             padding: 2px;
         }

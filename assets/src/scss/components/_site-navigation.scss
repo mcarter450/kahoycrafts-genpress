@@ -73,7 +73,7 @@
     }
 
     .has-inline-mobile-toggle .inside-header {
-        padding: 5px calc(0.5 * $spacing-horizontal);
+        padding: calc(0.5 * $spacing-vertical) calc(0.5 * $spacing-horizontal);
     }
 
     .menu-toggle {
