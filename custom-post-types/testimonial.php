@@ -702,7 +702,9 @@ class Jetpack_Testimonial {
 	}
 
 	private static function get_rating_stars() {
-		echo '<img class="star-icon" src="/wp-content/themes/kahoycrafts-genpress/assets/images/5-star-icon.svg">';
+		for ( $i = 0; $i < 5; $i++ ) {
+			echo '<i class="rating__star fas fa-star"></i>';
+		}
 	}
 
 	/**

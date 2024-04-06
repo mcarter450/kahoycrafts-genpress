@@ -673,6 +673,22 @@ body.home {
 
 }
 
+/* Product Detail - Reviews */
+body.single-product {
+    .woocommerce-product-rating > .stars {
+        margin-right: 1rem;
+    }
+
+    .woocommerce-Reviews ol.commentlist {
+        list-style: none;
+        margin-left: 1.5rem;
+
+        @media only screen and (max-width: 481px) {
+            margin-left: 0;
+        }
+    }
+}
+
 /* Shipping Weight & Dimensions (Content Hack) */
 .woocommerce-product-attributes-item {
 

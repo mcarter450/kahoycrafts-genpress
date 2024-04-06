@@ -511,6 +511,29 @@ add_filter( 'style_loader_src', function( $src, $handle ) {
 
 }, 10, 2 );
 
+function get_rating_stars($rating) {
+	$i = 0;
+	$n = floor($rating);
+	$html = '';
+
+	while ( $i < $n ) {
+		$html .= '<i class="rating__star fas fa-star"></i>';
+		$i++;
+	}
+	while ( $i < 5 ) {
+		$html .= '<i class="rating__star far fa-star"></i>';
+		$i++;
+	}
+	
+	return $html;
+}
+
+add_filter( 'woocommerce_product_get_rating_html', function( $html, $rating, $count ) {
+	if ($rating) {
+		return '<span class="stars">'. get_rating_stars($rating) .'</span>';
+	}
+}, 10, 3 );
+
 // Delay non-critical stylesheets 
 add_filter( 'style_loader_tag', function( $tag, $handle ) {
 
