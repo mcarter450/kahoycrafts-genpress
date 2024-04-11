@@ -435,10 +435,6 @@ function after_cart_contents( $cart_items ) {
     wc_enqueue_js( $code );
 }
 
-add_action( 'woocommerce_before_single_product', function( $data ) {
-	error_log(print_r($data, 1));
-}, 10, 1);
-
 add_action( 'woocommerce_thankyou', function( $order_id ) {
 
 	$order = wc_get_order( $order_id );
@@ -524,7 +520,7 @@ function get_rating_stars($rating) {
 		$html .= '<i class="rating__star far fa-star"></i>';
 		$i++;
 	}
-	
+
 	return $html;
 }
 
