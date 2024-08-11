@@ -27,9 +27,6 @@ function kahoy_crafts_styles() {
 	wp_dequeue_script( 'wcs-single-product' );
 	wp_dequeue_script( 'wcs-cart' );
 
-	// Limit additional CF7 scripts
-	wp_deregister_script( 'wp-i18n' );
-
 	// Disable cart fragments - not used in generatepress theme
 	wp_dequeue_script( 'wc-cart-fragments' );
 
