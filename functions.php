@@ -27,6 +27,9 @@ function kahoy_crafts_styles() {
 	wp_dequeue_script( 'wcs-single-product' );
 	wp_dequeue_script( 'wcs-cart' );
 
+	// Limit additional CF7 scripts
+	wp_deregister_script( 'wp-i18n' );
+
 	// Disable cart fragments - not used in generatepress theme
 	wp_dequeue_script( 'wc-cart-fragments' );
 
@@ -291,7 +294,9 @@ function newsletter_checkout_field_update_order_meta( $order_id ) {
 // Create the new wordpress action hook before sending the email from CF7
 add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 
-	$submission = WPCF7_Submission::get_instance();
+	//$submission = WPCF7_Submission::get_instance();
+	$submission = '';
+	return true;
 
 	if (! $submission ) {
 		$abort = true;
