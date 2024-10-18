@@ -291,9 +291,9 @@ function newsletter_checkout_field_update_order_meta( $order_id ) {
 // Create the new wordpress action hook before sending the email from CF7
 add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 
-	//$submission = WPCF7_Submission::get_instance();
-	$submission = '';
-	return true;
+	$submission = WPCF7_Submission::get_instance();
+	//$submission = '';
+	//return true;
 
 	if (! $submission ) {
 		$abort = true;
