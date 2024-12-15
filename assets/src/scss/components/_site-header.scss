@@ -3,27 +3,25 @@
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
-    background: transparent url('/wp-content/themes/kahoycrafts-genpress/assets/images/kahoycrafts_banner.webp') top center;
+    background: transparent url('/wp-content/themes/kahoycrafts-genpress/assets/images/kahoycrafts_banner_transition.webp') top center;
     background-repeat: no-repeat;
     height: 275px;
 
     margin-top: $nav-header-height;
 
     .site-logo {
-        opacity: .8;
-        max-width: 175px;
-        background-color: $color-shadow-light-blue;
-        padding: 10px;
-        margin-left: 5%;
-        margin-top: 40px;
+        height: 100%;
+        padding: 20px;
 
-         @media only screen and (max-width: 820px) {
-            max-width: 150px;
+        img {
+            width: auto;
+            max-height: 100%;
         }
     }
 
     .inside-header {
-        align-items: flex-start;
+        height: 100%;
+        align-items: center;
     }
 
     @media only screen and (max-width: 768px) {
@@ -31,20 +29,15 @@
         margin-top: 0;
 
         height: 25vw;
-        min-height: 100px;
-        background-image: url('/wp-content/themes/kahoycrafts-genpress/assets/images/kahoycrafts_banner_small.webp');
+        max-height: 100px;
         background-size: cover;
         background-position: top left;
 
         .site-logo {
-            margin-left: 0;
-            margin-top: 0;
-            max-width: 85px;
-            padding: 2px;
+            padding: 0px;
         }
 
         .inside-header {
-            align-items: center;
 
             .menu-toggle {
                 font-size: 18px;
