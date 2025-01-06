@@ -363,17 +363,12 @@ add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 	if ( preg_match('/contact-form/', $form->name()) ) {
 		$token = $_POST['cf-turnstile-response'];
 
-		error_log('TOKEN: '. $token);
-
 		if (empty($token)) {
 			$object->set_response('Cloudflare Turnstile token not found.');
 			$abort = true;
 		}
 		else {
 			$response = turnstile_validation($token);
-
-			error_log('TURNSTILE RESPONSE: '. $response);
-
 			if ($response != 'Success') {
 				$object->set_response($response);
 				$abort = true;
