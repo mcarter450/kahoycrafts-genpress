@@ -288,6 +288,55 @@ function newsletter_checkout_field_update_order_meta( $order_id ) {
 
 }
 
+function turnstile_validation($token = '') {
+
+    $secret = '0x4AAAAAAA4ppPAShn_GYye1eXMwVwNW7ck'; /* Store this somewhere secure */
+    $remote_addr = $_SERVER['REMOTE_ADDR'];
+    $cf_url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+    $message = '';
+
+    // Request data
+    $data = array(
+        "secret" => $secret,
+        "response" => $token,
+        "remoteip" => $remote_addr
+    );
+
+    // Initialize cURL
+    $curl = curl_init();
+
+    // Set the cURL options
+    curl_setopt($curl, CURLOPT_URL, $cf_url);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute the cURL request
+    $response = curl_exec($curl);
+
+    // Check for errors
+    if (curl_errno($curl)) {
+        $error_message = curl_error($curl);
+        // Handle the error the way you like it
+        $message = 'cURL Error: ' . $error_message;
+    }
+    else {
+        /* Parse Cloudflare's response and check if there are any validation errors */
+        $response = json_decode($response, true);
+        if ($response['error-codes'] && count($response['error-codes']) > 0) {
+            $message = 'Cloudflare Turnstile check failed.';
+        }
+        else {
+            $message = 'Success';
+        }
+    }
+
+    // Close cURL
+    curl_close($curl);
+
+    return $message;
+}
+
 // Create the new wordpress action hook before sending the email from CF7
 add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 
@@ -307,6 +356,25 @@ add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 	#honeypot spam filter
 	if ( !empty($posted_data["website"]) ) {
 		$abort = true;
+		return;
+	}
+
+	// Validate contact form
+	if ( preg_match('/contact-form/', $form->name()) ) {
+		$token = $_POST['cf-turnstile-response'];
+
+		if (empty($token)) {
+			$object->set_response('Cloudflare Turnstile token not found.');
+			$abort = true;
+		}
+		else {
+			$response = turnstile_validation($token);
+			if ($response != 'Success') {
+				$object->set_response($response);
+				$abort = true;
+			}
+		}
+		
 		return;
 	}
 
