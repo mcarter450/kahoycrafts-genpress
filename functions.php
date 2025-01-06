@@ -2,6 +2,8 @@
 //* Code goes here
 require(__DIR__ .'/custom-post-types/testimonial.php');
 require(__DIR__ .'/classes/kahoycrafts_product_categories_widget.php');
+require(__DIR__ .'/classes/kahoycrafts_cloudflare_turnstile.php');
+require(__DIR__ .'/classes/kahoycrafts_big_mailer.php');
 
 //    ------    ------------ ------------ --------    --------   ----    ---- ------------ 
 //   ********   ************ ************ ********   **********  *****   **** ************ 
@@ -288,61 +290,19 @@ function newsletter_checkout_field_update_order_meta( $order_id ) {
 
 }
 
-function turnstile_validation($token = '') {
-
-    $secret = TURNSTILE_SECRET_KEY;
-    $remote_addr = $_SERVER['REMOTE_ADDR'];
-    $cf_url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
-    $message = '';
-
-    // Request data
-    $data = array(
-        "secret" => $secret,
-        "response" => $token,
-        "remoteip" => $remote_addr
-    );
-
-    // Initialize cURL
-    $curl = curl_init();
-
-    // Set the cURL options
-    curl_setopt($curl, CURLOPT_URL, $cf_url);
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-    // Execute the cURL request
-    $response = curl_exec($curl);
-
-    // Check for errors
-    if (curl_errno($curl)) {
-        $error_message = curl_error($curl);
-        // Handle the error the way you like it
-        $message = 'cURL Error: ' . $error_message;
-    }
-    else {
-        /* Parse Cloudflare's response and check if there are any validation errors */
-        $response = json_decode($response, true);
-        if ($response['error-codes'] && count($response['error-codes']) > 0) {
-            $message = 'Cloudflare Turnstile check failed.';
-        }
-        else {
-            $message = 'Success';
-        }
-    }
-
-    // Close cURL
-    curl_close($curl);
-
-    return $message;
-}
-
 // Create the new wordpress action hook before sending the email from CF7
 add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 
 	$submission = WPCF7_Submission::get_instance();
-	//$submission = '';
-	//return true;
+	// these variables are examples of other things you may want to pass to your custom handler
+	//$remote_ip = $submission->get_meta( 'remote_ip' );
+	//$url = $submission->get_meta( 'url' );
+	//$timestamp = gmdate("Y-m-d H:i:s", $submission->get_meta( 'timestamp' ));
+	//$title = wpcf7_special_mail_tag( '', '_post_title', '' );
+    
+	// If you have checkboxes or other multi-select fields, make sure you convert the values to a string  
+	// $mycheckbox1 = implode(", ", $posted_data["checkbox-465"]);
+	// $mycheckbox2 = implode(", ", $posted_data["checkbox-466"]);
 
 	if (! $submission ) {
 		$abort = true;
@@ -362,78 +322,35 @@ add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 	// Validate contact form
 	if ( preg_match('/contact-form/', $form->name()) ) {
 		$token = $_POST['cf-turnstile-response'];
+		$remote_addr = $_SERVER['REMOTE_ADDR'];
 
-		if (empty($token)) {
+		if ( empty($token) ) {
 			$object->set_response('Cloudflare Turnstile token not found.');
 			$abort = true;
 		}
 		else {
-			$response = turnstile_validation($token);
+			$response = kahoycrafts_cloudflare_turnstile::validate($token, $remote_addr);
+
 			if ($response != 'Success') {
 				$object->set_response($response);
 				$abort = true;
 			}
 		}
-		
-		return;
 	}
-
-    // Skip api request 
-    if ( $form->name() != 'newsletter-signup' && empty($posted_data['newsletter-optin'][0]) ) {
-		return;
+	elseif ( $form->name() == 'newsletter-signup' ) {
+		$response = kahoycrafts_big_mailer::add_contact(
+			$posted_data["your-email"], 
+			$posted_data["your-name"]
+		);
+	 	
+	    if ( $response != 'Success' ) {
+	    	$object->set_response($response);
+	    	$abort = true;
+	    }
 	}
-
-	// these variables are examples of other things you may want to pass to your custom handler
-	//$remote_ip = $submission->get_meta( 'remote_ip' );
-	//$url = $submission->get_meta( 'url' );
-	//$timestamp = gmdate("Y-m-d H:i:s", $submission->get_meta( 'timestamp' ));
-	//$title = wpcf7_special_mail_tag( '', '_post_title', '' );
-    
-	// If you have checkboxes or other multi-select fields, make sure you convert the values to a string  
-	// $mycheckbox1 = implode(", ", $posted_data["checkbox-465"]);
-	// $mycheckbox2 = implode(", ", $posted_data["checkbox-466"]);
-
- 	// Encode the data in a new array in JSON format
-	$data = json_encode([
-		"email" => $posted_data["your-email"],
-		"list_ids" => [
-			//'3b76642d-8d8d-4cf9-b039-976f59ac94a2',
-			'ca8a5659-199e-4ca6-9062-2f0aa4544f23',
-		],
-		"field_values" => [
-			['name' => 'FIRST_NAME', 'string' => $posted_data["your-name"]]
-		]
-	]);
- 
-	// Finally send the data to your custom endpoint
-    $ch = curl_init("https://api.bigmailer.io/v1/brands/63e25b44-7bfe-45a9-8948-ef354714783d/contacts/upsert");
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    	"X-API-Key: 69ea64c7-261b-45b3-b733-8f6e00213386",
-    	"accept: application/json",
-    	"content-type: application/json"
-    ]);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT ,5); //Optional timeout value
-    curl_setopt($ch, CURLOPT_TIMEOUT, 5); //Optional timeout value
-    $result = curl_exec($ch);
-    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-    if ( $http_code != 200 && $form->name() == 'newsletter-signup' ) {
-    	$abort = true;
-    	$response = json_decode($result);
-
-    	if ($response->message) {
-    		$object->set_response($response->message);
-    	} else {
-    		$object->set_response('Sorry, an error occurred.');
-    	}
-    }
-
-    curl_close($ch);
         
-    return $result;
+    return;
+
 }, 10, 3 );
 
 /**
