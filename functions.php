@@ -290,7 +290,7 @@ function newsletter_checkout_field_update_order_meta( $order_id ) {
 
 function turnstile_validation($token = '') {
 
-    $secret = '0x4AAAAAAA4ppPAShn_GYye1eXMwVwNW7ck'; /* Store this somewhere secure */
+    $secret = TURNSTILE_SECRET_KEY;
     $remote_addr = $_SERVER['REMOTE_ADDR'];
     $cf_url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
     $message = '';
