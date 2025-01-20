@@ -468,6 +468,9 @@ add_action( 'woocommerce_thankyou', function( $order_id ) {
 // ----         --------  ------------     ----     ------------ ----   ----  ------------ 
 // ****         ********  ************     ****     ************ ****    **** ************ 
 
+// Remove useless auto size filter
+add_filter('wp_img_tag_add_auto_sizes', '__return_false');
+
 add_filter( 'style_loader_src', function( $src, $handle ) {
 
 	if ( is_front_page() or 
