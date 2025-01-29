@@ -131,6 +131,8 @@ add_action( 'admin_enqueue_scripts', 'kahoy_crafts_admin_styles', 11, 1 );
 
 function kahoy_crafts_admin_styles( $hook ) {
 
+	wp_deregister_style( 'brands-admin-styles' ); // Useless styles
+
 	wp_enqueue_style( 'kahoy-crafts-style', get_stylesheet_directory_uri() . '/assets/css/admin-style.min.css', [], wp_get_theme()->get( 'Version' ) );
 
 	// Fix error with woo-pay tos.js
