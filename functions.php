@@ -295,6 +295,53 @@ function newsletter_checkout_field_update_order_meta( $order_id ) {
 
 }
 
+add_action( 'wpcf7_init', 'wpcf7_add_form_tag_kcprofilepicker' );
+
+function wpcf7_add_form_tag_kcprofilepicker() {
+    wpcf7_add_form_tag( [ 'kcprofilepicker', 'kcprofilepicker*' ],
+        'wpcf7_kcprofilepicker_form_tag_handler', [ 'name-attr' => true ] );
+}
+
+function wpcf7_kcprofilepicker_form_tag_handler( $tag ) {
+
+	$tag = new WPCF7_FormTag( $tag );
+
+	if ( empty( $tag->name ) ) {
+        return '';
+    }
+
+	$img_path = '/wp-content/themes/kahoycrafts-genpress/assets/images/profiles/';
+
+	//ex. "L1:L-Shaped-Profile.png" "L2:Futurist-Profile.png" "L3:U-Turn-Profile.png" "L4:Deluxe-Profile.png" "L5:Wide-Profile.png" "T1:T-Shaped-Profile.png"
+
+	$val = current($tag->values);
+	$split = explode(':', $val);
+
+	$img_profile = $img_path . $split[1];
+
+	$template = '<div class="profile"><h5>%2$s</h5><label><input type="radio" name="%1$s" value="%2$s" %3$s><img src="%4$s" alt="%2$s"></label></div>';
+
+	$html = sprintf($template, $tag->name, $split[0], 'checked', $img_profile);
+
+	while ( $val = next($tag->values) ) {
+		$split = explode(':', $val);
+		$img_profile = $img_path . $split[1];
+		$html .= sprintf($template, $tag->name, $split[0], '', $img_profile);
+	}
+
+    $atts = [];
+
+    $class = wpcf7_form_controls_class( $tag->type );
+    $atts['class'] = $tag->get_class_option( $class );
+    $atts['id'] = $tag->get_id_option();
+
+    //$atts['name'] = $tag->name;
+    $atts = wpcf7_format_atts( $atts );
+
+    return sprintf( '<div %s>'. $html .'</div>', $atts );
+}
+
+
 // Create the new wordpress action hook before sending the email from CF7
 add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 
