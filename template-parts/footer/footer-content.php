@@ -60,7 +60,7 @@
 			<div class="protected-by">
 				<?php $image_attributes = wp_get_attachment_image_src(417, 'medium'); ?>
 				<?php if($image_attributes): ?>
-					Protected by <img class="cloudflare-logo" src="<?=$image_attributes[0]; ?>" width="150" height="50" alt="Cloudflare">
+					Protected by <img class="cloudflare-logo" src="<?=$image_attributes[0]; ?>" loading="lazy" width="150" height="50" alt="Cloudflare">
 				<?php endif; ?>
 			</div><!-- .protected-by -->
 		</div>
