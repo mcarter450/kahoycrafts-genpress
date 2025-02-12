@@ -140,7 +140,7 @@ get_header(); ?>
 				1208, 1210, 468, 1213, 1733, 
 				1436, 1682, 1214, 1215, 1216, 
 				1212, 829, 1211, 831, 207, 
-				1696, 1874
+				1696, 1204, 1874
 			];
 
 			print('<div class="pswp-gallery">');
@@ -156,9 +156,6 @@ get_header(); ?>
 				}
 			}
 			print('</div>');
-
-			?>
-			<?php
 
 			/**
 			 * generate_after_main_content hook.
