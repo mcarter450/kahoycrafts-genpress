@@ -56,8 +56,21 @@ get_header(); ?>
 			</script>
 			<link rel="stylesheet" href="/wp-content/themes/kahoycrafts-genpress/assets/css/photoswipe.css">
 			<style>
+			.pswp-gallery {
+			  display: grid;
+			  grid-template-columns: repeat(7, 1fr);
+			  column-gap: 5px;
+  			  row-gap: 5px;
+			}
+
 			.pswp-gallery img {
-			  margin-right: 5px;
+			  display: block;
+			  width: 100%;
+			  height: auto;
+			}
+
+			.pswp-gallery a {
+			  display: inline-block;
 			}
 
 			.pswp__custom-caption {
@@ -83,11 +96,24 @@ get_header(); ?>
 			  display: none;
 			}
 
+			@media (max-width: 1024px)
+			{
+			  .pswp-gallery {
+			  	grid-template-columns: repeat(6, 1fr);
+			  }
+			}
+
+			@media (max-width: 820px)
+			{
+			  .pswp-gallery {
+			  	grid-template-columns: repeat(5, 1fr);
+			  }
+			}
+
 			@media (max-width: 480px)
 			{
-			  .pswp-gallery img {
-			  	margin-right: 5px;
-			    width: calc(50% - 5px);
+			  .pswp-gallery {
+			  	grid-template-columns: repeat(3, 1fr);
 			  }
 			}
 			</style>
@@ -124,11 +150,9 @@ get_header(); ?>
 
 				$caption = wp_get_attachment_caption( $attachment_id );
 
-				//if (! $caption ) $caption = 'My caption';
-
 				if ($img_full_atts && $img_thumb_atts) {
 					printf('<a href="%s" data-pswp-width="%s" data-pswp-height="%s" target="_blank">', $img_full_atts[0], $img_full_atts[1], $img_full_atts[2]);
-					printf('<img src="%s" width="%s" height="%s" alt="%s"></a>', $img_thumb_atts[0], $img_thumb_atts[1], $img_thumb_atts[2], $caption);
+					printf('<img src="%s" alt="%s"></a>', $img_thumb_atts[0], $caption);
 				}
 			}
 			print('</div>');
