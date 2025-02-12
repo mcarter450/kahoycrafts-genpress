@@ -152,7 +152,7 @@ get_header(); ?>
 
 				if ($img_full_atts && $img_thumb_atts) {
 					printf('<a href="%s" data-pswp-width="%s" data-pswp-height="%s" target="_blank">', $img_full_atts[0], $img_full_atts[1], $img_full_atts[2]);
-					printf('<img src="%s" alt="%s"></a>', $img_thumb_atts[0], $caption);
+					printf('<img src="%s" alt="%s"></a>', $img_thumb_atts[0], htmlentities($caption));
 				}
 			}
 			print('</div>');
