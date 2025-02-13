@@ -177,20 +177,22 @@ add_action( 'wp_enqueue_scripts', 'kahoy_crafts_scripts' );
  */
 function kahoy_crafts_scripts() {
 
-	wp_enqueue_script(
-		'owl-carousel',
-		get_stylesheet_directory_uri() . '/assets/js/owl.carousel.min.js',
-		['jquery'],
-		wp_get_theme()->get( 'Version' ),
-		true
-	);
-	wp_enqueue_script(
-		'kahoycrafts',
-		get_stylesheet_directory_uri() . '/assets/js/kahoycrafts.min.js',
-		['jquery'],
-		wp_get_theme()->get( 'Version' ),
-		true
-	);
+	if ( is_front_page() ) {
+		wp_register_script(
+			'owl-carousel',
+			get_stylesheet_directory_uri() . '/assets/js/owl.carousel.min.js',
+			['jquery'],
+			wp_get_theme()->get( 'Version' ),
+			true
+		);
+		wp_enqueue_script(
+			'kahoycrafts',
+			get_stylesheet_directory_uri() . '/assets/js/kahoycrafts.min.js',
+			['jquery', 'owl-carousel'],
+			wp_get_theme()->get( 'Version' ),
+			true
+		);
+	}
 	if (! is_page('contact') ) {
 		wp_enqueue_script(
 			'newsletter-popup',
