@@ -145,14 +145,14 @@ get_header(); ?>
 
 			print('<div class="pswp-gallery">');
 			foreach ($images as $attachment_id) {
-				$img_full_atts = wp_get_attachment_image_src( $attachment_id, 'large');
+				$img_full_atts = wp_get_attachment_image_src( $attachment_id, 'large' );
 				$img_thumb_atts = wp_get_attachment_image_src( $attachment_id, 'thumbnail');
 
 				$caption = wp_get_attachment_caption( $attachment_id );
 
 				if ($img_full_atts && $img_thumb_atts) {
 					printf('<a href="%s" data-pswp-width="%s" data-pswp-height="%s" target="_blank">', $img_full_atts[0], $img_full_atts[1], $img_full_atts[2]);
-					printf('<img src="%s" alt="%s"></a>', $img_thumb_atts[0], htmlentities($caption));
+					printf('<img src="%s" width="%s" height="%s" alt="%s"></a>', $img_thumb_atts[0], $img_thumb_atts[1], $img_thumb_atts[1], $caption);
 				}
 			}
 			print('</div>');
