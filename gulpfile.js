@@ -50,8 +50,8 @@ function purge_general_styles() {
         '../../plugins/woocommerce/assets/css/woocommerce.css',
         '../../plugins/woocommerce/assets/css/woocommerce-layout.css',
         '../../plugins/woocommerce/assets/css/woocommerce-smallscreen.css',
-        '../../plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-vendors-style.css',
-        '../../plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-style.css'
+        '../../plugins/woocommerce/assets/client/blocks/wc-blocks.css',
+        '../../plugins/woocommerce/assets/client/blocks/all-products.css'
       ])
       .pipe(purgecss({
           content: ['assets/src/downloads/**/*.html'],

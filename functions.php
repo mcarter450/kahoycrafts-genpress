@@ -75,7 +75,6 @@ function kahoy_crafts_styles() {
 		// Load partial wp and wc gutenberg block styles for performance
 		wp_deregister_style( 'wp-block-library' );
 		wp_deregister_style( 'wc-blocks-style' );
-		wp_deregister_style( 'wc-all-blocks-style' );
 
 		// Remove yet more woo blocks style bloat
 		wp_deregister_style( 'wc-blocks-style-mini-cart-contents' );
@@ -114,7 +113,6 @@ function kahoy_crafts_styles() {
 		wp_deregister_style( 'wc-blocks-style-stock-filter' );
 		wp_deregister_style( 'wc-blocks-style-cart' );
 		wp_deregister_style( 'wc-blocks-style-checkout' );
-		wp_deregister_style( 'wc-blocks-vendors-style' );
 		
 		wp_register_style( 'purge-block-style', get_stylesheet_directory_uri() . '/assets/css/purge-block-style.min.css', [], wp_get_theme()->get( 'Version' ) );
 
@@ -528,12 +526,14 @@ add_filter('wp_img_tag_add_auto_sizes', '__return_false');
 add_filter( 'style_loader_src', function( $src, $handle ) {
 
 	if ( is_front_page() or 
-			 is_page('contact') or 
-			 is_page('owners-bio') or 
-			 is_page('free-shipping-kit') or 
-			 is_page('products-feed-generator') or
-			 is_page('gallery') or 
-			 is_blog() or ( function_exists( 'is_woocommerce' ) and is_woocommerce() ) ) {
+			is_page('contact') or 
+			is_page('owners-bio') or 
+			is_page('free-shipping-kit') or 
+			is_page('products-feed-generator') or
+			is_page('custom-quote-drawer-pulls') or 
+			is_page('planter-boxes') or 
+			is_page('gallery') or 
+			is_blog() or ( function_exists( 'is_woocommerce' ) and is_woocommerce() ) ) {
 
 		switch ($handle) {
 			case 'woocommerce-layout': 

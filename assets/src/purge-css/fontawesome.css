@@ -1,16 +1,18 @@
 /*!
- * Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
- * Copyright 2022 Fonticons, Inc.
+ * Copyright 2024 Fonticons, Inc.
  */
 .fa {
   font-family: var(--fa-style-family, "Font Awesome 6 Free");
   font-weight: var(--fa-style, 900);
 }
 
-.fa,
+.fas,
 .far,
-.fa-brands {
+.fa-solid,
+.fa-brands,
+.fa {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   display: var(--fa-display, inline-block);
@@ -18,6 +20,25 @@
   font-variant: normal;
   line-height: 1;
   text-rendering: auto;
+}
+
+.fas::before,
+.far::before,
+.fa-solid::before,
+.fa-brands::before,
+.fa::before {
+  content: var(--fa);
+}
+
+
+.fas,
+.fa-solid,
+.far {
+  font-family: "Font Awesome 6 Free";
+}
+
+.fa-brands {
+  font-family: "Font Awesome 6 Brands";
 }
 
 .fa-fw {
@@ -116,20 +137,33 @@
 /* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
 readers do not read off random characters that represent icons */
 
-.fa-shopping-cart::before {
-  content: "\f07a";
+.fa-user {
+  --fa: "\f007";
 }
 
-.fa-user::before {
-  content: "\f007";
+.fa-star {
+  --fa: "\f005";
+}
+
+.fa-handshake {
+  --fa: "\f2b5";
+}
+
+.fa-shopping-cart {
+  --fa: "\f07a";
+}
+
+.fa-store {
+  --fa: "\f54e";
 }
 
 /*!
- * Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
- * Copyright 2022 Fonticons, Inc.
+ * Copyright 2024 Fonticons, Inc.
  */
 :root {
+  --fa-style-family-classic: "Font Awesome 6 Free";
   --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";
 }
 
@@ -138,19 +172,19 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("../src/fontawesome/webfonts/fa-regular-400.woff2") format("woff2"), url("../src/fontawesome/webfonts/fa-regular-400.ttf") format("truetype");
+  src: url("../src/fontawesome-6.7.2/webfonts/fa-regular-400.woff2") format("woff2"), url("../src/fontawesome-6.7.2/webfonts/fa-regular-400.ttf") format("truetype");
 }
 .far {
-  font-family: "Font Awesome 6 Free";
   font-weight: 400;
 }
 
 /*!
- * Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
- * Copyright 2022 Fonticons, Inc.
+ * Copyright 2024 Fonticons, Inc.
  */
 :root {
+  --fa-style-family-classic: "Font Awesome 6 Free";
   --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
 }
 
@@ -159,15 +193,20 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url("../src/fontawesome/webfonts/fa-solid-900.woff2") format("woff2"), url("../src/fontawesome/webfonts/fa-solid-900.ttf") format("truetype");
+  src: url("../src/fontawesome-6.7.2/webfonts/fa-solid-900.woff2") format("woff2"), url("../src/fontawesome-6.7.2/webfonts/fa-solid-900.ttf") format("truetype");
+}
+.fas,
+.fa-solid {
+  font-weight: 900;
 }
 
 /*!
- * Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
- * Copyright 2022 Fonticons, Inc.
+ * Copyright 2024 Fonticons, Inc.
  */
 :root {
+  --fa-style-family-brands: "Font Awesome 6 Brands";
   --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
 }
 
@@ -176,22 +215,25 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("../src/fontawesome/webfonts/fa-brands-400.woff2") format("woff2"), url("../src/fontawesome/webfonts/fa-brands-400.ttf") format("truetype");
+  src: url("../src/fontawesome-6.7.2/webfonts/fa-brands-400.woff2") format("woff2"), url("../src/fontawesome-6.7.2/webfonts/fa-brands-400.ttf") format("truetype");
 }
 
 .fa-brands {
-  font-family: "Font Awesome 6 Brands";
   font-weight: 400;
 }
 
-.fa-facebook:before {
-  content: "\f09a";
+.fa-instagram {
+  --fa: "\f16d";
 }
 
-.fa-instagram:before {
-  content: "\f16d";
+.fa-facebook {
+  --fa: "\f09a";
 }
 
-.fa-pinterest:before {
-  content: "\f0d2";
+.fa-bluesky {
+  --fa: "\e671";
+}
+
+.fa-pinterest {
+  --fa: "\f0d2";
 }
