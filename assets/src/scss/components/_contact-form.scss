@@ -1,22 +1,86 @@
-body.page-template-contact-page .wpcf7-form {
+body.page-template-contact-page {
 
-    :nth-child(6) {
-        margin-bottom: 1em;
-    }
+    .wpcf7-form {
 
-    .wpcf7-textarea {
-        max-height: 200px;
-    }
-
-    .wpcf7-form-control.wpcf7-checkbox .wpcf7-list-item {
-
-        margin-left: 0.5em;
-
-        .wpcf7-list-item-label {
-            padding-left: 0.5rem;
-            cursor: pointer;
+        .wpcf7-textarea {
+            max-height: 200px;
         }
 
+        .wpcf7-list-item {
+            margin-left: 0.85rem;
+        }
+
+        .wpcf7-form-control.wpcf7-checkbox .wpcf7-list-item,
+        .wpcf7-form-control.wpcf7-radio .wpcf7-list-item {
+
+            margin-bottom: 0.5rem;
+
+            .wpcf7-list-item-label {
+                padding-left: 0.25rem;
+                cursor: pointer;
+            }
+
+        }
+
+        .cf-turnstile {
+            margin-top: -0.75rem;
+            margin-bottom: 1rem;
+        }
+
+    }
+
+    .custom-quote {
+
+        .wpcf7-list-item-label {
+          cursor: pointer;
+        }
+
+        /* HIDE RADIO */
+        .profile [type=radio] { 
+          position: absolute;
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+
+        /* IMAGE STYLES */
+        .profile [type=radio] + img {
+          cursor: pointer;
+          height: 110px;
+          width: auto;
+          padding: 1rem;
+        }
+
+        /* CHECKED STYLES */
+        .profile [type=radio]:checked + img {
+          outline: 2px solid blue;
+        }
+
+        .drawer-pull-profiles {
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        .drawer-pull-profiles .profile {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .message-label {
+            margin-bottom: 10px;
+        }
+
+        .drawer-pull-profiles .profile h5 {
+          margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 480px)
+        {
+          .drawer-pull-profiles .profile {
+            width: 50%;
+          }
+        }
     }
 
 }
