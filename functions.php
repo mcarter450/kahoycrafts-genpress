@@ -533,7 +533,7 @@ add_filter( 'style_loader_src', function( $src, $handle ) {
 			is_page('custom-quote-drawer-pulls') or 
 			is_page('planter-boxes') or 
 			is_page('gallery') or 
-			is_blog() or ( function_exists( 'is_woocommerce' ) and is_woocommerce() ) ) {
+			is_blog() ) {
 
 		switch ($handle) {
 			case 'woocommerce-layout': 
