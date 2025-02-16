@@ -65,6 +65,7 @@ function kahoy_crafts_styles() {
 	}
 
 	if ( is_front_page() or 
+		 is_page('about') or 
 		 is_page('contact') or 
 		 is_page('owners-bio') or 
 		 is_page('free-shipping-kit') or 
@@ -75,6 +76,13 @@ function kahoy_crafts_styles() {
 		// Load partial wp and wc gutenberg block styles for performance
 		wp_deregister_style( 'wp-block-library' );
 		wp_deregister_style( 'wc-blocks-style' );
+
+		if ( function_exists( 'is_woocommerce' ) and !is_woocommerce() ) {
+			wp_deregister_style( 'woocommerce-layout' );
+			wp_deregister_style( 'woocommerce-smallscreen' );
+			wp_deregister_style( 'woocommerce-general' );
+			wp_dequeue_style( 'woocommerce-inline' );
+		}
 
 		// Remove yet more woo blocks style bloat
 		wp_deregister_style( 'wc-blocks-style-mini-cart-contents' );
@@ -523,33 +531,33 @@ add_action( 'woocommerce_thankyou', function( $order_id ) {
 // Remove useless auto size filter
 add_filter('wp_img_tag_add_auto_sizes', '__return_false');
 
-add_filter( 'style_loader_src', function( $src, $handle ) {
+// add_filter( 'style_loader_src', function( $src, $handle ) {
 
-	if ( is_front_page() or 
-			is_page('contact') or 
-			is_page('owners-bio') or 
-			is_page('free-shipping-kit') or 
-			is_page('products-feed-generator') or
-			is_page('custom-quote-drawer-pulls') or 
-			is_page('planter-boxes') or 
-			is_page('gallery') or 
-			is_blog() ) {
+// 	if ( is_front_page() or 
+// 			is_page('contact') or 
+// 			is_page('owners-bio') or 
+// 			is_page('free-shipping-kit') or 
+// 			is_page('products-feed-generator') or
+// 			is_page('custom-quote-drawer-pulls') or 
+// 			is_page('planter-boxes') or 
+// 			is_page('gallery') or 
+// 			is_blog() ) {
 
-		switch ($handle) {
-			case 'woocommerce-layout': 
-			case 'woocommerce-smallscreen':
-				$src = preg_replace('/^(.*)\?(.*)$/', get_stylesheet_directory_uri() . '/assets/src/purge-css/'. $handle .'.css?$2', $src);
-				break;
-			case 'woocommerce-general':
-				$src = preg_replace('/^(.*)\?(.*)$/', get_stylesheet_directory_uri() . '/assets/src/purge-css/woocommerce.css?$2', $src);
-				break;
-		}
+// 		switch ($handle) {
+// 			case 'woocommerce-layout': 
+// 			case 'woocommerce-smallscreen':
+// 				$src = preg_replace('/^(.*)\?(.*)$/', get_stylesheet_directory_uri() . '/assets/src/purge-css/'. $handle .'.css?$2', $src);
+// 				break;
+// 			case 'woocommerce-general':
+// 				$src = preg_replace('/^(.*)\?(.*)$/', get_stylesheet_directory_uri() . '/assets/src/purge-css/woocommerce.css?$2', $src);
+// 				break;
+// 		}
 	    
-	}
+// 	}
 
-    return $src;
+//     return $src;
 
-}, 10, 2 );
+// }, 10, 2 );
 
 function get_rating_stars($rating) {
 	$i = 0;

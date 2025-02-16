@@ -1,20 +1,25 @@
-const gulp = require('gulp'),
-    sass = require('gulp-sass')(require('sass')),
-    concat = require('gulp-concat'),
-    autoprefixer = require('gulp-autoprefixer'),
-    cleanCSS = require('gulp-clean-css'),
-    rename = require('gulp-rename'),
-    uglify = require('gulp-uglify'),
-    sourcemaps = require('gulp-sourcemaps'),
-    browserSync = require('browser-sync').create(),
-    fs = require('fs'),
-    axios = require('axios').default,
-    purgecss = require('gulp-purgecss'),
-    config = require('./gulp.config'),
-    webpages = config.webpages;
+import gulp from 'gulp';
+import * as dartSass from 'sass';
+import gulpSass from 'gulp-sass';
+import concat from 'gulp-concat';
+import autoprefixer from 'gulp-autoprefixer';
+import cleanCSS from 'gulp-clean-css';
+import rename from 'gulp-rename';
+import uglify from 'gulp-uglify';
+import sourcemaps from 'gulp-sourcemaps';
+import browserSyncImport from 'browser-sync';
+import config from './gulp.config.js'
+import fs from 'fs';
+import axios from 'axios';
+import purgecss from 'gulp-purgecss';
+
+const sass = gulpSass(dartSass),
+      browserSync = browserSyncImport.create();
 
 async function download_webpages(cb) {
     // Make a request for a user with a given ID
+    const webpages = config.webpages;
+
     for (let page in webpages) {
         try {
             const resp = await axios.get('https://www.kahoycrafts.com' + webpages[page].path);
@@ -47,9 +52,6 @@ function purge_fontawesome_styles() {
 function purge_general_styles() {
     return gulp.src([
         '../../../wp-includes/css/dist/block-library/style.css',
-        '../../plugins/woocommerce/assets/css/woocommerce.css',
-        '../../plugins/woocommerce/assets/css/woocommerce-layout.css',
-        '../../plugins/woocommerce/assets/css/woocommerce-smallscreen.css',
         '../../plugins/woocommerce/assets/client/blocks/wc-blocks.css',
         '../../plugins/woocommerce/assets/client/blocks/all-products.css'
       ])
@@ -62,7 +64,7 @@ function purge_general_styles() {
                 /variations$/,
                 /woocommerce-product-gallery__trigger$/
             ],
-            // greedy: []
+            //greedy: []
           },
           rejected: false
       }))
@@ -90,7 +92,14 @@ function css() {
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
-    .pipe(cleanCSS({compatibility: '*'}))
+    .pipe(cleanCSS({
+        compatibility: '*',
+        level: {
+            1: {
+                tidySelectors: false
+            }
+        }
+    }))
     .pipe(sourcemaps.write('.', {
         includeContent: false,
         sourceRoot: '../src/scss'
@@ -122,12 +131,14 @@ function watch() {
     gulp.watch('./assets/src/js/**/*.js', { ignoreInitial: false }, js);
 }
 
-exports.download = download_webpages;
+export const download = download_webpages;
 
-exports.purge = gulp.series(purge_fontawesome_styles, purge_general_styles);
+export const purge = gulp.series(purge_fontawesome_styles, purge_general_styles);
 
-exports.build = gulp.parallel(css, js);
+export const build = gulp.parallel(css, js);
 
-exports.watch = gulp.parallel(watch);
+export { watch as watch };
 
-exports.default = gulp.parallel(watch, serve);
+const sync = gulp.parallel(watch, serve);
+
+export default sync;

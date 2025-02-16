@@ -185,6 +185,9 @@ body.home {
         }
 
         .product-benefits {
+
+            padding-top: 0;
+
             .wp-block-column .wp-block-image {
                 margin-bottom: 0;
             }
@@ -196,8 +199,6 @@ body.home {
                     margin-bottom: 1em;
                 }
             }
-
-            padding-top: 0;
 
             .wp-block-image.size-large {
                 max-width: 100%!important;
@@ -221,6 +222,7 @@ body.home {
                     margin: 0 2em 3em 2em;
                 }
             }
+
         }
 
         .service-badge {
@@ -243,10 +245,13 @@ body.home {
                 display: flex;
 
                 .owners-bio {
+
+                    margin-right: 1rem;
+
                     img {
                         max-width: 256px;
                     }
-                    margin-right: 1rem;
+
                 }
 
                 figcaption {
@@ -268,12 +273,15 @@ body.home {
             }
 
             .wp-block-image {
+
+                margin-right: 1rem;
+
                 .owners-bio {
                     img {
                         max-width: 128px;
                     }
-                    margin-right: 1rem;
                 }
+
             }
         }
 
@@ -554,6 +562,8 @@ body.home {
             top: 1px;
             background-color: $color-tabs-background;
             padding-top: 2px;
+            border: 1px solid $color-light-blue;
+            
             a {
                 padding: 5px 10px;
                 text-decoration: none;
@@ -562,7 +572,6 @@ body.home {
                 background-color: $color-page-background;
                 border-bottom-color: $color-page-background;
             }
-            border: 1px solid $color-light-blue;
 
             &--customer-logout {
                 background-color: transparent;

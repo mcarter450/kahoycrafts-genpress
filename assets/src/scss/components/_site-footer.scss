@@ -36,6 +36,11 @@
 
 .site-footer > footer > .site-info > .inner-site-info {
 
+    margin: $mobile-spacing;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 3px solid $color-primary;
+
     .site-logo {
         max-width: 200px;
     }
@@ -45,15 +50,9 @@
         align-items: center;
     }
 
-    margin: $mobile-spacing;
-    padding-top: 20px;
-    padding-bottom: 20px;
-
     @media only screen and (min-width: 768px) {
         margin: $global-spacing;
     }
-
-    border-top: 3px solid $color-primary;
 
     .protected-by .cloudflare-logo {
         max-width: 150px; 
