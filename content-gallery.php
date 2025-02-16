@@ -72,26 +72,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php
 			the_content();
 
-			$images = [
-				1205, 1278, 1209, 1207, 1218, 
-				1208, 1210, 468, 1733, 1213, 
-				1798, 1682, 1214, 1215, 1216, 
-				1212, 829, 1211, 831, 207, 
-				1810, 1696, 1874
-			];
-
 			print('<div class="pswp-gallery">');
-			foreach ($images as $attachment_id) {
-				$img_full_atts = wp_get_attachment_image_src( $attachment_id, 'large' );
-				$img_thumb_atts = wp_get_attachment_image_src( $attachment_id, 'thumbnail');
 
-				$caption = wp_get_attachment_caption( $attachment_id );
+			$theme_uri = get_stylesheet_directory_uri();
+			$theme_folder = get_stylesheet_directory();
 
-				if ($img_full_atts && $img_thumb_atts) {
-					printf('<a href="%s" data-pswp-width="%s" data-pswp-height="%s" target="_blank">', $img_full_atts[0], $img_full_atts[1], $img_full_atts[2]);
-					printf('<img src="%s" width="%s" height="%s" alt="%s"></a>', $img_thumb_atts[0], $img_thumb_atts[1], $img_thumb_atts[1], $caption);
-				}
+			$thumbs = parse_ini_file("$theme_folder/assets/images/gallery/thumbs.ini", true);
+
+			foreach ($thumbs as $img => $props) {
+			    $img_url = "$theme_uri/assets/images/gallery/$img";
+			    $thumb_url = "$theme_uri/assets/images/gallery/thumbs/{$props['thumbnail']}-thumbnail-150x150.jpg";
+
+			    printf('<a href="%s" data-pswp-width="%s" data-pswp-height="%s" target="_blank">', $img_url, $props['width'], $props['height']);
+				printf('<img src="%s" width="150" height="150" alt="%s"></a>', $thumb_url, $props['caption']);
 			}
+
 			print('</div>');
 
 			wp_link_pages(
