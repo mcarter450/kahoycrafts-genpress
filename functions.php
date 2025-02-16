@@ -124,7 +124,7 @@ function kahoy_crafts_styles() {
 		
 		wp_register_style( 'purge-block-style', get_stylesheet_directory_uri() . '/assets/css/purge-block-style.min.css', [], wp_get_theme()->get( 'Version' ) );
 
-		wp_enqueue_style( 'kahoy-crafts-style', get_stylesheet_directory_uri() . '/assets/css/purge-style.min.css', ['purge-block-style'], wp_get_theme()->get( 'Version' ) );
+		wp_enqueue_style( 'kahoy-crafts-style', get_stylesheet_directory_uri() . '/assets/css/style.min.css', ['purge-block-style'], wp_get_theme()->get( 'Version' ) );
 
 	} else {
 		// Use full styles for sensitive pages

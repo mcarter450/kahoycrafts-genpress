@@ -1,0 +1,62 @@
+@import "../../css/photoswipe";
+
+.pswp-gallery {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 5px;
+	  row-gap: 5px;
+}
+
+.pswp-gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pswp-gallery a {
+  display: inline-block;
+}
+
+.pswp__custom-caption {
+  background: rgba(75, 150, 75, 0.75);
+  font-size: 16px;
+  color: #fff;
+  width: calc(100% - 32px);
+  max-width: 400px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+}
+
+.pswp__custom-caption a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.hidden-caption-content {
+  display: none;
+}
+
+@media (max-width: 1024px)
+{
+  .pswp-gallery {
+  	grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 820px)
+{
+  .pswp-gallery {
+  	grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 480px)
+{
+  .pswp-gallery {
+  	grid-template-columns: repeat(3, 1fr);
+  }
+}
