@@ -531,34 +531,6 @@ add_action( 'woocommerce_thankyou', function( $order_id ) {
 // Remove useless auto size filter
 add_filter('wp_img_tag_add_auto_sizes', '__return_false');
 
-// add_filter( 'style_loader_src', function( $src, $handle ) {
-
-// 	if ( is_front_page() or 
-// 			is_page('contact') or 
-// 			is_page('owners-bio') or 
-// 			is_page('free-shipping-kit') or 
-// 			is_page('products-feed-generator') or
-// 			is_page('custom-quote-drawer-pulls') or 
-// 			is_page('planter-boxes') or 
-// 			is_page('gallery') or 
-// 			is_blog() ) {
-
-// 		switch ($handle) {
-// 			case 'woocommerce-layout': 
-// 			case 'woocommerce-smallscreen':
-// 				$src = preg_replace('/^(.*)\?(.*)$/', get_stylesheet_directory_uri() . '/assets/src/purge-css/'. $handle .'.css?$2', $src);
-// 				break;
-// 			case 'woocommerce-general':
-// 				$src = preg_replace('/^(.*)\?(.*)$/', get_stylesheet_directory_uri() . '/assets/src/purge-css/woocommerce.css?$2', $src);
-// 				break;
-// 		}
-	    
-// 	}
-
-//     return $src;
-
-// }, 10, 2 );
-
 function get_rating_stars($rating) {
 	$i = 0;
 	$n = floor($rating);
@@ -581,47 +553,6 @@ add_filter( 'woocommerce_product_get_rating_html', function( $html, $rating, $co
 		return '<span class="stars">'. get_rating_stars($rating) .'</span>';
 	}
 }, 10, 3 );
-
-// Delay non-critical stylesheets 
-add_filter( 'style_loader_tag', function( $tag, $handle ) {
-
-	if ( is_admin() ) {
-		return $tag;
-	}
-
-	if ( is_front_page() or 
-			 is_page('contact') or 
-			 is_page('owners-bio') or 
-			 is_page('free-shipping-kit') or 
-			 is_page('products-feed-generator') or
-			 is_page('gallery') or 
-			 is_blog() ) {
-
-		switch ($handle) {
-			case 'woocommerce-layout':
-			case 'woocommerce-smallscreen':
-			case 'woocommerce-general':
-			case 'generate-google-fonts':
-			case 'wc-blocks-checkout-style':
-				$tag = str_replace('rel=\'stylesheet\'', 'rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"', $tag);
-				break;
-		}
-	}
-
-	if ( function_exists( 'is_woocommerce' ) and is_woocommerce() ) {
-
-		switch ($handle) {
-			case 'generate-google-fonts':
-			case 'wc-blocks-checkout-style':
-				$tag = str_replace('rel=\'stylesheet\'', 'rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"', $tag);
-				break;
-		}
-
-	}
-
-	return $tag;
-
-}, 10, 2);
 
 /**
  * Defer or async scripts
