@@ -714,3 +714,17 @@ body.single-product {
     }
 
 }
+
+/* Woo Cart & Checkout Page */
+#add_payment_method table.cart .product-thumbnail,
+.woocommerce-cart table.cart .product-thumbnail,
+.woocommerce-checkout table.cart .product-thumbnail {
+    min-width: 100px
+}
+
+#add_payment_method table.cart img,
+.woocommerce-cart table.cart img,
+.woocommerce-checkout table.cart img {
+    width: 100px;
+    box-shadow: none
+}
