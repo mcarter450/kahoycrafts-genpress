@@ -677,6 +677,10 @@ body.home {
 }
 
 /* Product Detail Page */
+.woocommerce div.product form.cart .variations select {
+    background-color: lighten($color-shadow-light-blue, 20%);
+}
+
 @media only screen and (max-width: 481px) {
 
     #wcpay-payment-request-button-separator {
