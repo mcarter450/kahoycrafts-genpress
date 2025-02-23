@@ -15,9 +15,9 @@
 	background-color: #333 !important;
 	transition: left 0.3s, opacity 0.3s;
 	transition-timing-function: ease-in;
-	height: 30px;
-	width: 30px;
-	border-radius: 15px;
+	height: 60px;
+	width: 60px;
+	border-radius: 30px;
 	opacity: 0;
 	color: #fff;
 }
@@ -25,19 +25,14 @@
 .owl-theme .owl-nav .owl-prev span,
 .owl-theme .owl-nav .owl-next span {
 	position: relative;
-	height: 30px;
-	top: -2px;
-	line-height: 30px;
-	font-size: 1.5rem;
+	display: inline-block;
+	top: -5px;
+	width: 60px;
+	height: 60px;
+	line-height: 60px;
+	font-size: 60px;
 	color: #fff;
-}
-
-.owl-theme .owl-nav .owl-prev span {
-	padding-left: 10px;
-}
-
-.owl-theme .owl-nav .owl-next span {
-	padding-right: 10px;
+	text-align: center;
 }
 
 .owl-theme .owl-nav .owl-prev:focus,
