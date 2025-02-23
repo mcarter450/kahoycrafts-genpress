@@ -241,6 +241,15 @@ figure.wp-block-gallery.has-nested-images{
   .wp-block-gallery.has-nested-images.columns-4 figure.wp-block-image:not(#individual-image){
     width:calc(25% - var(--wp--style--unstable-gallery-gap, 16px)*.75);
   }
+  .wp-block-gallery.has-nested-images.columns-default figure.wp-block-image:not(#individual-image){
+    width:calc(33.33% - var(--wp--style--unstable-gallery-gap, 16px)*.66667);
+  }
+  .wp-block-gallery.has-nested-images.columns-default figure.wp-block-image:not(#individual-image):first-child:nth-last-child(2),.wp-block-gallery.has-nested-images.columns-default figure.wp-block-image:not(#individual-image):first-child:nth-last-child(2)~figure.wp-block-image:not(#individual-image){
+    width:calc(50% - var(--wp--style--unstable-gallery-gap, 16px)*.5);
+  }
+  .wp-block-gallery.has-nested-images.columns-default figure.wp-block-image:not(#individual-image):first-child:last-child{
+    width:100%;
+  }
 }
 .wp-block-gallery.has-nested-images.alignleft,.wp-block-gallery.has-nested-images.alignright{
   max-width:420px;
@@ -262,9 +271,6 @@ h1.has-background,h2.has-background,h3.has-background,h4.has-background{
   height:auto;
   max-width:100%;
   vertical-align:bottom;
-}
-.wp-block-image[style*=border-radius] img,.wp-block-image[style*=border-radius]>a{
-  border-radius:inherit;
 }
 .wp-block-image.aligncenter{
   text-align:center;

@@ -21,6 +21,10 @@ export default {
 	        path: '/product/deluxe-birch-drawer-pull-wooden-wardrobe-handle/'
 	    },
 	    {
+	    	name: 'bike-light-charging-stand',
+	    	path: '/bike-light-charging-stand/'
+	    },
+	    {
 	        name: 'bio',
 	        path: '/owners-bio/'
 	    },
