@@ -347,7 +347,8 @@ jQuery( function( $ ) {
 				var img = $( el ).find( 'img' );
 
 				if ( img.length ) {
-					var large_image_src = img.attr( 'data-large_image' ),
+					var large_image_src = img.attr( 'data-large_image' )
+							.replace('/wp-content', '/wp-content/webp-express/webp-images').replace('.jpg', '.jpg.webp'),
 						large_image_w   = img.attr( 'data-large_image_width' ),
 						large_image_h   = img.attr( 'data-large_image_height' ),
 						alt             = img.attr( 'alt' ),
