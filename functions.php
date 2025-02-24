@@ -570,9 +570,11 @@ add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 		return str_replace( ' src', ' async src', $tag );
 	}
 
-	// if ($handle == 'wc-single-product') {
-	// 	$tag = "<script src='/wp-content/themes/kahoycrafts-genpress/assets/js/woo/single-product.min.js' id='wc-single-product-js'></script>";
-	// }
+	if ($handle == 'wc-single-product') {
+		$tag = str_replace(
+			'/wp-content/plugins/woocommerce/assets/js/frontend/single-product.min.js', 
+			'/wp-content/themes/kahoycrafts-genpress/assets/js/woo/single-product.min.js', $tag);
+	}
 
 	if ($handle == 'flexslider') {
 		$tag = str_replace(
