@@ -80,12 +80,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$thumbs = parse_ini_file("$theme_folder/assets/images/gallery/thumbs.ini", true);
 
 			foreach ($thumbs as $img => $props) {
-			    $img_url = str_replace(
-			    	['/wp-content/themes/kahoycrafts-genpress', '.jpg'], 
-			    	['/wp-content/webp-express/webp-images/themes/kahoycrafts-genpress', '.jpg.webp'],
-			    	"$theme_uri/assets/images/gallery/$img"
-			    );
-
+			    $img_url = "$theme_uri/assets/images/gallery/$img";
 			    $thumb_url = "$theme_uri/assets/images/gallery/thumbs/{$props['thumbnail']}-thumbnail-150x150.jpg";
 
 			    printf('<a href="%s" data-pswp-width="%s" data-pswp-height="%s" target="_blank">', $img_url, $props['width'], $props['height']);
