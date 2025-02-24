@@ -82,9 +82,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 			foreach ($thumbs as $img => $props) {
 			    $img_url = "$theme_uri/assets/images/gallery/$img";
 			    $thumb_url = "$theme_uri/assets/images/gallery/thumbs/{$props['thumbnail']}-thumbnail-150x150.jpg";
+			    $webp_thumb_url = str_replace(
+			    	['/wp-content/themes/kahoycrafts-genpress', '.jpg'],
+			    	['/wp-content/webp-express/webp-images/themes/kahoycrafts-genpress', '.jpg.webp'],
+			    	$thumb_url
+			    );
 
 			    printf('<a href="%s" data-pswp-width="%s" data-pswp-height="%s" target="_blank">', $img_url, $props['width'], $props['height']);
-				printf('<img src="%s" width="150" height="150" alt="%s"></a>', $thumb_url, $props['caption']);
+			    print('<picture>');
+			    printf('<source srcset="%s" type="image/webp">', $webp_thumb_url);
+				printf('<img src="%s" width="150" height="150" alt="%s" class="webpexpress-processed"></a>', $thumb_url, $props['caption']);
+				print('</picture>');
 			}
 
 			print('</div>');
