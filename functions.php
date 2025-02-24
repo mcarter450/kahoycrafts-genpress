@@ -563,24 +563,20 @@ add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 		return $tag;
 	}
 	
-	if ( $handle == 'wpforms-validation' || 
-		 $handle == 'wpforms-mailcheck' || 
-		 $handle == 'wpforms-punycode' || 
-		 $handle == 'wpforms-recaptcha' ||
-		 $handle == 'generate-menu' || 
+	if ( $handle == 'generate-menu' || 
 		 $handle == 'cookie-consent' ||
 		 $handle == 'cookie-consent-banner' ) {
 		
 		return str_replace( ' src', ' async src', $tag );
 	}
 
-	if ($handle == 'wc-single-product') {
-		$tag = "<script src='/wp-content/themes/kahoycrafts-genpress/assets/js/woo/single-product.min.js' id='wc-single-product-js'></script>";
-	}
+	// if ($handle == 'wc-single-product') {
+	// 	$tag = "<script src='/wp-content/themes/kahoycrafts-genpress/assets/js/woo/single-product.min.js' id='wc-single-product-js'></script>";
+	// }
 
-	if ($handle == 'flexslider') {
-		$tag = "<script src='/wp-content/themes/kahoycrafts-genpress/assets/js/woo/jquery.flexslider.min.js' id='wc-single-product-js'></script>";
-	}
+	// if ($handle == 'flexslider') {
+	// 	$tag = "<script src='/wp-content/themes/kahoycrafts-genpress/assets/js/woo/jquery.flexslider.min.js' id='wc-single-product-js'></script>";
+	// }
 
 	return $tag;
 
