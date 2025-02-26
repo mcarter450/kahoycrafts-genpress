@@ -528,6 +528,36 @@ add_action( 'woocommerce_thankyou', function( $order_id ) {
 // ----         --------  ------------     ----     ------------ ----   ----  ------------ 
 // ****         ********  ************     ****     ************ ****    **** ************ 
 
+// Custom logo filter
+add_filter( 'get_custom_logo', function ( $html, $blog_id ) {
+
+	if ( preg_match('/srcset=\"[^\"]+\"\s+sizes=\"[^\"]+"/', $html, $matches) ) {
+		$srcset = str_replace('/uploads', '/webp-express/webp-images/uploads', $matches[0]);
+		$srcset = preg_replace('/\.(png|jpg)/', '.$1.webp', $srcset);
+
+		$replacement = '$1<picture><source '. $srcset .' type="image/webp">$2</picture></a>';
+
+		$html = preg_replace('/^(<a[^<]+)(<img[^<]+)<\/a>$/', $replacement, $html);
+	}
+
+	return $html;
+
+}, 10, 2 );
+
+// Generate Press logo filter
+add_filter( 'generate_logo_output', function ( $html, $logo ) {
+
+	$webp_logo = str_replace('/uploads', '/webp-express/webp-images/uploads', $logo);
+	$webp_logo = preg_replace('/\.(png|jpg)/', '.$1.webp', $webp_logo);
+
+	$replacement = '<picture><source srcset='. $webp_logo .' type="image/webp">$1</picture>';
+
+	$html = preg_replace('/(<img[^<]+)/', $replacement, $html);
+
+	return $html;
+
+}, 10, 2 );
+
 // Remove useless auto size filter
 add_filter('wp_img_tag_add_auto_sizes', '__return_false');
 
