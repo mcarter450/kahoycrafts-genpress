@@ -14,7 +14,7 @@ export default {
 	    },
 	    {
 	        name: 'product_detail',
-	        path: '/product/decorative-bookends-multicolor-backlit-cityscape-1-pair/'
+	        path: '/product/walnut-bookends-with-integrated-planter-box-1-pair/'
 	    },
 	    {
 	        name: 'product_detail_handle',
