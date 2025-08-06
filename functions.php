@@ -161,6 +161,18 @@ add_action( 'init', function() {
 	register_nav_menu( 'footer', __( 'Footer Menu' ) );
 	remove_action( 'generate_footer', 'generate_construct_footer', 10 );
 
+	// allow image tags in wp comments
+	global $allowedtags;
+	
+	$tags = [
+		'img' => [
+			'src' => [],
+			'alt' => [],
+		]
+	];
+
+	$allowedtags = array_merge( $allowedtags, $tags );
+
 } );
 
 /**
