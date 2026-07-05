@@ -229,6 +229,13 @@ function kahoy_crafts_scripts() {
 			true
 		);
 	}
+	wp_enqueue_script(
+		'turnstile-api', 
+		'https://challenges.cloudflare.com/turnstile/v0/api.js', 
+		[], 
+		null, 
+		true
+	);
 	wp_register_script(
 		'cookie-consent-banner',
 		get_stylesheet_directory_uri() . '/assets/js/cookie-consent-banner.min.js',
@@ -391,25 +398,26 @@ add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 		return;
 	}
 
-	// Validate contact form
-	if ( preg_match('/contact-form/', $form->name()) ) {
-		$token = $_POST['cf-turnstile-response'];
-		$remote_addr = $_SERVER['REMOTE_ADDR'];
+	// Validate all forms
+	$token = $_POST['cf-turnstile-response'];
+	$remote_addr = $_SERVER['REMOTE_ADDR'];
 
-		if ( empty($token) ) {
-			$object->set_response('Cloudflare Turnstile token not found.');
+	if ( empty($token) ) {
+		$object->set_response('Cloudflare Turnstile token not found.');
+		$abort = true;
+		return;
+	}
+	else {
+		$response = kahoycrafts_cloudflare_turnstile::validate($token, $remote_addr);
+
+		if ($response != 'Success') {
+			$object->set_response($response);
 			$abort = true;
-		}
-		else {
-			$response = kahoycrafts_cloudflare_turnstile::validate($token, $remote_addr);
-
-			if ($response != 'Success') {
-				$object->set_response($response);
-				$abort = true;
-			}
+			return;
 		}
 	}
-	elseif ( $form->name() == 'newsletter-signup' ) {
+
+	if ( $form->name() == 'newsletter-signup' ) {
 		$response = kahoycrafts_big_mailer::add_contact(
 			$posted_data["your-email"], 
 			$posted_data["your-name"]
