@@ -703,6 +703,11 @@ body.home {
 
 }
 
+/* Fix button alignment issue */
+.woocommerce-variation-add-to-cart {
+    display: flex;
+}
+
 /* Product Detail - Reviews */
 body.single-product {
     .woocommerce-product-rating > .stars {
@@ -745,4 +750,16 @@ body.single-product {
 .woocommerce-checkout table.cart img {
     width: 100px;
     box-shadow: none
+}
+
+.woocommerce-checkout #customer_details {
+    margin-bottom: 20px;
+}
+
+.woocommerce-cart-form table.shop_table .cart_item:nth-child(even) {
+    background-color: lighten($color-blue, 5%);
+}
+
+.woocommerce-checkout table.shop_table .cart_item:nth-child(even) {
+    background-color: $color-blue;
 }
