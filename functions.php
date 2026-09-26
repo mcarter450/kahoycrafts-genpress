@@ -509,6 +509,9 @@ add_action( 'woocommerce_thankyou', function( $order_id ) {
 // ----         --------  ------------     ----     ------------ ----   ----  ------------ 
 // ****         ********  ************     ****     ************ ****    **** ************ 
 
+// Suppress Jetpack connection test
+add_filter( 'jetpack_connection_error_notice_message', '__return_empty_string' );
+
 // Custom logo filter
 add_filter( 'get_custom_logo', function ( $html, $blog_id ) {
 
