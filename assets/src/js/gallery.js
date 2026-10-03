@@ -16,10 +16,10 @@ lightbox.on('uiRegister', function() {
 				const currSlideElement = lightbox.pswp.currSlide.data.element;
 				let captionHTML = '';
 				if (currSlideElement) {
-					const hiddenCaption = currSlideElement.querySelector('.hidden-caption-content');
-					if (hiddenCaption) {
-						// get caption from element with class hidden-caption-content
-						captionHTML = hiddenCaption.innerHTML;
+					const captionElement = currSlideElement.parentNode.querySelector('.wp-element-caption');
+					if (captionElement) {
+						// get caption from element with class wp-element-caption
+						captionHTML = captionElement.innerHTML;
 					} else {
 						// get caption from alt attribute
 						captionHTML = currSlideElement.querySelector('img').getAttribute('alt');
