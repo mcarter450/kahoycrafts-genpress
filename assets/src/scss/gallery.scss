@@ -7,6 +7,11 @@
 	  row-gap: 5px;
 }
 
+// Hide image blur effect for captions
+.wp-block-gallery.has-nested-images figure.wp-block-image:has(figcaption)::before {
+    display: none;
+}
+
 .pswp-gallery .wp-element-caption {
   display: none;
 }
@@ -38,10 +43,6 @@
 .pswp__custom-caption a {
   color: #fff;
   text-decoration: underline;
-}
-
-.hidden-caption-content {
-  display: none;
 }
 
 @media (max-width: 1024px)
