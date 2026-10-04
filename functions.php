@@ -1,6 +1,5 @@
 <?php
 //* Code goes here
-require(__DIR__ .'/custom-post-types/testimonial.php');
 require(__DIR__ .'/custom-post-types/kc-carousel.php');
 require(__DIR__ .'/custom-post-types/kc-testimonial.php');
 require(__DIR__ .'/classes/kahoycrafts_product_categories_widget.php');
