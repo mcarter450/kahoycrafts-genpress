@@ -37,15 +37,19 @@ function kc_carousel($atts) {
 
   $default = array(
       'parent' => 'homepage-carousel',
+      'class' => 'creative-process'
   );
   $a = shortcode_atts($default, $atts);
 
   $parent_slug = trim($a['parent']);
+  $class = trim($a['class']);
 
   $parent = get_page_by_path($parent_slug, OBJECT, 'kc-carousel');
 
+  $html = '';
+
   if ($parent) {
-    $html = '<div class="owl-carousel owl-theme creative-process">';
+    $html = '<div class="owl-carousel owl-theme '. $class .'">';
 
     $children = new WP_Query(array(
         'post_type'   => 'kc-carousel',
