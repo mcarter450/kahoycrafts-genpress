@@ -29,18 +29,16 @@
     }
 
     h2, h4 {
-        width: 376px;
         color: $white;
         text-align: left;
     }
 
     h2 {
-        font-size: 1.7rem;
+        font-size: 26px;
     }
 
     h4 {
-        font-size: 1.2rem;
-        // font-style: italic;
+        font-size: 18px;
     }
 
     .wpcf7-not-valid-tip {
@@ -70,9 +68,6 @@
         .toolbar {
             width: auto;
         }
-
-        h1, h4 {
-            width: auto;
-        }
+        
     }
 }
