@@ -12,17 +12,37 @@
 			animateOut: 'fadeOut',
 			lazyLoad: true,
 			responsiveClass:true,
-			responsive:{
-				0:{
+			responsive: {
+				0: {
 					items: 1
 				},
-				600:{
+				600: {
 					items: 1
 				},
-				1000:{
+				1000: {
 					items: 1
 				}
 			}
+		});
+
+		$('.kc-testimonial-shortcode').addClass(['owl-carousel', 'owl-theme']).owlCarousel({
+		    nav: false,
+		    autoplay: true,
+		    loop: true,
+		    lazyLoad: true,
+		    margin: 35,
+		    responsiveClass: true,
+		    responsive: {
+		        0: {
+		            items: 1
+		        },
+		        600: {
+		            items: 2
+		        },
+		        1000: {
+		            items: 2
+		        }
+		    }
 		});
 		
 	});
