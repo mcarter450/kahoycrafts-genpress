@@ -336,8 +336,7 @@ add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 
 	if ( $form->name() == 'newsletter-signup' ) {
 		$response = kahoycrafts_big_mailer::add_contact(
-			$posted_data["your-email"], 
-			//$posted_data["your-name"]
+			$posted_data["your-email"]
 		);
 	 	
 	    if ( $response != 'Success' ) {
