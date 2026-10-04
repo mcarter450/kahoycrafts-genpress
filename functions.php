@@ -239,51 +239,6 @@ function remove_jquery_migrate( $scripts ) {
 	}
 }
 
-add_action( 'woocommerce_after_order_notes', 'newsletter_checkout_field' );
-
-function newsletter_checkout_field( $checkout ) {
-
-	echo '<div class="newsletter-checkout-field">';
-
-	$checked = $checkout->get_value( 'newsletter_optin' ) ? $checkout->get_value( 'newsletter_optin' ) : 0;
-
-	woocommerce_form_field('newsletter_optin', 
-		array(
-
-			'type' => 'checkbox',
-
-			'class' => array(
-
-				'optin-field-class form-row-wide'
-
-			),
-
-			'required' => false,
-
-			'label' => __('Keep me up to date on news and exclusive offers via email'),
-
-		) ,
-
-		$checked
-	);
-
-	echo '</div>';
-
-}
-
-add_action( 'woocommerce_checkout_update_order_meta', 'newsletter_checkout_field_update_order_meta' );
-
-/**
- * Store newsletter optin choice
- */
-function newsletter_checkout_field_update_order_meta( $order_id ) {
-
-	$value = isset($_POST['newsletter_optin']) ? 'yes' : 'no';
-	
-	update_post_meta( $order_id, 'newsletter_optin', $value );
-
-}
-
 add_action( 'wpcf7_init', 'wpcf7_add_form_tag_kcprofilepicker' );
 
 function wpcf7_add_form_tag_kcprofilepicker() {
@@ -382,7 +337,7 @@ add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 	if ( $form->name() == 'newsletter-signup' ) {
 		$response = kahoycrafts_big_mailer::add_contact(
 			$posted_data["your-email"], 
-			$posted_data["your-name"]
+			//$posted_data["your-name"]
 		);
 	 	
 	    if ( $response != 'Success' ) {
@@ -583,18 +538,6 @@ add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 		
 		return str_replace( ' src', ' async src', $tag );
 	}
-
-	// if ($handle == 'wc-single-product') {
-	// 	$tag = str_replace(
-	// 		'/wp-content/plugins/woocommerce/assets/js/frontend/single-product.min.js', 
-	// 		'/wp-content/themes/kahoycrafts-genpress/assets/js/woo/single-product.min.js', $tag);
-	// }
-
-	// if ($handle == 'flexslider') {
-	// 	$tag = str_replace(
-	// 		'/wp-content/plugins/woocommerce/assets/js/flexslider/jquery.flexslider.min.js', 
-	// 		'/wp-content/themes/kahoycrafts-genpress/assets/js/woo/jquery.flexslider.min.js', $tag);
-	// }
 
 	return $tag;
 

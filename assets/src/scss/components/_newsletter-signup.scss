@@ -16,7 +16,7 @@
 
     &.expand {
         width: 440px;
-        height: 620px;
+        height: 540px;
     }
 
     .toolbar {
@@ -28,14 +28,19 @@
         padding: 1rem 2rem;
     }
 
-    h1, h4 {
+    h2, h4 {
         width: 376px;
         color: $white;
-        text-align: center;
+        text-align: left;
+    }
+
+    h2 {
+        font-size: 1.7rem;
     }
 
     h4 {
         font-size: 1.2rem;
+        // font-style: italic;
     }
 
     .wpcf7-not-valid-tip {

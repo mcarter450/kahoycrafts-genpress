@@ -6,7 +6,7 @@ class kahoycrafts_big_mailer {
 
 	const API_URL = 'https://api.bigmailer.io/v1/brands/63e25b44-7bfe-45a9-8948-ef354714783d';
 
-	static public function add_contact($email, $name) {
+	static public function add_contact($email) {
 
 		// Encode the data in a new array in JSON format
 		$data = json_encode([
@@ -14,10 +14,10 @@ class kahoycrafts_big_mailer {
 			"list_ids" => [
 				//'3b76642d-8d8d-4cf9-b039-976f59ac94a2',
 				'ca8a5659-199e-4ca6-9062-2f0aa4544f23',
-			],
+			]/*,
 			"field_values" => [
 				['name' => 'FIRST_NAME', 'string' => $name]
-			]
+			]*/
 		]);
 	    
 		// Finally send the data to your custom endpoint

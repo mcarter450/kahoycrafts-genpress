@@ -8,18 +8,13 @@
 		var popupId   = '#newsletter-popup'; // ID of the popup to display.
 
 		var $popup = $('#newsletter-popup')
+		if ($popup.length === 0) {
+			return;
+		}
 
 		$popup.find('.close').on('click', function() {
 			$popup.hide()
 		})
-
-		// var wpcf7Elm = document.querySelector( '#wpcf7-f1640-o2' );
-
-		// wpcf7Elm.addEventListener( 'wpcf7mailsent', function( event ) {
-		//   setTimeout(function() {
-		//   	$popup.hide()
-		//   }, 3000)
-		// }, false );
 
 		function maybeShowPopup() {
 			// Check if the user scrolled far enough.
