@@ -31,10 +31,11 @@
     h2, h4 {
         color: $white;
         text-align: left;
+        width: 376px;
     }
 
     h2 {
-        font-size: 1.7rem;
+        font-size: 2rem;
     }
 
     h4 {
@@ -43,6 +44,10 @@
 
     .wpcf7-not-valid-tip {
         color: #c0fe55;
+    }
+
+    .wpcf7-form label {
+        color: $color-blue;
     }
 
     .wpcf7-submit {
@@ -69,7 +74,7 @@
             width: auto;
         }
 
-        h1, h4 {
+        h2, h4 {
             width: auto;
         }
     }
