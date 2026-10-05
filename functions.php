@@ -112,7 +112,6 @@ function kahoy_crafts_admin_styles( $hook ) {
 		wp_deregister_script( 'WCPAY_TOS' );
 		wp_deregister_script( 'WCPAY_MULTI_CURRENCY_ANALYTICS' );
 	}
-
 }
 
 function is_blog() {
@@ -166,6 +165,7 @@ function kahoy_crafts_scripts() {
 			wp_get_theme()->get( 'Version' ),
 			true
 		);
+
 		wp_enqueue_script(
 			'kahoycrafts',
 			get_stylesheet_directory_uri() . '/assets/js/kahoycrafts.min.js',
@@ -174,6 +174,7 @@ function kahoy_crafts_scripts() {
 			true
 		);
 	}
+
 	if (! is_page('contact') ) {
 		wp_enqueue_script(
 			'newsletter-popup',
@@ -183,6 +184,7 @@ function kahoy_crafts_scripts() {
 			true
 		);
 	}
+
 	if ( is_product() ) {
 		wp_enqueue_script(
 			'view-product',
@@ -192,6 +194,7 @@ function kahoy_crafts_scripts() {
 			true
 		);
 	}
+
 	wp_enqueue_script(
 		'turnstile-api', 
 		'https://challenges.cloudflare.com/turnstile/v0/api.js', 
@@ -199,6 +202,7 @@ function kahoy_crafts_scripts() {
 		null, 
 		true
 	);
+
 	wp_register_script(
 		'cookie-consent-banner',
 		get_stylesheet_directory_uri() . '/assets/js/cookie-consent-banner.min.js',
@@ -206,6 +210,7 @@ function kahoy_crafts_scripts() {
 		null,
 		true
 	);
+
 	wp_enqueue_script(
 		'cookie-consent',
 		get_stylesheet_directory_uri() . '/assets/js/cookie-consent.min.js',
@@ -213,24 +218,13 @@ function kahoy_crafts_scripts() {
 		wp_get_theme()->get( 'Version' ),
 		true
 	);
-
 }
-
-/**
- * Post nav for jetpack testimonials
- */
-add_action( 'generate_after_entry_content', function() {
-    if ( is_singular( 'jetpack-testimonial' ) ) : ?>
-        <footer class="entry-meta">
-            <?php generate_content_nav( 'nav-below' ); ?>
-        </footer><!-- .entry-meta -->
-    <?php endif;
-} );
 
 add_action( 'wp_default_scripts', 'remove_jquery_migrate' );
 
 // Remove JQuery migrate
 function remove_jquery_migrate( $scripts ) {
+
 	if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
 		$script = $scripts->registered['jquery'];
 		// Check whether the script has any dependencies
@@ -453,6 +447,7 @@ add_action( 'woocommerce_thankyou', function( $order_id ) {
   	});";
 
   	wc_enqueue_js( $code );
+
 } );
 
 // ------------ --------  ----         ------------ ------------ -----------  ------------ 
@@ -501,6 +496,7 @@ add_filter( 'generate_logo_output', function ( $html, $logo ) {
 add_filter('wp_img_tag_add_auto_sizes', '__return_false');
 
 function get_rating_stars($rating) {
+
 	$i = 0;
 	$n = floor($rating);
 	$html = '';
@@ -509,6 +505,7 @@ function get_rating_stars($rating) {
 		$html .= '<i class="rating__star fas fa-star"></i>';
 		$i++;
 	}
+
 	while ( $i < 5 ) {
 		$html .= '<i class="rating__star far fa-star"></i>';
 		$i++;
@@ -518,9 +515,13 @@ function get_rating_stars($rating) {
 }
 
 add_filter( 'woocommerce_product_get_rating_html', function( $html, $rating, $count ) {
+
 	if ($rating) {
 		return '<span class="stars">'. get_rating_stars($rating) .'</span>';
 	}
+
+	return $html;
+
 }, 10, 3 );
 
 /**
@@ -585,18 +586,19 @@ function kahoycrafts_disable_sitemap_specific_page( $args, $post_type ) {
 	$args['post__not_in'][] = 72; // exclude page with ID = 72
 	
 	return $args;
-
 }
 
 /**
  * Remove lazy loading for image above the fold
  */
 add_filter( 'woocommerce_product_get_image', function( $image, $obj, $size, $attr, $placeholder ) {
+
 	if ( $obj->get_menu_order() == -1 ) {
 		$image = str_replace('loading="lazy"', '', $image);
 	}
 
 	return $image;
+
 }, 10, 5);
 
 // Override video tag
@@ -626,5 +628,4 @@ function video_shortcode_override( $markup, $attr, $content, $id ) {
 	}
 
 	return $markup;
-
 }
