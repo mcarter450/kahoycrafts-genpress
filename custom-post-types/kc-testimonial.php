@@ -2,7 +2,7 @@
 function kc_testimonial_cpt() {
 // carousel cpt
   $labels = array(
-    'name'               => _x( 'Testimonial', 'post type general name' ),
+    'name'               => _x( 'Testimonials', 'post type general name' ),
     'singular_name'      => _x( 'Testimonial', 'post type singular name' ),
     'add_new'            => _x( 'Add New', 'testimonial' ),
     'add_new_item'       => __( 'Add New Testimonial' ),
@@ -46,13 +46,14 @@ function kc_testimonials($atts) {
 
     foreach ($children->posts as $post) {
       $image = get_the_post_thumbnail($post->ID, 'thumbnail');
+      $post_url = get_post_permalink($post->ID);
 
 $html .= <<<TEXT
 <div class="item">
   <div class="testimonial-entry">
-    <a class="testimonial-featured-image" href="$post->guid">$image</a>
+    <a class="testimonial-featured-image" href="$post_url">$image</a>
     <div class="testimonial-entry-content"><p>$post->post_excerpt</p></div>
-    <span class="testimonial-entry-title">― <a href="$post->guid">$post->post_title</a>
+    <span class="testimonial-entry-title">― <a href="$post_url">$post->post_title</a>
       <span class="stars">
         <i class="rating__star fas fa-star"></i>
         <i class="rating__star fas fa-star"></i>

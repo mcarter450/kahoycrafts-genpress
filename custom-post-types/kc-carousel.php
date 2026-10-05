@@ -2,19 +2,19 @@
 function kc_carousel_cpt() {
 // carousel cpt
   $labels = array(
-    'name'               => _x( 'Carousel', 'post type general name' ),
+    'name'               => _x( 'Carousels', 'post type general name' ),
     'singular_name'      => _x( 'Carousel', 'post type singular name' ),
     'add_new'            => _x( 'Add New', 'carousel' ),
-    'add_new_item'       => __( 'Add New Carousel item' ),
-    'edit_item'          => __( 'Edit Carousel item' ),
-    'new_item'           => __( 'New Carousel item' ),
-    'all_items'          => __( 'All Carousel items' ),
-    'view_item'          => __( 'View Carousel item' ),
-    'search_items'       => __( 'Search Carousel items' ),
-    'not_found'          => __( 'No carousel items found' ),
-    'not_found_in_trash' => __( 'No carousel items found in the Trash' ), 
-    'parent_item_colon'  => '',
-    'menu_name'          => 'KC Carousel'
+    'add_new_item'       => __( 'Add New Carousel' ),
+    'edit_item'          => __( 'Edit Carousel' ),
+    'new_item'           => __( 'New Carousel' ),
+    'all_items'          => __( 'All Carousels' ),
+    'view_item'          => __( 'View Carousel' ),
+    'search_items'       => __( 'Search Carousels' ),
+    'not_found'          => __( 'No carousels found' ),
+    'not_found_in_trash' => __( 'No carousels found in the Trash' ), 
+    'parent_item_colon'  => 'Parent Carousel:',
+    'menu_name'          => 'KC Carousels'
   );
 
   $args = array(
