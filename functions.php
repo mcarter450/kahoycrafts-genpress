@@ -157,6 +157,11 @@ add_action( 'wp_enqueue_scripts', 'kahoy_crafts_scripts' );
  */
 function kahoy_crafts_scripts() {
 
+	$handle = 'kc-woocommerce-tracking';
+
+    wp_register_script( $handle, '', [], null, true );
+    wp_enqueue_script( $handle );
+
 	if ( is_front_page() ) {
 		wp_register_script(
 			'owl-carousel',
@@ -347,6 +352,20 @@ add_action( 'wpcf7_before_send_mail', function( $form, &$abort, $object ) {
 /**
  *  Google Ads conversion tracking
  */
+
+function kc_inline_js( $code ) {
+
+	$result = wp_add_inline_script(
+		'kc-woocommerce-tracking',
+		$code,
+		'after'
+	);
+
+	if ( false === $result ) {
+		error_log( 'Could not attach WooCommerce tracking script.' );
+	}
+}
+
 add_action('woocommerce_add_to_cart', 'add_to_cart_click', 10, 6);
 
 function add_to_cart_click( $cart_id, $product_id, $request_quantity, $variation_id, $variation, $cart_item_data ) {
@@ -375,7 +394,7 @@ function add_to_cart_click( $cart_id, $product_id, $request_quantity, $variation
 		'items': {$json_items}
 	});";
 
-    wc_enqueue_js( $code );
+    kc_inline_js( $code );
 }
 
 add_action('woocommerce_review_order_after_cart_contents', 'after_cart_contents');
@@ -410,7 +429,7 @@ function after_cart_contents( $cart_items ) {
 		'items': {$json_items}
 	});";
 
-    wc_enqueue_js( $code );
+    kc_inline_js( $code );
 }
 
 add_action( 'woocommerce_thankyou', function( $order_id ) {
@@ -446,7 +465,7 @@ add_action( 'woocommerce_thankyou', function( $order_id ) {
 	  'items': {$json_items}
   	});";
 
-  	wc_enqueue_js( $code );
+  	kc_inline_js( $code );
 
 } );
 
