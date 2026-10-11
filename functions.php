@@ -239,6 +239,13 @@ function remove_jquery_migrate( $scripts ) {
 	}
 }
 
+// Add previous and next links to kc-testimonial type
+add_action( 'generate_after_entry_content', function() {
+    if ( is_singular( 'kc-testimonial' ) ) {
+        generate_content_nav( 'nav-below' );
+    }
+} );
+
 add_action( 'wpcf7_init', 'wpcf7_add_form_tag_kcprofilepicker' );
 
 function wpcf7_add_form_tag_kcprofilepicker() {
