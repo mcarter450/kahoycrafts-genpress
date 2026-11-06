@@ -23,16 +23,6 @@ add_action( 'wp_enqueue_scripts', 'kahoy_crafts_styles', 11, 0 );
 
 function kahoy_crafts_styles() {
 
-	// Disable subscription styles
-	wp_dequeue_style( 'wcs-checkout' );
-	wp_dequeue_style( 'wc-blocks-integration' );
-	
-	wp_dequeue_script( 'wcs-single-product' );
-	wp_dequeue_script( 'wcs-cart' );
-
-	// Disable cart fragments - not used in generatepress theme
-	wp_dequeue_script( 'wc-cart-fragments' );
-
 	wp_dequeue_style( 'generate-child' );
 
 	// Disable useless styles
@@ -49,8 +39,6 @@ function kahoy_crafts_styles() {
 	wp_deregister_script( 'mediaelement-vimeo' );
 
 	// Remove flexible shipping styles
-	wp_deregister_style( 'flexible-shipping-free-shipping-notice-block-integration-blocks-integration-frontend' );
-	wp_deregister_style( 'flexible-shipping-free-shipping-notice-block-integration-blocks-integration-editor' );
 	wp_deregister_style( 'flexible-shipping-free-shipping' );
 
 	// if we're not on a Woocommerce page, dequeue all of these scripts
