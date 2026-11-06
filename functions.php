@@ -208,21 +208,21 @@ function kahoy_crafts_scripts() {
 		true
 	);
 
-	wp_register_script(
-		'cookie-consent-banner',
-		get_stylesheet_directory_uri() . '/assets/js/cookie-consent-banner.min.js',
-		[],
-		null,
-		true
-	);
+	// wp_register_script(
+	// 	'cookie-consent-banner',
+	// 	get_stylesheet_directory_uri() . '/assets/js/cookie-consent-banner.min.js',
+	// 	[],
+	// 	null,
+	// 	true
+	// );
 
-	wp_enqueue_script(
-		'cookie-consent',
-		get_stylesheet_directory_uri() . '/assets/js/cookie-consent.min.js',
-		['cookie-consent-banner'],
-		wp_get_theme()->get( 'Version' ),
-		true
-	);
+	// wp_enqueue_script(
+	// 	'cookie-consent',
+	// 	get_stylesheet_directory_uri() . '/assets/js/cookie-consent.min.js',
+	// 	['cookie-consent-banner'],
+	// 	wp_get_theme()->get( 'Version' ),
+	// 	true
+	// );
 }
 
 add_action( 'wp_default_scripts', 'remove_jquery_migrate' );
