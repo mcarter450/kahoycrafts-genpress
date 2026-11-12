@@ -128,9 +128,9 @@ add_action( 'init', function() {
 /**
  * Build our footer.
  */
-add_action( 'generate_before_footer_content', function() {
-	get_template_part( 'template-parts/footer/footer-widgets' );
-} );
+// add_action( 'generate_before_footer_content', function() {
+// 	get_template_part( 'template-parts/footer/footer-widgets' );
+// } );
 
 add_action( 'generate_footer', function() {
 	get_template_part( 'template-parts/footer/footer-content' );
